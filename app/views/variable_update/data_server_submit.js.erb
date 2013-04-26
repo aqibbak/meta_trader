@@ -1,0 +1,28 @@
+<% if @new && @result %>
+  $("#data_server_new_record").val("true");
+  $(".data_server_table").append('<tr class="data_server_row" data-position="<%= @data["position"] %>" data-description="<%= @data["description"] %>" data-ip="<%= ApiMethods.long2ip(@data["ip"]) %>" data-ipinternal="<%= ApiMethods.long2ip(@data["ip_internal"]) %>" data-priority="<%= @data["priority"] %>"  data-server="<%= @data["server"] %>"><td class="el"><%= @data["server"] %></td><td class="el"><%= @data["description"] %></td><td class="el"><%= ApiMethods.long2ip(@data["ip_internal"]) %></td><td class="el"><%= @data["priority"] == 255 ? "Idle" : @data["priority"] %></td><td class="el"><%= @data["loading"] == 4294967295 ? "n/a" : @data["loading"] %></td><td><%= link_to "delete", delete_data_server_row_path(:position => @data["position"]), :remote=> true, :method => :delete %></td></tr>');
+  $("#data_server_tab_position").val('<%= @data["position"].to_i + 1 %>');
+  $("#data_server_tab_description").val("");
+  $("#data_server_tab_server").val("");
+  $("#data_server_tab_ip_internal").val("");
+  $("#data_server_tab_priority").val("");
+<% elsif @result %>
+  $("#data_server_new_record").val("true");
+  var row = $(".data_server_row[data-position='<%= @data['position']%>']")[0];
+  $(row).attr("data-description", "<%= @data['description'] %>");
+  $(row).attr("data-ip", "<%= @data['ip'] %>");
+  $(row).attr("data-server", "<%= @data['server'] %>");
+  $(row).attr("data-ipinternal", "<%= @data['ip_internal'] %>");
+  $(row).attr("data-priority", "<%= @data['priority'] %>");
+  $($(row).find("td")[0]).text("<%= @data['server'] %>");
+  $($(row).find("td")[1]).text("<%= @data['description'] %>");
+  $($(row).find("td")[2]).text("<%= ApiMethods.long2ip(@data['ip_internal']) %>");
+  $($(row).find("td")[3]).text("<%= @data['priority'] == 255 ? 'Idle' : @data['priority'] %>");
+  $($(row).find("td")[4]).text("<%= @data['loading'] == 4294967295 ? 'n/a' : @data['loading'] %>");
+  var last_position = $(".data_server_table").find("tr").last().attr("data-position");
+  $("#data_server_tab_position").val(last_position + 1);
+  $("#data_server_tab_description").val("");
+  $("#data_server_tab_server").val("");
+  $("#data_server_tab_ip_internal").val("");
+  $("#data_server_tab_priority").val("");
+<% end %>

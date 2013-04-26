@@ -1,0 +1,79 @@
+<% unless @backup.nil? %>
+  <%= @backup %>
+
+    <h1>400 &mdash; Bad Request</h1>
+    <p>Not enough data{"method":"CfgUpdateBackup","update":[{"field":"watch_ip","value":0},{"field":"watch_role","value":0},{"field":"watch_password","value":0},{"field":"watch_opposite","value":0},{"field":"fullbackup_path","value":"C:\\MetaTrader4Backup"},{"field":"fullbackup_period","value":1},{"field":"fullbackup_shift","value":60},{"field":"archive_period","value":4},{"field":"archive_shift","value":0},{"field":"archive_store","value":0},{"field":"external_path","value":0},{"field":"export_securities","value":""},{"field":"export_period","value":4},{"field":"export_path","value":""}]}</p>
+
+
+  <%= form_tag backup_submit_path, :method => "POST", :remote => true do %>
+    <%= submit_tag %>
+    <%= hidden_field_tag "backup_tab[watch_ip]", @backup["backup_tab"] %>
+    <table>
+      <tr>
+        <th>Property</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Server role</td>
+        <td><%= select_tag "backup_tab[watch_role]", options_for_watch_role(@backup["watch_role"])%></td>
+      </tr>
+      <tr>
+        <td>Password of the slave server</td>
+        <td><%= password_field_tag "backup_tab[watch_password]", @backup["watch_password"], :readonly => @backup["watch_role"]==0 %></td>
+      </tr>
+      <tr>
+        <td style="width: 250px;" >Oposite server IP address and port</td>
+        <td><%= text_field_tag "backup_tab[watch_opposite]", @backup["watch_opposite"], :readonly => @backup["watch_role"]==0 %></td>
+      </tr>
+      <tr>
+        <td>Full backup to</td>
+        <td><%= text_field_tag "backup_tab[fullbackup_path]", @backup["fullbackup_path"], :style => "width: 300px;"%></td>
+      </tr>
+      <tr>
+        <td>Full backup every</td>
+        <td>
+          <%= select_tag "backup_tab[fullbackup_period]", options_for_backup_period(@backup["fullbackup_period"])%>
+          <span style="color: lightgray;"><%= Time.zone.at @backup["fullbackup_lasttime"] %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>Full backup time</td>
+        <td>
+          <% time = @backup["fullbackup_shift"] %>
+          <%= number_field_tag "backup_tab[fullbackup_shift][hour]", (time/60).to_i %>:<%= number_field_tag "backup_tab[fullbackup_shift][minute]", time.to_i - (time/60).to_i*60 %>
+        </td>
+      </tr>
+      <tr>
+        <td>Archival backup every</td>
+        <td>
+          <%= select_tag "backup_tab[archive_period]", options_for_arch_backup_period(@backup["archive_period"])%>
+          <span style="color: lightgray;"><%= Time.zone.at @backup["archive_lasttime"] %></span>
+        </td>
+      </tr>
+      <tr>
+        <td>Shift of archive backup time</td>
+        <td><%= number_field_tag "backup_tab[archive_shift]", @backup["archive_shift"] %> minute(s)</td>
+      </tr>
+      <tr>
+        <td>Keep archival backups within</td>
+        <td><%= select_tag "backup_tab[archive_store]", options_for_archive_store(@backup["archive_store"])%></td>
+      </tr>
+      <tr>
+        <td>Archival backup external processing</td>
+        <td><%= text_field_tag "backup_tab[external_path]", @backup["external_path"], :style => "width: 300px;" %></td>
+      </tr>
+      <tr>
+        <td>Export symbols</td>
+        <td><%=text_field_tag "backup_tab[export_securities]",@backup["export_securities"],:style=>"width: 300px;"%></td>
+      </tr>
+      <tr>
+        <td>Export external processing every</td>
+        <td><%= select_tag "backup_tab[export_period]", options_for_export_period(@backup["export_period"])%></td>
+      </tr>
+      <tr>
+        <td>Export external processing</td>
+        <td><%= text_field_tag "backup_tab[export_path]", @backup["export_path"], :style => "width: 300px;" %></td>
+      </tr>
+    </table>
+  <% end %>
+<% end %>

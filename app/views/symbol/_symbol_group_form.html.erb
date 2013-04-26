@@ -1,0 +1,27 @@
+<% unless @symbol_group.nil? %>
+  <%= form_tag symbol_group_submit_path, :method => "POST", :remote => true, :class => "symbol_group_form" do %>
+    <%= submit_tag %>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th style="width: 600px;">Symbols</th>
+      </tr>
+      <% @symbol_group.each_with_index do |sg, ix| %>
+        <tr>
+          <td>
+            <%= hidden_field_tag "symbol_group_tab[#{ix}][position]", ix %>
+            <%= hidden_field_tag "symbol_group_tab[#{ix}][changed]", false, :class => "symbol_group_changed" %>
+            <%= text_field_tag "symbol_group_tab[#{ix}][name]", sg["name"], :class => "symbol_group_field" %>
+          </td>
+          <td>
+            <%= text_field_tag "symbol_group_tab[#{ix}][description]", sg["description"], :class => "symbol_group_field"%>
+          </td>
+          <td>
+            <%= text_field_tag "symbol_group_symbols", get_symbol_group_symbols(ix, @symbol), :disabled => true, :style => "width: 99%;" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+<% end %>

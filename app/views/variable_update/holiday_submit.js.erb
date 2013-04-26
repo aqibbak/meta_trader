@@ -1,0 +1,47 @@
+<% if @new && @result %>
+  $("#holiday_new_record").val("true");
+  $(".holiday_table").append('<tr class="holiday_row" data-position="<%= @data["position"] %>" data-day="<%= @data["day"] %>" data-month="<%= @data["month"] %>" data-year="<%= @data["year"] %>" data-from="<%= @data["from"] %>" data-to="<%= @data["to"] %>"  data-symbol="<%= @data["symbol"] %>" data-description="<%= @data["description"] %>" data-enable="<%= @data["enable"] %>"><td class="el"><%= @data["year"]=="0" ? "****" : @data["year"] %>.<%= @data["month"] %>.<%= @data["day"] %></td><td class="el"><%= "#{@data["from"]["hour"].to_s.rjust(2, "0")}:#{@data["from"]["minute"].to_s.rjust(2, "0")}" %></td><td class="el"><%= "#{@data["to"]["hour"].to_s.rjust(2, "0")}:#{@data["to"]["minute"].to_s.rjust(2, "0")}" %></td><td class="el"><%= @data["symbol"] %></td><td class="el"><%= @data["description"] %></td><td><%= link_to "delete", delete_holiday_row_path(:position => @data["position"]), :remote=> true, :method => :delete %></td></tr>');
+  $("#holiday_tab_position").val('<%= @data["position"].to_i + 1 %>');
+  $("input[name='holiday_tab[enable]'][type='checkbox']").prop("checked", true);
+  $("#holiday_tab_month").val("");
+  $("#holiday_tab_day").val("");
+  $("#holiday_tab_yearly_check").prop("checked", false);
+  $("#holiday_tab_year").val("").show();
+  $("#holiday_tab_from_hour").val("");
+  $("#holiday_tab_from_minute").val("");
+  $("#holiday_tab_to_hour").val("");
+  $("#holiday_tab_to_minute").val("");
+  $("#holiday_tab_comment").val("");
+  $("#holiday_tab_symbol").val("");
+  $("#holiday_tab_description").val("");
+<% elsif @result %>
+  $("#holiday_new_record").val("true");
+  var row = $(".holiday_row[data-position='<%= @data['position']%>']")[0];
+  $(row).attr("data-day", "<%= @data['day'] %>");
+  $(row).attr("data-month", "<%= @data['month'] %>");
+  $(row).attr("data-year", "<%= @data['year'] %>");
+  $(row).attr("data-from", "<%= @data['from'] %>");
+  $(row).attr("data-to", "<%= @data['to'] %>");
+  $(row).attr("data-symbol", "<%= @data['symbol'] %>");
+  $(row).attr("data-description", "<%= @data['description'] %>");
+  $(row).attr("data-enable", "<%= @data['enable'] %>");
+  $($(row).find("td")[0]).text("<%= @data['year']=='0' ? '****' : @data['year'] %>.<%= @data['month'] %>.<%= @data['day'] %>");
+  $($(row).find("td")[1]).text("<%= @data['from']['hour'].to_s.rjust(2, '0') %>:<%= @data['from']['minute'].to_s.rjust(2, '0') %>");
+  $($(row).find("td")[2]).text("<%= @data['to']['hour'].to_s.rjust(2, '0') %>:<%= @data['to']['minute'].to_s.rjust(2, '0') %>");
+  $($(row).find("td")[3]).text("<%= @data['symbol'] %>");
+  $($(row).find("td")[4]).text("<%= @data['description'] %>");
+  var last_position = $(".holiday_table").find("tr").last().attr("data-position");
+  $("#holiday_tab_position").val(last_position + 1);
+  $("input[name='holiday_tab[enable]'][type='checkbox']").prop("checked", true);
+  $("#holiday_tab_month").val("");
+  $("#holiday_tab_day").val("");
+  $("#holiday_tab_yearly_check").prop("checked", false);
+  $("#holiday_tab_year").val("").show();
+  $("#holiday_tab_from_hour").val("");
+  $("#holiday_tab_from_minute").val("");
+  $("#holiday_tab_to_hour").val("");
+  $("#holiday_tab_to_minute").val("");
+  $("#holiday_tab_comment").val("");
+  $("#holiday_tab_symbol").val("");
+  $("#holiday_tab_description").val("");
+<% end %>

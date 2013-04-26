@@ -1,0 +1,122 @@
+<% unless @common.nil? %>
+  <%= form_tag common_submit_path, :method => "POST", :remote => true do %>
+    <%= submit_tag %>
+    <table style="margin: 10px">
+      <tbody>
+        <tr>
+          <td>Server</td>
+          <td><%= @common["owner"] %></td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td><%= text_field_tag "common_tab[name]", @common["name"] %></td>
+        </tr>
+        <tr>
+          <td>IP Address</td>
+          <td><%= select_tag "common_tab[address]", options_for_ip_address(@common["bind_adresses"],@common["address"]) %></td>
+        </tr>
+        <tr>
+          <td>Communication port</td>
+          <td><%= text_field_tag "common_tab[port]", @common["port"] %></td>
+        </tr>
+        <tr>
+          <td>Demo accounts</td>
+          <td><%= select_tag "common_tab[typeofdemo]", options_for_demo_type(@common["typeofdemo"]) %></td>
+        </tr>
+        <tr>
+          <td>Time of demo</td>
+          <td><%= number_field_tag "common_tab[timeofdemo]", @common["timeofdemo"] %> days</td>
+        </tr>
+
+        <tr>
+          <td>Time zone</td>
+          <td><%= select_tag "common_tab[timezone]", options_for_timezone(@common["timezone"]) %></td>
+        </tr>
+        <tr>
+          <td>Daylight Saving Time correction</td>
+          <td><%= select_tag "common_tab[daylightcorrection]", options_for_yes_no(@common["daylightcorrection"]) %></td>
+        </tr>
+        <tr>
+          <td>End of day time</td>
+          <td><%= number_field_tag "common_tab[endhour]", @common["endhour"] %>:<%= number_field_tag "common_tab[endminute]", @common["endminute"] %></td>
+        </tr>
+        <tr>
+          <td>Rollover mode</td>
+          <td><%= select_tag "common_tab[rollovers_mode]", options_for_rollover(@common["rollovers_mode"]) %></td>
+        </tr>
+        <tr>
+          <td>Statements mode</td>
+          <td><%= select_tag "common_tab[statement_mode]", options_for_statements(@common["statement_mode"]) %></td>
+        </tr>
+        <tr>
+          <td>Monthly statements mode</td>
+          <td><%= select_tag "common_tab[monthly_state_mode]", options_for_monthly_statements(@common["monthly_state_mode"]) %></td>
+        </tr>
+        <tr>
+          <td>Generate statements at weekends</td>
+          <td><%= select_tag "common_tab[statement_weekend]", options_for_yes_no(@common["statement_weekend"])%></td>
+        </tr>
+        <tr>
+          <td>Keep internal emails</td>
+          <td><%= number_field_tag "common_tab[keepemails]", @common["keepemails"] %> days</td>
+        </tr>
+        <tr>
+          <td>Keep ticks</td>
+          <td><%= number_field_tag "common_tab[keepticks]", @common["keepticks"] %> days</td>
+        </tr>
+        <tr>
+          <td>Optimization time</td>
+          <td><%= number_field_tag "common_tab[optimization_t][optimization_time_h]", time_hours(@common["optimization_time"]) %>:<%= number_field_tag "common_tab[optimization_t][optimization_time_m]", time_minutes(@common["optimization_time"]) %></td>
+        </tr>
+        <tr>
+          <td>Antiflood controlls</td>
+          <td><%= select_tag "common_tab[antiflood]", options_for_yes_no(@common["antiflood"]) %></td>
+        </tr>
+        <tr>
+          <td>Antiflood max. connections</td>
+          <td><%= number_field_tag "common_tab[floodcontrol]", @common["floodcontrol"] %></td>
+        </tr>
+        <tr>
+          <td>Feeder switch timeout</td>
+          <td><%= number_field_tag "common_tab[feeder_timeout]", @common["feeder_timeout"] %> seconds</td>
+        </tr>
+        <tr>
+          <td>Live update mode</td>
+          <td><%= select_tag "common_tab[liveupdate_mode]", options_for_live_update(@common["liveupdate_mode"]) %></td>
+        </tr>
+        <tr>
+          <td>Time synchronization with</td>
+          <td><%= select_tag "common_tab[timesync]", options_for_timesync(@common["timesync"]) %></td>
+        </tr>
+        <tr>
+          <td>IP Access list of web services</td>
+          <td>
+            <% @common["web_adresses"].each_with_index do |wa, ix| %>
+              <%= text_field_tag "common_tab[web_adresses][#{ix}]", ApiMethods.long2ip(wa), :style => "width: 120px;" %>
+              <% if ix==3 %><br/><% end %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>Path to accounts/orders bases</td>
+          <td><%= text_field_tag "common_tab[path_database]", @common["path_database"], :style => "width: 300px;" %></td>
+        </tr>
+        <tr>
+          <td>Path to history bases</td>
+          <td><%= text_field_tag "common_tab[path_history]", @common["path_history"], :style => "width: 300px;" %></td>
+        </tr>
+        <tr>
+          <td>Path to log files</td>
+          <td><%= text_field_tag "common_tab[path_log]", @common["path_log"], :style => "width: 300px;" %></td>
+        </tr>
+        <tr>
+          <td>Adapters</td>
+          <td>
+            <%= select_tag "common_tab[adapter][selected_adapter]", options_for_adapters(@common["adapters"].split('|')) %>
+            <%= hidden_field_tag "common_tab[adapter][full_adapter_list]", @common["adapters"] %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>

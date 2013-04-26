@@ -1,0 +1,27 @@
+<%= render "fixed_update/common_form" %>
+
+<%= render "variable_update/access_form" %>
+
+<%= render "variable_update/data_server_form" %>
+
+<%= render "fixed_update/time_form" %>
+
+<%= render "variable_update/holiday_form" %>
+
+<%= render "symbol/symbol_group_form" %>
+
+<%= render "fixed_update/backup_form" %>
+
+<script>
+  var ping_timer;
+  var period = 150;
+
+  $(document).ready(function(){
+    ping_timer = setInterval(function () {
+      $.ajax({
+        method : "POST",
+        url    : "<%= ping_session_path %>"
+      });
+    }, period * 1000);
+  })
+</script>

@@ -1,0 +1,10 @@
+$("#access_new_record").val("true");
+<% if @result %>
+  $(".access_table .access_row[data-position='<%= @position%>']").first().remove();
+  $(".access_table .access_row").each(function(ix,el){
+    if( parseInt($(el).attr("data-position")) > <%= @position %> ){
+      $(el).attr("data-position", parseInt($(el).attr("data-position")) - 1);
+      $(el).find("td a").first().attr("href", "/tabs/access/"+$(el).attr("data-position").toString());
+    }
+  });
+<% end %>

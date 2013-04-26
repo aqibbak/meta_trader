@@ -1,0 +1,35 @@
+<% unless @access.nil? %>
+  <table class="access_table" style="margin: 10px">
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Comment</th>
+      <th>Delete</th>
+    </tr>
+    <% @access.each_with_index do |row, ix| %>
+      <tr class="access_row" data-position="<%= ix %>" data-action="<%= row["action"] %>" data-from="<%= ApiMethods.long2ip(row["from"]) %>" data-to="<%= ApiMethods.long2ip(row["to"]) %>" data-comment="<%= row["comment"] %>">
+        <td class="el"><%= ApiMethods.long2ip(row["from"]) %></td>
+        <td class="el"><%= ApiMethods.long2ip(row["to"]) %></td>
+        <td class="el"><%= row["comment"] %></td>
+        <td><%= link_to "delete", delete_access_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= form_tag access_submit_path, :method => "POST", :remote => true do %>
+    <%= hidden_field_tag "access_new_record", true %>
+    <%= hidden_field_tag "access_tab[position]", @access.count %>
+    <label for="access_tab[action]">Action: </label>
+    <%= select_tag "access_tab[action]", options_for_access_action %>
+    <br/>
+    <label for="access_tab[from]">From: </label>
+    <%= text_field_tag "access_tab[from]" %>
+    <label for="access_tab[to]">to: </label>
+    <%= text_field_tag "access_tab[to]" %>
+    <br/>
+    <label for="access_tab[comment]">Comment: </label>
+    <%= text_field_tag "access_tab[comment]" %>
+    <br/>
+    <%= submit_tag %>
+    <%= link_to "new", "#", :id => "new_access" %>
+  <% end %>
+<% end %>
