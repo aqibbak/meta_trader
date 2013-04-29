@@ -122,7 +122,7 @@ class ApiMethods
       if key == "optimization_t"
         data[:optimization_time] = data[:optimization_t][:optimization_time_h].to_i * 60 + data[:optimization_t][:optimization_time_m].to_i
         update_string += ',' unless ix==0
-        update_string += '{"field": "optimization_time", "value" '+data[:optimization_time].to_s+'}'
+        update_string += '{"field": "optimization_time", "value": '+data[:optimization_time].to_s+'}'
       elsif key == "web_adresses"
         web_adresses = "["
         data[key].values.each_with_index do |value, inx|
