@@ -19,12 +19,12 @@ class ApiAccessController < ApplicationController
     api = ApiMethods.new
     @common = api.getCommon(session)
     @access = api.getAccess(session)
-    #@data_server = api.getDataServer(session)
-    #@time = api.getTime(session)
-    #@holiday = api.getHoliday(session)
-    #@security = api.getSecurity(session)
-    #@symbol_group = api.getSymbolGroup(session)
-    #@symbol = api.getSymbol(session)
+    @data_server = api.getDataServer(session)
+    @time = api.getTime(session)
+    @holiday = api.getHoliday(session)
+    @security = api.getSecurity(session)
+    @symbol_group = api.getSymbolGroup(session)
+    @symbol = api.getSymbol(session)
     #@backup = api.getBackup(session)
   end
 

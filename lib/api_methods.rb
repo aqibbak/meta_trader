@@ -104,9 +104,9 @@ class ApiMethods
         response = JSON.parse(res.body)
         if response["success"] == true
           session["session_expires"] = 3.minutes.from_now
-          return true
+          return {:success => true, :msg => "All good"}
         else
-          return false
+          return {:success => false, :msg => response["msg"]}
         end
       end
     end

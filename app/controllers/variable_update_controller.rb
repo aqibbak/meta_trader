@@ -5,7 +5,11 @@ class VariableUpdateController < ApplicationController
     @data = params[:access_tab]
     @new = params[:access_new_record] == "true"
     api = ApiMethods.new
-    @result = api.updateAccess(@data,session)
+    begin
+      @result = api.updateAccess(@data,session)
+    rescue => e
+      @error = true
+    end
   end
 
   def access_delete
@@ -18,10 +22,14 @@ class VariableUpdateController < ApplicationController
     data = params[:data_server_tab]
     @new = params[:data_server_new_record] == "true"
     api = ApiMethods.new
-    @result = api.updateDataServer(data,session)
-    position = data["position"]
-    @data = api.getDataServer(session,position)
-    @data["position"] = position
+    begin
+      @result = api.updateDataServer(data,session)
+      position = data["position"]
+      @data = api.getDataServer(session,position)
+      @data["position"] = position
+    rescue => e
+      @error = true
+    end
   end
 
   def data_server_delete
@@ -34,7 +42,11 @@ class VariableUpdateController < ApplicationController
     @data = params[:holiday_tab]
     @new = params[:holiday_new_record] == "true"
     api = ApiMethods.new
-    @result = api.updateHoliday(@data,session)
+    begin
+      @result = api.updateHoliday(@data,session)
+    rescue => e
+      @error = true
+    end
   end
 
   def holiday_delete

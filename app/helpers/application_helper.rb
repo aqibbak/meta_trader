@@ -194,7 +194,7 @@ module ApplicationHelper
   end
 
   def options_for_archive_store(selected=nil)
-        options = ""
+    options = ""
     options += "<option value='0'#{' selected=true' if selected==0}>1 day</option>"
     options += "<option value='1'#{' selected=true' if selected==1}>3 days</option>"
     options += "<option value='2'#{' selected=true' if selected==2}>1 week</option>"
@@ -215,4 +215,74 @@ module ApplicationHelper
     return options.html_safe
   end
 
+  def options_for_source_select(symbols,selected=nil)
+    options = "<option value=''></option>"
+    symbols.each do |symbol|
+      options += "<option value='#{symbol["symbol"]}'#{' selected=true' if selected==symbol["symbol"]}>#{symbol["symbol"]}</option>"
+    end
+    return options.html_safe
+  end
+
+  def options_for_symbol_digits(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>0</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>1</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>2</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>3</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>4</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>5</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_type(symbol_groups,selected=nil)
+    options = ""
+    symbol_groups.each_with_index do |symbol_group, ix|
+      options += "<option value='#{ix}'#{' selected=true' if selected==ix}>#{symbol_group["name"]}</option>" if symbol_group["name"] != ""
+    end
+    return options.html_safe
+  end
+
+  def options_for_symbol_execution(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>Request</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>Instant</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Market</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_currency(selected=nil)
+    options = ""
+    options += "<option value='USD'#{' selected=true' if selected=="USD"}>USD</option>"
+    options += "<option value='EUR'#{' selected=true' if selected=="EUR"}>EUR</option>"
+    options += "<option value='GBP'#{' selected=true' if selected=="GBP"}>GBP</option>"
+    options += "<option value='JPY'#{' selected=true' if selected=="JPY"}>JPY</option>"
+    options += "<option value='CHF'#{' selected=true' if selected=="CHF"}>CHF</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_trade(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>No</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>Close only</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Full access</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_orders(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>Good till today including SL/TP</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>Good till cancelled</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Good till today excluding SL/TP</option>"
+    return options.html_safe
+  end
+
+  def options_for_spread_balance(symbol)
+    spread = symbol["spread"]
+    selected = symbol["spread_balance"]
+    options = ""
+    (-150..150).to_a.each do |ix|
+      options += "<option value='ix'#{' selected=true' if selected==ix}>#{ix-(spread.to_f/2).floor.to_i} bid/#{ix+(spread.to_f/2).ceil.to_i} ask</option>"
+    end
+    return options.html_safe
+  end
 end

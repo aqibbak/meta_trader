@@ -1,5 +1,5 @@
 $("#access_new_record").val("true");
-<% if @result %>
+<% if @result[:success] %>
   $(".access_table .access_row[data-position='<%= @position%>']").first().remove();
   $(".access_table .access_row").each(function(ix,el){
     if( parseInt($(el).attr("data-position")) > <%= @position %> ){
@@ -7,4 +7,6 @@ $("#access_new_record").val("true");
       $(el).find("td a").first().attr("href", "/tabs/access/"+$(el).attr("data-position").toString());
     }
   });
+<% elsif !@result[:success] %>
+  alert("<%= @result[:msg] %>");
 <% end %>

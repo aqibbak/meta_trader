@@ -1,5 +1,5 @@
 $("#data_server_new_record").val("true");
-<% if @result %>
+<% if @result[:success] %>
   $(".data_server_table .data_server_row[data-position='<%= @position%>']").first().remove();
   $(".data_server_table .data_server_row").each(function(ix,el){
     if( parseInt($(el).attr("data-position")) > <%= @position %> ){
@@ -7,4 +7,6 @@ $("#data_server_new_record").val("true");
       $(el).find("td a").first().attr("href", "/tabs/data_server/"+$(el).attr("data-position").toString());
     }
   });
+<% elsif !@result[:success] %>
+  alert("<%= @result[:msg] %>");
 <% end %>

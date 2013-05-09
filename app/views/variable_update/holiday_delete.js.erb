@@ -1,5 +1,5 @@
 $("#holiday_new_record").val("true");
-<% if @result %>
+<% if @result[:success] %>
   $(".holiday_table .holiday_row[data-position='<%= @position%>']").first().remove();
   $(".holiday_table .holiday_row").each(function(ix,el){
     if( parseInt($(el).attr("data-position")) > <%= @position %> ){
@@ -7,4 +7,6 @@ $("#holiday_new_record").val("true");
       $(el).find("td a").first().attr("href", "/tabs/holiday/"+$(el).attr("data-position").toString());
     }
   });
+<% elsif !@result[:success] %>
+  alert("<%= @result[:msg] %>");
 <% end %>

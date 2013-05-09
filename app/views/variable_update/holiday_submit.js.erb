@@ -1,4 +1,6 @@
-<% if @new && @result %>
+<% if @error %>
+alert("An error occured while executing this operation");
+<% elsif @new && @result[:success] %>
   $("#holiday_new_record").val("true");
   $(".holiday_table").append('<tr class="holiday_row" data-position="<%= @data["position"] %>" data-day="<%= @data["day"] %>" data-month="<%= @data["month"] %>" data-year="<%= @data["year"] %>" data-from="<%= @data["from"] %>" data-to="<%= @data["to"] %>"  data-symbol="<%= @data["symbol"] %>" data-description="<%= @data["description"] %>" data-enable="<%= @data["enable"] %>"><td class="el"><%= @data["year"]=="0" ? "****" : @data["year"] %>.<%= @data["month"] %>.<%= @data["day"] %></td><td class="el"><%= "#{@data["from"]["hour"].to_s.rjust(2, "0")}:#{@data["from"]["minute"].to_s.rjust(2, "0")}" %></td><td class="el"><%= "#{@data["to"]["hour"].to_s.rjust(2, "0")}:#{@data["to"]["minute"].to_s.rjust(2, "0")}" %></td><td class="el"><%= @data["symbol"] %></td><td class="el"><%= @data["description"] %></td><td><%= link_to "delete", delete_holiday_row_path(:position => @data["position"]), :remote=> true, :method => :delete %></td></tr>');
   $("#holiday_tab_position").val('<%= @data["position"].to_i + 1 %>');
@@ -14,7 +16,7 @@
   $("#holiday_tab_comment").val("");
   $("#holiday_tab_symbol").val("");
   $("#holiday_tab_description").val("");
-<% elsif @result %>
+<% elsif @result[:success] %>
   $("#holiday_new_record").val("true");
   var row = $(".holiday_row[data-position='<%= @data['position']%>']")[0];
   $(row).attr("data-day", "<%= @data['day'] %>");
@@ -44,4 +46,6 @@
   $("#holiday_tab_comment").val("");
   $("#holiday_tab_symbol").val("");
   $("#holiday_tab_description").val("");
+<% elsif !@result[:success] %>
+  alert("<%= @result[:msg] %>");
 <% end %>
