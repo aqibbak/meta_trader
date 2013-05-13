@@ -25,7 +25,10 @@ class ApiAccessController < ApplicationController
     @security = api.getSecurity(session)
     @symbol_group = api.getSymbolGroup(session)
     @symbol = api.getSymbol(session)
-    #@backup = api.getBackup(session)
+    #@sym = api.symbolWithEmptySessions
+    @backup = api.getBackup(session)
+    #@group = api.getGroup(session)
+    #@grp = {}
   end
 
   def ping_session

@@ -281,8 +281,193 @@ module ApplicationHelper
     selected = symbol["spread_balance"]
     options = ""
     (-150..150).to_a.each do |ix|
-      options += "<option value='ix'#{' selected=true' if selected==ix}>#{ix-(spread.to_f/2).floor.to_i} bid/#{ix+(spread.to_f/2).ceil.to_i} ask</option>"
+      options += "<option value='#{ix}'#{' selected=true' if selected==ix}>#{ix-(spread.to_f/2).floor.to_i} bid/#{ix+(spread.to_f/2).ceil.to_i} ask</option>"
     end
     return options.html_safe
   end
+
+  def options_for_symbol_filter_limit(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected=="0"}>no</option>"
+    options += "<option value='0.001'#{' selected=true' if selected=="0.001"}>0.1</option>"
+    options += "<option value='0.005'#{' selected=true' if selected=="0.005"}>0.5</option>"
+    options += "<option value='0.01'#{' selected=true' if selected=="0.01"}>1.0</option>"
+    options += "<option value='0.03'#{' selected=true' if selected=="0.03"}>3.0</option>"
+    options += "<option value='0.05'#{' selected=true' if selected=="0.05"}>5.0</option>"
+    options += "<option value='0.1'#{' selected=true' if selected=="0.1"}>10.0</option>"
+    options += "<option value='0.15'#{' selected=true' if selected=="0.15"}>15.0</option>"
+    options += "<option value='0.2'#{' selected=true' if selected=="0.2"}>20.0</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_filter_counter(selected=nil)
+    options = ""
+    options += "<option value='1'#{' selected=true' if selected==1}>1</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>2</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>3</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>4</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>5</option>"
+    options += "<option value='6'#{' selected=true' if selected==6}>6</option>"
+    options += "<option value='7'#{' selected=true' if selected==7}>7</option>"
+    options += "<option value='8'#{' selected=true' if selected==8}>8</option>"
+    options += "<option value='9'#{' selected=true' if selected==9}>9</option>"
+    options += "<option value='10'#{' selected=true' if selected==10}>10</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_filter_smoothing(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>off</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>2</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>3</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>4</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>5</option>"
+    options += "<option value='6'#{' selected=true' if selected==6}>6</option>"
+    options += "<option value='7'#{' selected=true' if selected==7}>7</option>"
+    options += "<option value='8'#{' selected=true' if selected==8}>8</option>"
+    options += "<option value='9'#{' selected=true' if selected==9}>9</option>"
+    options += "<option value='10'#{' selected=true' if selected==10}>10</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_margin_mode(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>Forex [ lots * contract_size / leverage * percentage / 100 ]</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>CFD [ lots * contract_size * market_price * percentage / 100 ]</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Futures [ lots * initial_margin * percentage / 100 ]</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>CFD-Index [ lots * contract_size * market_price / tick_size * price * percentage / 100 ]</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>CFD-Leverage [ lots * contract_size * market_price / leverage * percentage / 100 ]</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_profit_mode(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>Forex[ (close_price - open_price) * contract_size * lots ]</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>CFD[ (close_price - open_price) * contract_size * lots ]</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Futures[ (close_price - open_price) * tick_price / tick_size * lots ]</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_swap_type(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>by points [ lots * long_or_short points * pointsize ]</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>by money [ lots * long_or_short ]</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>by interest [ lots * long_or_short / 100 / 360 ]</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>by money in margin currency [lots * long_or_short ]</option>"
+    return options.html_safe
+  end
+
+  def options_for_symbol_swap_rollover3days(selected=nil)
+    options = ""
+    options += "<option value='1'#{' selected=true' if selected==1}>Monday</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Tuesday</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>Wednesday</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>Thursday</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>Friday</option>"
+    return options.html_safe
+  end
+
+  def group_securities(group, securities)
+    output_string = ""
+    first = true
+    securities.each_with_index do |sec, si|
+      if group["secgroups"][si]["show"].to_i==1 && sec["name"]!=""
+        if first
+          first = false
+          output_string += sec["name"]
+        else
+          output_string += ", " + sec["name"]
+        end
+      end
+    end
+    return output_string
+  end
+
+  def options_for_group_default_leverage(selected=nil)
+    options = ""
+    options += "<option value='1000'#{' selected=true' if selected==1000}>1:1000</option>"
+    options += "<option value='500'#{' selected=true' if selected==500}>1:500</option>"
+    options += "<option value='400'#{' selected=true' if selected==400}>1:400</option>"
+    options += "<option value='300'#{' selected=true' if selected==300}>1:300</option>"
+    options += "<option value='200'#{' selected=true' if selected==200}>1:200</option>"
+    options += "<option value='175'#{' selected=true' if selected==175}>1:175</option>"
+    options += "<option value='150'#{' selected=true' if selected==150}>1:150</option>"
+    options += "<option value='125'#{' selected=true' if selected==125}>1:125</option>"
+    options += "<option value='100'#{' selected=true' if selected==100}>1:100</option>"
+    options += "<option value='75'#{' selected=true' if selected==75}>1:75</option>"
+    options += "<option value='66'#{' selected=true' if selected==66}>1:66</option>"
+    options += "<option value='50'#{' selected=true' if selected==50}>1:50</option>"
+    options += "<option value='33'#{' selected=true' if selected==33}>1:33</option>"
+    options += "<option value='25'#{' selected=true' if selected==25}>1:25</option>"
+    options += "<option value='20'#{' selected=true' if selected==20}>1:20</option>"
+    options += "<option value='10'#{' selected=true' if selected==10}>1:10</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>1:5</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>1:3</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>1:2</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>1:1</option>"
+    options += "<option value='0'#{' selected=true' if selected==0}></option>"
+    return options.html_safe
+  end
+
+  def options_for_group_news(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>disable</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>topics only</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>full package</option>"
+    return options.html_safe
+  end
+
+  def options_for_group_maxsecurities(selected=nil)
+    options = ""
+    options += "<option value='10'#{' selected=true' if selected==10}>10</option>"
+    options += "<option value='30'#{' selected=true' if selected==30}>30</option>"
+    options += "<option value='50'#{' selected=true' if selected==50}>50</option>"
+    options += "<option value='4096'#{' selected=true' if selected==4096}>unlimited</option>"
+    return options.html_safe
+  end
+
+  def options_for_group_maxpositions(selected=nil)
+    options = ""
+    options += "<option value='10'#{' selected=true' if selected==10}>10</option>"
+    options += "<option value='30'#{' selected=true' if selected==30}>30</option>"
+    options += "<option value='50'#{' selected=true' if selected==50}>50</option>"
+    options += "<option value='0'#{' selected=true' if selected==0}>unlimited</option>"
+    return options.html_safe
+  end
+
+  def options_for_group_rights(selected=nil)
+    options = ""
+    options += "<option value='1'#{' selected=true' if selected==1}>Disable</option>"
+    options += "<option value='17'#{' selected=true' if selected==17}>Enable all signals from all brokers</option>"
+    options += "<option value='33'#{' selected=true' if selected==33}>Enable signals from my servers only</option>"
+    return options.html_safe
+  end
+
+  def options_for_group_archive_period(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>disabled</option>"
+    options += "<option value='90'#{' selected=true' if selected==90}>90</option>"
+    options += "<option value='180'#{' selected=true' if selected==180}>180</option>"
+    options += "<option value='365'#{' selected=true' if selected==365}>365</option>"
+    return options.html_safe
+  end
+
+  def options_for_group_archive_max_balance(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>0</option>"
+    options += "<option value='100'#{' selected=true' if selected==100}>100</option>"
+    options += "<option value='1000'#{' selected=true' if selected==1000}>1000</option>"
+    options += "<option value='10000'#{' selected=true' if selected==10000}>10000</option>"
+    return options.html_safe
+  end
+
+  def options_for_group_archive_pending_period(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>disabled</option>"
+    (1..6).to_a.each do |i|
+      options += "<option value='#{i}'#{' selected=true' if selected==i}>#{i}</option>"
+    end
+    return options.html_safe
+  end
+
 end

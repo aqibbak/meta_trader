@@ -175,7 +175,7 @@ class ApiMethods
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key+'", "value": '+time.to_s+'}'
       else
-        if key=="fullbackup_path"||key=="export_path"||key=="export_securities"||key=="external_path"
+        if key=="fullbackup_path"||key=="export_path"||key=="export_securities"||key=="external_path"||key=="watch_password"||key=="watch_opposite"
           update_string += ',' unless ix==0     
           update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
         else
@@ -217,11 +217,165 @@ class ApiMethods
     return updateData(update_string, session)
   end
 
+  def symbolWithEmptySessions
+    return {"sessions"=>[{"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1},
+                         {"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1},
+                         {"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1},
+                         {"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1},
+                         {"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1},
+                         {"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1},
+                         {"quote"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "quote_overnight"=>-1,
+                          "trade"=>
+                         [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
+                          {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
+                           "trade_overnight"=>-1}]}
+  end
+
   def getSymbol(session)
     return getData('{"method":"CfgRequestSymbol"}', session)
   end
 
-  def updateSymbol(data,session)
+  def updateSymbol(sym_key,data,session)
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="source"
+        value = data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }
+        if value != ""        
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+value+'"}'
+        end
+      elsif key=="instant_max_volume"
+        value = data[key].to_i * 100
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": '+value.to_s+'}'
+      elsif key=="margin_divider"
+        value = 100 / data[key].to_f
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": '+value.to_s+'}'
+      elsif key=="sessions"
+        sessions = data[key].map { |k,v| v }
+        session_string = ""
+        sessions.each_with_index do |session,i|
+          quotes = session["quote"].map { |k,v| v }
+          trades = session["trade"].map { |k,v| v }
+          session_string += ',' unless i==0
+            
+          quotes_string = ''
+          quotes.each_with_index do |quote,qix|
+            close = (quote["close_hour"].to_i * 60 + quote["close_min"].to_i).to_s
+            close_hour = quote["close_hour"].to_i.to_s
+            close_min = quote["close_min"].to_i.to_s
+            open = (quote["open_hour"].to_i * 60 + quote["open_min"].to_i).to_s
+            open_hour = quote["open_hour"].to_i.to_s
+            open_min = quote["open_min"].to_i.to_s
+            
+            quotes_string += ',' unless qix==0
+            quotes_string += '[{"field":"close","value":'+close+'},'+
+                              '{"field":"close_hour","value":'+close_hour+'},'+
+                              '{"field":"close_min","value":'+close_min+'},'+
+                              '{"field":"open","value":'+open+'},'+
+                              '{"field":"open_hour","value":'+open_hour+'},'+
+                              '{"field":"open_min","value":'+open_min+'}]'
+          end
+          quotes_string = '{"field":"quote","value":['+quotes_string+']}'
+
+          trades_string = ''
+          trades.each_with_index do |trade,qix|
+            close = (trade["close_hour"].to_i * 60 + trade["close_min"].to_i).to_s
+            close_hour = trade["close_hour"].to_i.to_s
+            close_min = trade["close_min"].to_i.to_s
+            open = (trade["open_hour"].to_i * 60 + trade["open_min"].to_i).to_s
+            open_hour = trade["open_hour"].to_i.to_s
+            open_min = trade["open_min"].to_i.to_s
+            
+            trades_string += ',' unless qix==0
+            trades_string += '[{"field":"close","value":'+close+'},'+
+                              '{"field":"close_hour","value":'+close_hour+'},'+
+                              '{"field":"close_min","value":'+close_min+'},'+
+                              '{"field":"open","value":'+open+'},'+
+                              '{"field":"open_hour","value":'+open_hour+'},'+
+                              '{"field":"open_min","value":'+open_min+'}]'
+          end
+          trades_string = '{"field":"trade","value":['+trades_string+']}'
+
+          session_string += '['+quotes_string+','+trades_string+']'
+        end
+        puts '{"field": "'+key.to_s+'", "value": '+session_string+'}'
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
+      else
+        if key=="symbol"||key=="description"||key=="margin_currency"
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
+        else
+          if data[key].to_s != "" && key!="background_color"
+            update_string += ',' unless ix==0
+            update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
+          end
+        end
+      end
+    end
+    update_string = '{"method": "CfgUpdateSymbol", "key" : "'+sym_key+'", "update": ['+update_string+']}'
+    return updateData(update_string, session)
   end
 
   def deleteSymbol(position,session)
@@ -339,6 +493,39 @@ class ApiMethods
 
   def deleteDataServer(position,session)
     update_string = '{"method": "CfgDeleteDataServer", "position": '+position.to_s+'}'
+    return updateData(update_string, session)
+  end
+
+  def groupWithEmpty
+    return {}
+  end
+
+  def getGroup(session)
+    return getData('{"method":"CfgRequestGroup"}', session)
+  end
+
+  def updateGroup(grp_key,data,session)
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="source"
+        value = data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }
+        if value != ""        
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+value+'"}'
+        end
+      else
+        if key=="symbol"||key=="description"||key=="margin_currency"
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
+        else
+          if data[key].to_s != "" && key!="background_color"
+            update_string += ',' unless ix==0
+            update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
+          end
+        end
+      end
+    end
+    update_string = '{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "update": ['+update_string+']}'
     return updateData(update_string, session)
   end
 
