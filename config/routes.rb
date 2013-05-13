@@ -13,6 +13,12 @@ MetaTrader::Application.routes.draw do
 
   post "tabs/symbol_group/submit", :to => "symbol#symbol_group_submit", :as => "symbol_group_submit"
 
+  get "fetch_symbol", :to => "symbol#fetch_symbol", :as => "fetch_symbol"
+  post "tabs/symbol/submit", :to => "symbol#symbol_submit", :as => "symbol_submit"
+
+  get "fetch_group", :to => "group#fetch_group", :as => "fetch_group"
+  post "tabs/group/submit", :to => "group#group_submit", :as => "group_submit"
+
   post "tabs/access/submit", :to => "variable_update#access_submit", :as => "access_submit"
   delete "tabs/access/:position", :to => "variable_update#access_delete", :as => "delete_access_row"
 

@@ -48,6 +48,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.7.7)
     libv8 (3.11.8.17)
+    logical_tabs (0.8.0)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -101,6 +102,10 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-bootstrap-rails (2.2.6)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
     tzinfo (0.3.37)
     uglifier (2.0.1)
       execjs (>= 0.3.0)
@@ -113,9 +118,11 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   json
+  logical_tabs
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
   therubyracer
+  twitter-bootstrap-rails
   uglifier (>= 1.0.3)

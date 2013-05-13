@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Day</th>
+    <th colspan=3>Quotes</th>
+    <th colspan=3>Trade</th>
+  </tr>
+<% @sym["sessions"].each_with_index do |session, ix| %>
+  <tr>
+    <td><%= Date::DAYNAMES[ix] %></td>
+    <% session["quote"].each_with_index do |quote, qix| %>
+      <td>
+      <%=text_field_tag "symbol[sessions][#{ix}][quote][#{qix}][open_hour]","%02d"%quote["open_hour"],:style=>"width:17px;"%>:<%=text_field_tag "symbol[sessions][#{ix}][quote][#{qix}][open_min]","%02d"%quote["open_min"],:style=>"width:17px;"%>
+      -
+      <%=text_field_tag "symbol[sessions][#{ix}][quote][#{qix}][close_hour]","%02d"%quote["close_hour"],:style=>"width:17px;"%>:<%=text_field_tag "symbol[sessions][#{ix}][quote][#{qix}][close_min]","%02d"%quote["close_min"],:style=>"width:17px;"%>
+      </td>
+    <% end %>
+    <% session["trade"].each_with_index do |trade, tix| %>
+      <td>
+      <%=text_field_tag "symbol[sessions][#{ix}][trade][#{tix}][open_hour]","%02d"%trade["open_hour"],:style=>"width:17px;"%>:<%=text_field_tag "symbol[sessions][#{ix}][trade][#{tix}][open_min]","%02d"%trade["open_min"],:style=>"width:17px;"%>
+      -
+      <%=text_field_tag "symbol[sessions][#{ix}][trade][#{tix}][close_hour]","%02d"%trade["close_hour"],:style=>"width:17px;"%>:<%=text_field_tag "symbol[sessions][#{ix}][trade][#{tix}][close_min]","%02d"%trade["close_min"],:style=>"width:17px;"%>
+      </td>
+    <% end %>
+  </tr>
+<% end if @sym["sessions"] %>
+</table>

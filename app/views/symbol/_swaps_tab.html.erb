@@ -1,0 +1,36 @@
+<div class="row-fluid">
+  <div class="span12">
+     <%= hidden_field_tag "symbol[swap_enable]", '0' %>
+     <%= check_box_tag "symbol[swap_enable]", '1', @sym["swap_enable"]==1 %> Enable
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    Type: <%= select_tag "symbol[swap_type]", options_for_symbol_swap_type(@sym["swap_type"]), :style => "width:400px;" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    Long positions: <%= text_field_tag "symbol[swap_long]", @sym["swap_long"], :style => "width:100px;" %>
+  </div>
+  <div class="span6">
+    Short positions: <%= text_field_tag "symbol[swap_short]", @sym["swap_short"], :style => "width:100px;" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    3-day swaps: <%= select_tag "symbol[swap_rollover3days]", options_for_symbol_swap_rollover3days(@sym["swap_rollover3days"]) %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+     <%= hidden_field_tag "symbol[swap_openprice]", '0' %>
+     <%= check_box_tag "symbol[swap_openprice]", '1', @sym["swap_openprice"]==1 %> Use open price for position value calculation
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+     <%= hidden_field_tag "find_this", '0' %>
+     <%= check_box_tag "find_this", '1', @sym["find_this"]==1 %> Charge variation margin on rollover (FIND THIS)
+  </div>
+</div>

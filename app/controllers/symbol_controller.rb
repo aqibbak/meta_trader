@@ -18,4 +18,20 @@ class SymbolController < ApplicationController
     end
   end
 
+  def symbol_submit
+    data = params[:symbol]
+    key = params[:symbol_key]
+    api = ApiMethods.new
+    @result = api.updateSymbol(key,data,session)
+    render :nothing => true
+  end
+
+  def fetch_symbol
+    pos = params[:pos]
+    api = ApiMethods.new
+    @symbol_group = api.getSymbolGroup(session)
+    @symbol = api.getSymbol(session)
+    @sym = @symbol[pos.to_i]
+  end
+
 end

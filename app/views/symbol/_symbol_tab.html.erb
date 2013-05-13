@@ -1,0 +1,66 @@
+<div class="row-fluid">
+  <div class="span4">
+    Symbol: <%= text_field_tag "symbol[symbol]", @sym["symbol"], :style => "width: 120px" %>
+  </div>
+  <div class="span4">
+    Source: <%= select_tag "symbol[source]", options_for_source_select(@symbol, @sym["source"]), :style => "width: 100px" %>
+  </div>
+  <div class="span4">
+    Digits: <%= select_tag "symbol[digits]", options_for_symbol_digits(@sym["digits"]), :style => "width: 50px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    Description: <%= text_field_tag "symbol[description]", @sym["description"], :style => "width: 300px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+    Type: <%= select_tag "symbol[type]", options_for_symbol_type(@symbol_group, @sym["type"]), :style => "width: 100px" %>
+  </div>
+  <div class="span4">
+    Execution: <%= select_tag "symbol[exemode]", options_for_symbol_execution(@sym["exemode"]), :style => "width: 100px" %>
+  </div>
+  <div class="span4">
+    Currency: <%= select_tag "symbol[currency]", options_for_symbol_currency(@sym["currency"]), :disabled =>true, :style => "width: 80px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+    Trade: <%= select_tag "symbol[trade]", options_for_symbol_trade(@sym["trade"]), :style => "width: 120px" %>
+  </div>
+  <div class="span4">
+    <%#Background: <%= text_field_tag "symbol[background_color]", @sym["background_color"], :style => "width: 100px" %>
+  </div>
+  <div class="span4">
+    Margin Currency: <%= select_tag "symbol[margin_currency]", options_for_symbol_currency(@sym["margin_currency"]), :style => "width: 80px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    Maximum lots for IE: <%= text_field_tag "symbol[instant_max_volume]", @sym["instant_max_volume"] ? @sym["instant_max_volume"]/100 : "", :style => "width: 50px" %>
+  </div>
+  <div class="span6">
+    Orders: <%= select_tag "symbol[gtc_pendings]", options_for_symbol_orders(@sym["gtc_pendings"]), :style => "width: 240px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+    Spread by default: <%= text_field_tag "symbol[spread]", @sym["spread"], :style => "width: 40px" %> pt
+  </div>
+  <div class="span4">
+    <%= hidden_field_tag "symbol[long_only]", '0' %>
+    Long only: <%= check_box_tag "symbol[long_only]", '1', @sym["long_only"]==1 %>
+  </div>
+  <div class="span4">
+    Limit & stop level: <%= text_field_tag "symbol[stops_level]", @sym["stops_level"], :style => "width: 40px" %> pt
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    Spread balance: <%= select_tag "symbol[spread_balance]", options_for_spread_balance(@sym), :style => "width: 180px"  %>
+  </div>
+  <div class="span6">
+    Freeze level: <%= text_field_tag "symbol[freeze_level]", @sym["freeze_level"], :style => "width: 40px"  %> pt
+  </div>
+</div>
