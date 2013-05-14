@@ -1,18 +1,39 @@
-<%= render "fixed_update/common_form" %>
+<div class="tab common_tab">
+  <h2>Common</h2>
+  <%= render "fixed_update/common_form" %>
+</div>
 
-<%= render "variable_update/access_form" %>
+<div class="tab access_tab">
+  <h2>Access</h2>
+  <%= render "variable_update/access_form" %>
+</div>
 
-<%= render "variable_update/data_server_form" %>
+<div class="tab data_server_tab">
+  <h2>Data Server</h2>
+  <%= render "variable_update/data_server_form" %>
+</div>
 
-<%= render "fixed_update/time_form" %>
+<div class="tab time_tab">
+  <h2>Time</h2>
+  <%= render "fixed_update/time_form" %>
+</div>
 
-<%= render "variable_update/holiday_form" %>
+<div class="tab holiday_tab">
+  <h2>Holiday</h2>
+  <%= render "variable_update/holiday_form" %>
+</div>
 
-<%= render "symbol/symbol_group_form" %>
+<div class="tab symbol_group_tab">
+  <h2>Symbol Group</h2>
+  <%= render "symbol/symbol_group_form" %>
+</div>
 
 <%#= render "symbol/symbol_form" %>
 
-<%= render "fixed_update/backup_form" %>
+<div class="tab backup_tab">
+  <h2>Backup</h2>
+  <%= render "fixed_update/backup_form" %>
+</div>
 
 <script>
   var ping_timer;

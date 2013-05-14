@@ -2,6 +2,7 @@ class ApiAccessController < ApplicationController
   include ApplicationHelper
 
   def login_form
+    render layout: "login"
   end
 
   def login
