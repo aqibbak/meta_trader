@@ -19,7 +19,7 @@
       </tr>
       <tr>
         <td>Password of the slave server</td>
-        <td><%= password_field_tag "backup_tab[watch_password]", @backup["watch_password"], :readonly => @backup["watch_role"]==0 %></td>
+        <td><%= password_field_tag "backup_tab[watch_password]", @backup["watch_password"].encode('utf-8', 'iso-8859-1'), :readonly => @backup["watch_role"]==0 %></td>
       </tr>
       <tr>
         <td style="width: 250px;" >Oposite server IP address and port</td>
