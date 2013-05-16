@@ -39,7 +39,7 @@
     <%#= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
     <br/>
     <label for="holiday_tab[description]">Description: </label>
-    <%= text_field_tag "holiday_tab[description]", :class =>"m-wrap" %>
+    <%= text_field_tag "holiday_tab[description]"%>
     <br/>
     <%= submit_tag "Submit", :class => "btn green" %>
     <%= link_to "new", "#", :id => "new_holiday" %>
