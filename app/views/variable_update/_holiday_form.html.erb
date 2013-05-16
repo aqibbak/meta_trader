@@ -1,5 +1,5 @@
 <% unless @holiday.nil? %>
-  <table class="holiday_table" style="margin: 10px">
+  <table class="holiday_table table table-striped table-bordered table-advance">
     <tr>
       <th>Day</th>
       <th>From</th>
@@ -36,12 +36,12 @@
     <%= number_field_tag "holiday_tab[to][hour]" %>:<%= number_field_tag "holiday_tab[to][minute]" %>
     <br/>
     <label for="holiday_tab[symbol]">Symbol: </label>
-    <%= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
+    <%#= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
     <br/>
     <label for="holiday_tab[description]">Description: </label>
-    <%= text_field_tag "holiday_tab[description]"%>
+    <%= text_field_tag "holiday_tab[description]", :class =>"m-wrap" %>
     <br/>
-    <%= submit_tag %>
+    <%= submit_tag "Submit", :class => "btn green" %>
     <%= link_to "new", "#", :id => "new_holiday" %>
   <% end %>
 <% end %>
