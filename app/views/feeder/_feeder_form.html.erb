@@ -1,0 +1,61 @@
+<%= form_tag feeder_submit_path, :method => "POST", :remote => true do %>
+  <%= hidden_field_tag "new_feeder", @fdr.empty? %>
+  <%= hidden_field_tag "feeder_key", @fdr["name"] %>
+  <div class="row-fluid">
+    <div class="span12">
+       <%= hidden_field_tag "feeder[enable]", '0' %>
+       <%= check_box_tag "feeder[enable]", '1', @fdr["enable"]==1 %> Enable
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span7">
+      Name: <%= text_field_tag "feeder[name]", @fdr["name"], :style => "width: 300px" %>
+    </div>
+    <div class="span5">
+      <%= select_tag "feeder[mode]", options_for_feeder_mode(@fdr), :style => "width: 200px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      File: <%= select_tag "feeder[file]", options_for_feeder_file(@fdr["file"]), :style => "width: 300px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      Server: <%= text_field_tag "feeder[server]", @fdr["server"], :style => "width: 300px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      Login: <%= text_field_tag "feeder[login]", @fdr["login"], :style => "width: 80px" %>
+    </div>
+    <div class="span6">
+      Password: <%= password_field_tag "feeder[pass]", @fdr["pass"], :style => "width: 80px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      Keywords: <%= text_field_tag "feeder[keywords]", @fdr["keywords"], :style => "width: 200px" %>
+    </div>
+    <div class="span6">
+      Language: <%= select_tag "feeder[news_langid]", options_for_feeder_news_langid(@fdr["news_langid"]), :style => "width: 150px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      Idle timeout: <%= select_tag "feeder[timeout]", options_for_feeder_timeout(@fdr["timeout"]), :style => "width: 100px" %> seconds, reconnect after 
+    </div>
+    <div class="span6">
+      <%= select_tag "feeder[timeout_reconnect]", options_for_feeder_timeout_reconnect(@fdr["timeout_reconnect"]), :style => "width: 100px" %> seconds
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      Sleep for: <%= text_field_tag "feeder[timeout_sleep]", @fdr["timeout_sleep"], :style => "width: 80px" %> seconds after
+    </div>
+    <div class="span6">
+      <%= text_field_tag "feeder[attemps_sleep]", @fdr["attemps_sleep"], :style => "width: 80px" %> attempts
+    </div>
+  </div>
+  <%= submit_tag %>
+<% end %>

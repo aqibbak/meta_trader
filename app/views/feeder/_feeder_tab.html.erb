@@ -1,0 +1,26 @@
+<% unless @feeder.nil? %>
+<div class="row-fluid">
+  <div class="span5">
+    <table>
+      <tr>
+        <th>Vendor</th>
+        <th>Source</th>
+        <th>Server</th>
+      </tr>
+      <% @feeder.each_with_index do |feeder, ix|%>
+        <tr class="feeder-row" data-pos="<%= ix %>">
+          <td><%= feeder["name"] %></td>
+          <td><%= ["Quotes", "News", "Quotes&News"][feeder["mode"]] %></td>
+          <td><%= feeder["server"] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div id="feeder-form" class="span7">
+    <%= render "feeder/feeder_form" %>
+  </div>
+</div>
+
+ {"attemps_sleep"=>5, "enable"=>0, "file"=>"mt4feeder.feed", "keywords"=>"", "login"=>"1001", "mode"=>0, "name"=>"MetaTrader 4 Quotes", "news_langid"=>0, "pass"=>"DemoFeeder", "server"=>"demo.metaquotes.net:443", "timeout"=>120, "timeout_reconnect"=>5, "timeout_sleep"=>60}
+
+<% end %>

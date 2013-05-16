@@ -19,6 +19,15 @@ MetaTrader::Application.routes.draw do
   get "fetch_group", :to => "group#fetch_group", :as => "fetch_group"
   post "tabs/group/submit", :to => "group#group_submit", :as => "group_submit"
 
+  get "fetch_manager", :to => "manager#fetch_manager", :as => "fetch_manager"
+  post "tabs/manager/submit", :to => "manager#manager_submit", :as => "manager_submit"
+
+  get "fetch_feeder", :to => "feeder#fetch_feeder", :as => "fetch_feeder"
+  post "tabs/feeder/submit", :to => "feeder#feeder_submit", :as => "feeder_submit"
+
+  get "fetch_synchronization", :to => "synchronization#fetch_synchronization", :as => "fetch_synchronization"
+  post "tabs/synchronization/submit", :to => "synchronization#synchronization_submit", :as => "synchronization_submit"
+
   post "tabs/access/submit", :to => "variable_update#access_submit", :as => "access_submit"
   delete "tabs/access/:position", :to => "variable_update#access_delete", :as => "delete_access_row"
 

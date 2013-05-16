@@ -470,4 +470,243 @@ module ApplicationHelper
     return options.html_safe
   end
 
+  def options_for_group_margin_type(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>%, percent</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>$, money</option>"
+    return options.html_safe    
+  end
+
+  def options_for_group_margin_mode(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>do not use unrealized profit/loss</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>use unrealized profit/loss</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>use unrealized profit only</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>use unrealized loss only</option>"
+    return options.html_safe   
+  end
+
+  def options_for_secgroup_execution(selected)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>manual only, no automation</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>automatic only</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>manual, but automatic if no dealers online</option>"
+    return options.html_safe   
+  end
+
+  def options_for_secgroup_spread_diff(selected=nil)
+    options = ""
+    (-3..3).to_a.each do |i|
+      options += "<option value='#{i}'#{' selected=true' if selected==i}>#{i}</option>"
+    end
+    return options.html_safe
+  end
+
+  def options_for_secgroup_ie_deviation(selected=nil)
+    options = ""
+    (0..5).to_a.each do |i|
+      options += "<option value='#{i}'#{' selected=true' if selected==i}>#{i}</option>"
+    end
+    return options.html_safe
+  end
+
+  def options_for_secgroup_autocloseout_mode(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>None, do not use auto close-out at the end of day</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>HIHI, highest sells against highest buys</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>LOLO, lowest sells against lowest buys</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>HILO, highest sells against lowest buys</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>LOHI, lowest sells against highest buys</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>FIFO first bought/sold against first sold/bought</option>"
+    options += "<option value='6'#{' selected=true' if selected==6}>LIFO last bought/sold against first sold/bought</option>"
+    options += "<option value='7'#{' selected=true' if selected==7}>Intraday followed by FIFO</option>"
+    return options.html_safe   
+  end
+
+  def options_for_secgroup_comm_type(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>$, money</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>pt, points</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>%, percentage</option>"
+    return options.html_safe
+  end
+
+  def options_for_secgroup_comm_agent_type(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>$, money</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>pt, points</option>"
+    return options.html_safe
+  end
+
+  def options_for_secgroup_comm_lots(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>per lot</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>per deal</option>"
+    return options.html_safe
+  end
+
+  def options_for_secgroup_lot_min(selected=nil)
+    options = ""
+    (0..4).to_a.each do |i|
+      options += "<option value='#{0.01 * 10**i}'#{' selected=true' if selected.to_f==0.01 * 10**i}>#{0.01 * 10**i}</option>"
+    end
+    return options.html_safe
+  end
+
+  def options_for_secgroup_lot_max(selected=nil)
+    options = ""
+    options += "<option value='0.1'#{' selected=true' if selected.to_f==0.1}>0.1</option>"
+    options += "<option value='1.0'#{' selected=true' if selected.to_f==1.0}>1.0</option>"
+    options += "<option value='10.0'#{' selected=true' if selected.to_f==10.0}>10.0</option>"
+    options += "<option value='100.0'#{' selected=true' if selected.to_f==100.0}>100.0</option>"
+    options += "<option value='500.0'#{' selected=true' if selected.to_f==500.0}>500.0</option>"
+    options += "<option value='1000.0'#{' selected=true' if selected.to_f==1000.0}>1000.0</option>"
+    options += "<option value='10000'#{' selected=true' if selected.to_f==10000}>10000</option>"
+    return options.html_safe
+  end
+
+  def options_for_secgroup_lot_step(selected=nil)
+    options = ""
+    (0..3).to_a.each do |i|
+      options += "<option value='#{0.1 * 10**i}'#{' selected=true' if selected.to_f==0.1 * 10**i}>#{0.1 * 10**i}</option>"
+    end
+    return options.html_safe
+  end
+
+  def options_for_secmargin_symbol(selected=nil,securities)
+    options = ""
+    securities.each_with_index do |sec, si|
+      options += "<option value='#{sec["symbol"]}'#{' selected=true' if selected==sec["symbol"]}>#{sec["symbol"]}, #{sec["description"]}</option>"
+    end
+    return options.html_safe
+  end
+
+  def options_for_secmargin_swap_long(selected, securities, sec_sel)
+    options = ""
+    sec = nil
+    options += "<option value='#{Float::INFINITY}'#{' selected=true' if selected==Float::INFINITY}>default</option>"
+    securities.each_with_index do |sec, si|
+      if sec["symbol"] == sec_sel 
+        options += "<option value='#{sec["swap_long"]}'#{' selected=true' if selected==sec["swap_long"]}>#{sec["swap_long"]}</option>"
+      end
+    end
+    return options.html_safe
+  end
+
+  def options_for_secmargin_swap_short(selected, securities, sec_sel)
+    options = ""
+    options += "<option value='#{Float::INFINITY}'#{' selected=true' if selected==Float::INFINITY}>default</option>"
+    securities.each_with_index do |sec, si|
+      if sec["symbol"] == sec_sel 
+        options += "<option value='#{sec["swap_short"]}'#{' selected=true' if selected==sec["swap_short"]}>#{sec["swap_short"]}</option>"
+      end
+    end
+    return options.html_safe
+  end
+
+  def options_for_secmargin_margin_divider(selected, securities, sec_sel)
+    options = ""
+    options += "<option value='0.0'#{' selected=true' if selected==Float::INFINITY}>default</option>"
+    securities.each_with_index do |sec, si|
+      if sec["symbol"] == sec_sel 
+        options += "<option value='#{sec["margin_divider"]}'#{' selected=true' if selected==sec["margin_divider"]}>#{number_with_precision(100.0/sec["margin_divider"], :precision => 2)}</option>"
+      end
+    end
+    return options.html_safe
+  end
+
+  def list_manager_rights(manager)
+    list = ""
+    list += "admin, " if manager["admin"] == 1
+    list += "manager, " if manager["manager"] == 1
+    list += "dealer, " if manager["broker"] == 1
+    list += "internal mail, " if manager["email"] == 1
+    list += "journals, " if manager["logs"] == 1
+    list += "market watch, " if manager["market_watch"] == 1
+    list += "accountant, " if manager["money"] == 1
+    list += "send news, " if manager["news"] == 1
+    list += "connections, " if manager["online"] == 1
+    list += "server plugins, " if manager["plugins"] == 1
+    list += "reports, " if manager["reports"] == 1
+    list += "risk manager, " if manager["riskman"] == 1
+    list += "supervise trades, " if manager["see_trades"] == 1
+    list += "server reports, " if manager["server_reports"] == 1
+    list += "techsupport, " if manager["techsupport"] == 1
+    list += "edit trades, " if manager["trades"] == 1
+    list += "personal details, " if manager["user_details"] == 1
+  end
+
+  def options_for_manager_exp_time(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>unlimited</option>"
+    options += "<option value='7'#{' selected=true' if selected==7}>7</option>"
+    options += "<option value='14'#{' selected=true' if selected==14}>14</option>"
+    options += "<option value='30'#{' selected=true' if selected==30}>30</option>"
+    options += "<option value='61'#{' selected=true' if selected==61}>61</option>"
+    options += "<option value='182'#{' selected=true' if selected==182}>182</option>"
+    return options.html_safe
+  end
+
+  def options_for_feeder_mode(feeder)
+    options = ""
+    if ["ChapionshipFeeder.feed","djchinesenewsfeeder.feed","djnewsfeeder.feed",
+        "fxstreetfeeder.feed","ibtnewsfeeder.feed","japanesenewsfeeder.feed",
+        "primenewsfeeder.feed","tcnewsfeeder.feed"].include?(feeder["file"])
+      options += "<option value='1'#{' selected=true' if feeder["mode"]==1}>News</option>"
+    else
+      options += "<option value='0'#{' selected=true' if feeder["mode"]==0}>Quotes</option>"
+      options += "<option value='1'#{' selected=true' if feeder["mode"]==1}>News</option>"
+      options += "<option value='2'#{' selected=true' if feeder["mode"]==2}>Quotes & News</option>" unless feeder["file"]=="uniserverfeeder.feed"
+    end
+    return options.html_safe
+  end
+
+  def options_for_feeder_news_langid(selected=nil)
+    options = ""
+    return options.html_safe
+  end
+
+  def options_for_feeder_timeout(selected=nil)
+    options = ""
+    options += "<option value='5'#{' selected=true' if selected==5}>5</option>"
+    options += "<option value='10'#{' selected=true' if selected==10}>10</option>"
+    options += "<option value='30'#{' selected=true' if selected==30}>30</option>"
+    options += "<option value='60'#{' selected=true' if selected==60}>60</option>"
+    options += "<option value='120'#{' selected=true' if selected==120}>120</option>"
+    return options.html_safe
+  end
+
+  def options_for_feeder_timeout_reconnect(selected=nil)
+    options = ""
+    options += "<option value='5'#{' selected=true' if selected==5}>5</option>"
+    options += "<option value='10'#{' selected=true' if selected==10}>10</option>"
+    options += "<option value='30'#{' selected=true' if selected==30}>30</option>"
+    options += "<option value='60'#{' selected=true' if selected==60}>60</option>"
+    return options.html_safe
+  end
+
+  def options_for_feeder_file(selected=nil)
+    options = ""
+    options += "<option value='ChapionshipFeeder.feed'#{' selected=true' if selected=="ChapionshipFeeder.feed"}>ChapionshipFeeder.feed</option>"
+    options += "<option value='djchinesenewsfeeder.feed'#{' selected=true' if selected=="djchinesenewsfeeder.feed"}>djchinesenewsfeeder.feed</option>"
+    options += "<option value='djnewsfeeder.feed'#{' selected=true' if selected=="djnewsfeeder.feed"}>djnewsfeeder.feed</option>"
+    options += "<option value='fxstreetfeeder.feed'#{' selected=true' if selected=="fxstreetfeeder.feed"}>fxstreetfeeder.feed</option>"
+    options += "<option value='ibtnewsfeeder.feed'#{' selected=true' if selected=="ibtnewsfeeder.feed"}>ibtnewsfeeder.feed</option>"
+    options += "<option value='japanesenewsfeeder.feed'#{' selected=true' if selected=="japanesenewsfeeder.feed"}>japanesenewsfeeder.feed</option>"
+    options += "<option value='mt4feeder.feed'#{' selected=true' if selected=="mt4feeder.feed"}>mt4feeder.feed</option>"
+    options += "<option value='primenewsfeeder.feed'#{' selected=true' if selected=="primenewsfeeder.feed"}>primenewsfeeder.feed</option>"
+    options += "<option value='tcnewsfeeder.feed'#{' selected=true' if selected=="tcnewsfeeder.feed"}>tcnewsfeeder.feed</option>"
+    options += "<option value='unifeeder.feed'#{' selected=true' if selected=="unifeeder.feed"}>unifeeder.feed</option>"
+    options += "<option value='uniserverfeeder.feed'#{' selected=true' if selected=="uniserverfeeder.feed"}>uniserverfeeder.feed</option>"
+    return options.html_safe
+  end
+
+  def options_for_synchronization_mode(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>Add</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>Update</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Replace</option>"
+    return options.html_safe
+  end
+
 end

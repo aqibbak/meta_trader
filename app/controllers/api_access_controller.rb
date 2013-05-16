@@ -29,6 +29,12 @@ class ApiAccessController < ApplicationController
     @backup = api.getBackup(session)
     #@group = api.getGroup(session)
     #@grp = {}
+    #@manager = api.getManager(session)
+    #@mgr = {}
+    #@feeder = api.getFeeder(session)
+    #@fdr = {}
+    #@synchronization = api.getSynchronization(session)
+    #@sync = {}
   end
 
   def ping_session

@@ -217,6 +217,39 @@ class ApiMethods
     return updateData(update_string, session)
   end
 
+  def getManager(session)
+    return getData('{"method":"CfgRequestManager"}', session)
+  end
+
+  def updateManager(mgr_key,data,session)
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="source"
+        value = data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }
+        if value != ""        
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+value+'"}'
+        end
+      elsif key=="instant_max_volume"
+        value = data[key].to_i * 100
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": '+value.to_s+'}'
+      else
+        if key=="symbol"||key=="description"||key=="margin_currency"
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
+        else
+          if data[key].to_s != "" && key!="background_color"
+            update_string += ',' unless ix==0
+            update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
+          end
+        end
+      end
+    end
+    update_string = '{"method": "CfgUpdateManager", "key" : "'+mgr_key+'", "update": ['+update_string+']}'
+    return updateData(update_string, session)
+  end
+
   def symbolWithEmptySessions
     return {"sessions"=>[{"quote"=>
                          [{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
@@ -359,7 +392,6 @@ class ApiMethods
 
           session_string += '['+quotes_string+','+trades_string+']'
         end
-        puts '{"field": "'+key.to_s+'", "value": '+session_string+'}'
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
       else
@@ -507,18 +539,65 @@ class ApiMethods
   def updateGroup(grp_key,data,session)
     update_string = ""
     data.keys.each_with_index do |key, ix|
-      if key=="source"
-        value = data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }
-        if value != ""        
-          update_string += ',' unless ix==0
-          update_string += '{"field": "'+key.to_s+'", "value": "'+value+'"}'
+      if key=="secgroups"
+=begin
+        sessions = data[key].map { |k,v| v }
+        session_string = ""
+        sessions.each_with_index do |session,i|
+          quotes = session["quote"].map { |k,v| v }
+          trades = session["trade"].map { |k,v| v }
+          session_string += ',' unless i==0
+            
+          quotes_string = ''
+          quotes.each_with_index do |quote,qix|
+            close = (quote["close_hour"].to_i * 60 + quote["close_min"].to_i).to_s
+            close_hour = quote["close_hour"].to_i.to_s
+            close_min = quote["close_min"].to_i.to_s
+            open = (quote["open_hour"].to_i * 60 + quote["open_min"].to_i).to_s
+            open_hour = quote["open_hour"].to_i.to_s
+            open_min = quote["open_min"].to_i.to_s
+            
+            quotes_string += ',' unless qix==0
+            quotes_string += '[{"field":"close","value":'+close+'},'+
+                              '{"field":"close_hour","value":'+close_hour+'},'+
+                              '{"field":"close_min","value":'+close_min+'},'+
+                              '{"field":"open","value":'+open+'},'+
+                              '{"field":"open_hour","value":'+open_hour+'},'+
+                              '{"field":"open_min","value":'+open_min+'}]'
+          end
+          quotes_string = '{"field":"quote","value":['+quotes_string+']}'
+
+          trades_string = ''
+          trades.each_with_index do |trade,qix|
+            close = (trade["close_hour"].to_i * 60 + trade["close_min"].to_i).to_s
+            close_hour = trade["close_hour"].to_i.to_s
+            close_min = trade["close_min"].to_i.to_s
+            open = (trade["open_hour"].to_i * 60 + trade["open_min"].to_i).to_s
+            open_hour = trade["open_hour"].to_i.to_s
+            open_min = trade["open_min"].to_i.to_s
+            
+            trades_string += ',' unless qix==0
+            trades_string += '[{"field":"close","value":'+close+'},'+
+                              '{"field":"close_hour","value":'+close_hour+'},'+
+                              '{"field":"close_min","value":'+close_min+'},'+
+                              '{"field":"open","value":'+open+'},'+
+                              '{"field":"open_hour","value":'+open_hour+'},'+
+                              '{"field":"open_min","value":'+open_min+'}]'
+          end
+          trades_string = '{"field":"trade","value":['+trades_string+']}'
+
+          session_string += '['+quotes_string+','+trades_string+']'
         end
+        puts '{"field": "'+key.to_s+'", "value": '+session_string+'}'
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
+=end
       else
-        if key=="symbol"||key=="description"||key=="margin_currency"
+        if key=="group"||key=="company"||key=="currency"||key=="signature"||key=="smtp_login"||key=="smtp_password"||key=="smtp_server"||key=="support_email"||key=="templates"
           update_string += ',' unless ix==0
           update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
         else
-          if data[key].to_s != "" && key!="background_color"
+          if data[key].to_s != ""
             update_string += ',' unless ix==0
             update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
           end
@@ -526,6 +605,71 @@ class ApiMethods
       end
     end
     update_string = '{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "update": ['+update_string+']}'
+    return updateData(update_string, session)
+  end
+
+  def getFeeder(session)
+    return getData('{"method":"CfgRequestFeeder"}', session)
+  end
+
+  def updateFeeder(fdr_key,data,session)
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="name"||key=="server"||key=="login"||key=="pass"||key=="keywords"||key=="file"
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
+      else
+        if data[key].to_s != ""
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
+        end
+      end
+    end
+    update_string = '{"method": "CfgUpdateFeeder", "key" : "'+fdr_key+'", "update": ['+update_string+']}'
+    return updateData(update_string, session)
+  end
+
+  def getSynchronization(session)
+    return getData('{"method":"CfgRequestSync"}', session)
+  end
+
+  def updateSynchronization(sync_key,data,session)
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="limits"
+        if data[key].to_i == 0
+          data["from"] = 0
+          data["to"] = 0
+        else
+          from_date = Time.new
+          from_date.year = data["from"]["year"]
+          from_date.month = data["from"]["month"]
+          from_date.day = data["from"]["day"]
+          from_date.hour = data["from"]["hour"]
+          from_date.min = data["from"]["min"]
+          data["from"] = from_date.to_i
+
+          to_date = Time.new
+          to_date.year = data["to"]["year"]
+          to_date.month = data["to"]["month"]
+          to_date.day = data["to"]["day"]
+          to_date.hour = data["to"]["hour"]
+          to_date.min = data["to"]["min"]
+          data["to"] = to_date.to_i
+        end
+      else
+        if key=="server"||key=="securities"
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
+        else
+          if data[key].to_s != ""
+            update_string += ',' unless ix==0
+            update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
+          end
+        end
+      end
+    end
+    update_string = '{"method": "CfgUpdateSync", "key" : "'+sync_key+'", "update": ['+update_string+']}'
     return updateData(update_string, session)
   end
 

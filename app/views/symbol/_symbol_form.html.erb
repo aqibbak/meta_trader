@@ -1,7 +1,7 @@
 <%= form_tag symbol_submit_path, :method => "POST", :remote => true do %>
   <%= hidden_field_tag "new_symbol", @sym.empty? %>
   <%= hidden_field_tag "symbol_key", @sym["symbol"] %>
-  <%= tabbed_panel :class => "blah" do |tp| %>
+  <%= tabbed_panel do |tp| %>
     <% tp.add_tab("Symbol") do %>
       <%= render "symbol/symbol_tab" %>
     <% end %>
