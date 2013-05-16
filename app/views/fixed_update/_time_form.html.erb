@@ -1,7 +1,7 @@
 <% if @time %>
   <% days = @time["days"] %>
   <%= form_tag time_submit_path, :method => "POST", :remote => true do %>
-    <table>
+    <table class="table table-bordered planer">
       <tr>
         <th></th>
         <% (0..23).to_a.each do |hour| %>
@@ -24,6 +24,6 @@
       </tr>
     <% end %>
     </table>
-    <%= submit_tag %>
+    <%= submit_tag "Submit", :class => "btn green" %>
   <% end %>
 <% end %>
