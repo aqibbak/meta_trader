@@ -1,10 +1,10 @@
 <% unless @access.nil? %>
-  <table class="access_table" style="margin: 10px">
+  <table class="access_table table table-striped table-bordered table-advance">
     <tr>
-      <th>From</th>
-      <th>To</th>
-      <th>Comment</th>
-      <th>Delete</th>
+      <th><i class="icon-briefcase"></i> From</th>
+      <th><i class="icon-user"></i> To</th>
+      <th><i class="icon-comment"></i> Comment</th>
+      <th><i class="icon-trash"></i> Delete</th>
     </tr>
     <% @access.each_with_index do |row, ix| %>
       <tr class="access_row" data-position="<%= ix %>" data-action="<%= row["action"] %>" data-from="<%= ApiMethods.long2ip(row["from"]) %>" data-to="<%= ApiMethods.long2ip(row["to"]) %>" data-comment="<%= row["comment"] %>">
@@ -15,6 +15,7 @@
       </tr>
     <% end %>
   </table>
+  <h5><i class="icon-caret-down"></i> Create new access</h5>
   <%= form_tag access_submit_path, :method => "POST", :remote => true do %>
     <%= hidden_field_tag "access_new_record", true %>
     <%= hidden_field_tag "access_tab[position]", @access.count %>
@@ -29,7 +30,7 @@
     <label for="access_tab[comment]">Comment: </label>
     <%= text_field_tag "access_tab[comment]" %>
     <br/>
-    <%= submit_tag %>
+    <%= submit_tag "Submit", :class => "btn green" %>
     <%= link_to "new", "#", :id => "new_access" %>
   <% end %>
 <% end %>
