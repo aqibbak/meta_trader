@@ -38,8 +38,14 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     erubis (2.7.0)
+    excon (0.21.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    heroku-api (0.3.10)
+      excon (~> 0.21.0)
+    heroku_san (4.2.5)
+      heroku-api (>= 0.1.2)
+      rake
     hike (1.2.2)
     i18n (0.6.1)
     journey (1.0.4)
@@ -111,6 +117,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  heroku_san
   jquery-rails
   json
   pg
