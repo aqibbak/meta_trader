@@ -1,12 +1,12 @@
 <% unless @data_server.nil? %>
-  <table class="data_server_table" style="margin: 10px">
+  <table class="data_server_table table table-striped table-bordered table-advance">
     <tr>
-      <th>Server</th>
+      <th><i class="icon-cogs"></i> Server</th>
       <th>Description</th>
       <th>Internal IP Address</th>
       <th>Priority</th>
       <th>Loading</th>
-      <th>Delete</th>
+      <th><i class="icon-trash"></i> Delete</th>
     </tr>
     <% @data_server.each_with_index do |row, ix| %>
       <tr class="data_server_row" data-position="<%= ix %>" data-description="<%= row["description"] %>"
@@ -34,7 +34,7 @@
     <label for="data_server_tab[priority]">Priority: </label>
     <%= select_tag "data_server_tab[priority]", options_for_data_server_priority %>
     <br/>
-    <%= submit_tag %>
+    <%= submit_tag "Submit", :class => "btn green" %>
     <%= link_to "new", "#", :id => "new_data_server" %>
   <% end %>
 <% end %>
