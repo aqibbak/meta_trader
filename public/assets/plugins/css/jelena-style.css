@@ -1,0 +1,62 @@
+/*
+   Jelena Style
+   ================================== */
+
+
+/** Colors **/
+.blue {
+  color: #4b8df8;
+} 
+.light-blue{
+  color:  #bfd5fa;
+}
+.red{
+  color: #e02222;
+} 
+.yellow{
+  color: #ffb848;
+} 
+.green{
+  color: #35aa47;
+} 
+.purple{
+  color: #852b99;
+}
+.grey{
+  color: #555555;
+}
+.light-grey{
+  color: #fafafa;
+}
+
+/***
+ 	Universal classes
+ 						****/
+
+.center{
+	text-align: center;
+}
+.bold{
+	font-weight: bold;
+}
+.normal{
+	font-weight: normal;
+}
+
+
+/* 
+  COMMON
+  ============================================ */
+
+.table-bordered th, .table-bordered td {
+border: 1px solid #ddd;
+}
+.table-bordered th, .table-bordered td:first-child{
+	font-weight: bold;
+	color: grey;
+}
+.table.planer th, 
+.table.planer td{
+	padding: 0px;
+	text-align: center;
+}
