@@ -6,9 +6,9 @@
 
 
   <%= form_tag backup_submit_path, :method => "POST", :remote => true do %>
-    <%= submit_tag %>
+
     <%= hidden_field_tag "backup_tab[watch_ip]", @backup["backup_tab"] %>
-    <table>
+    <table class="table table-striped table-bordered table-advance">
       <tr>
         <th>Property</th>
         <th>Value</th>
@@ -75,5 +75,7 @@
         <td><%= text_field_tag "backup_tab[export_path]", @backup["export_path"], :style => "width: 300px;" %></td>
       </tr>
     </table>
+            <%= submit_tag "Submit", :class => "btn green" %>
+
   <% end %>
 <% end %>
