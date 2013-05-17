@@ -1,5 +1,18 @@
-<%= form_tag(login_path, :method => "POST") do -%>
-<%= text_field_tag "username" %>
-<%= password_field_tag "password" %>
-<%= submit_tag "Login" %>
-<% end -%>
+<h2>SIGN IN</h2>
+<form action="<%= login_path %>" method="POST" class="form-validate">
+  <div class="control-group">
+    <div class="controls">
+      <input type="text" name='username' placeholder="Username" class="input-block-level" data-rule-required="true">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="pw controls">
+      <input type="password" name="password" placeholder="Password" class="input-block-level" data-rule-required="true">
+    </div>
+  </div>
+  <div class="submit">
+    <input type="submit" value="Sign me in" class="btn btn-primary">
+  </div>
+</form>
+
+<div>&nbsp;</div>

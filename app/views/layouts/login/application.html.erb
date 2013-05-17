@@ -12,26 +12,24 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
-  <%= render "layouts/core_ui_head" %>
+  <%= render "layouts/login/core_ui_head" %>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="/assets/ui/img/favicon.ico" />
 </head>
-<body>
-
-  <%= render "layouts/top_nav" %>
+<body class="login">
 
   <%= flash[:error] %>
 
-  <div class="container-fluid" id="content">
-    <div id="left">
-      <%= render "shared/sidebar" %>
-    </div><!-- /left -->
+	<div class="wrapper">
+		<h1>
+			<a href="#"><img src="/assets/ui/img/logo-big.png" alt="" class='retina-ready' width="59" height="49">MetaTrader</a>
+		</h1>
 
-    <div id="main">
-      <%= yield %>  
-    </div><!-- /main -->
-  </div><!-- /container-fluid content -->
-
+		<div class="login-body">
+    	<%= yield %>  
+  	</div><!-- /.login-body -->
+  </div><!-- /.wrapper -->
+  
 </body>
 </html>

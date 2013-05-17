@@ -1,37 +1,74 @@
-<%= render "fixed_update/common_form" %>
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="pull-left">
+      <h1>Section</h1>
+    </div>
+  </div>
+  <div class="breadcrumbs">
+    <ul>
+      <li>
+        <a href="#">Sections</a>
+        <i class="icon-angle-right"></i>
+      </li>
+      <li>
+        <a href="#">All</a>
+      </li>
+    </ul>
+    <div class="close-bread">
+      <a href="#"><i class="icon-remove"></i></a>
+    </div>
+  </div>
 
-<%= render "variable_update/access_form" %>
+  <div class="section section-common">
+    <%= render "fixed_update/common_form" %>
+  </div>
 
-<%= render "variable_update/data_server_form" %>
+  <div class="section section-access">
+    <%= render "variable_update/access_form" %>
+  </div>
 
-<%= render "fixed_update/time_form" %>
+  <div class="section section-data_server">
+    <%= render "variable_update/data_server_form" %>
+  </div>
 
-<%= render "variable_update/holiday_form" %>
+  <div class="section section-time">
+    <%= render "fixed_update/time_form" %>
+  </div>
 
-<%= render "symbol/symbol_group_form" %>
+  <div class="section section-holiday">
+    <%= render "variable_update/holiday_form" %>
+  </div>
 
-<%#= render "symbol/symbols_tab" %>
+  <div class="section section-group">
+    <%= render "symbol/symbol_group_form" %>
+  </div>
 
-<%= render "fixed_update/backup_form" %>
+  <div class="section section-symbols">
+    <%= render "symbol/symbols_tab" %>
+  </div>
 
-<%#= render "group/group_tab" %>
+  <%#= render "fixed_update/backup_form" %>
 
-<%#= render "manager/manager_tab" %>
+  <%#= render "group/group_tab" %>
 
-<%#= render "feeder/feeder_tab" %>
+  <%#= render "manager/manager_tab" %>
 
-<%#= render "synchronization/synchronization_tab" %>
+  <%#= render "feeder/feeder_tab" %>
 
-<script>
-  var ping_timer;
-  var period = 150;
+  <%#= render "synchronization/synchronization_tab" %>
 
-  $(document).ready(function(){
-    ping_timer = setInterval(function () {
-      $.ajax({
-        method : "POST",
-        url    : "<%= ping_session_path %>"
-      });
-    }, period * 1000);
-  })
-</script>
+  <script>
+    var ping_timer;
+    var period = 150;
+
+    $(document).ready(function(){
+      ping_timer = setInterval(function () {
+        $.ajax({
+          method : "POST",
+          url    : "<%= ping_session_path %>"
+        });
+      }, period * 1000);
+    })
+  </script>
+
+</div><!-- /container-fluid -->

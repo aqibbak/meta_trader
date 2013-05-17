@@ -1,5 +1,6 @@
 class ApiAccessController < ApplicationController
   include ApplicationHelper
+  layout :resolve_layout
 
   def login_form
   end
@@ -25,16 +26,16 @@ class ApiAccessController < ApplicationController
     @security = api.getSecurity(session)
     @symbol_group = api.getSymbolGroup(session)
     @symbol = api.getSymbol(session)
-    #@sym = api.symbolWithEmptySessions
-    @backup = api.getBackup(session)
-    #@group = api.getGroup(session)
-    #@grp = {}
-    #@manager = api.getManager(session)
-    #@mgr = {}
-    #@feeder = api.getFeeder(session)
-    #@fdr = {}
-    #@synchronization = api.getSynchronization(session)
-    #@sync = {}
+    @sym = api.symbolWithEmptySessions
+    # @backup = api.getBackup(session)
+    # @group = api.getGroup(session)
+    # @grp = {}
+    # @manager = api.getManager(session)
+    # @mgr = {}
+    # @feeder = api.getFeeder(session)
+    # @fdr = {}
+    # @synchronization = api.getSynchronization(session)
+    # @sync = {}
   end
 
   def ping_session
@@ -43,4 +44,14 @@ class ApiAccessController < ApplicationController
     render :nothing => true
   end
 
+  private
+
+    def resolve_layout
+      case action_name
+      when "login_form"
+        "login/application"
+      else
+        "application"
+      end
+    end
 end
