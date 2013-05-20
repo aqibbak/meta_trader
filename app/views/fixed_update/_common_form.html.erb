@@ -1,7 +1,7 @@
 <% unless @common.nil? %>
   <%= form_tag common_submit_path, :method => "POST", :remote => true do %>
-    <%= submit_tag %>
-    <table style="margin: 10px">
+    <div class="box-content">
+    <table class="table table-bordered common-table">
       <tbody>
         <tr>
           <td>Server</td>
@@ -116,7 +116,13 @@
             <%= hidden_field_tag "common_tab[adapter][full_adapter_list]", @common["adapters"] %>
           </td>
         </tr>
+        <tr>
+          <td></td>
+          <td> <%= submit_tag "Submit", :class => "btn btn-primary" %> </td>
+        </tr>
       </tbody>
     </table>
+    </div><!--/box-content-->
+   
   <% end %>
 <% end %>

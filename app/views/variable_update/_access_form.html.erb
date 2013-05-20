@@ -1,11 +1,13 @@
 <% unless @access.nil? %>
-  <table class="access_table" style="margin: 10px">
+  <table class="access_table table table-bordered">
+    <thead>
     <tr>
       <th>From</th>
       <th>To</th>
       <th>Comment</th>
       <th>Delete</th>
     </tr>
+    </thead>
     <% @access.each_with_index do |row, ix| %>
       <tr class="access_row" data-position="<%= ix %>" data-action="<%= row["action"] %>" data-from="<%= ApiMethods.long2ip(row["from"]) %>" data-to="<%= ApiMethods.long2ip(row["to"]) %>" data-comment="<%= row["comment"] %>">
         <td class="el"><%= ApiMethods.long2ip(row["from"]) %></td>
@@ -15,21 +17,48 @@
       </tr>
     <% end %>
   </table>
-  <%= form_tag access_submit_path, :method => "POST", :remote => true do %>
+  <div class="row-fluid">
+  <div class="span6">
+  <%= form_tag access_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true do %>
     <%= hidden_field_tag "access_new_record", true %>
     <%= hidden_field_tag "access_tab[position]", @access.count %>
-    <label for="access_tab[action]">Action: </label>
-    <%= select_tag "access_tab[action]", options_for_access_action %>
-    <br/>
-    <label for="access_tab[from]">From: </label>
+
+    <div class="control-group">
+    <label for="access_tab[action]" class="control-label">Action: </label>
+    <div class="controls">
+     <%= select_tag "access_tab[action]", options_for_access_action %>
+    </div>
+    </div><!--/control-group-->
+
+    <div class="control-group">
+    <label for="access_tab[from]" class="control-label">From: </label>
+    <div class="controls">
     <%= text_field_tag "access_tab[from]" %>
-    <label for="access_tab[to]">to: </label>
+    </div>
+    </div><!--/control-group-->
+
+    <div class="control-group">
+    <label for="access_tab[to]" class="control-label">To: </label>
+    <div class="controls">
     <%= text_field_tag "access_tab[to]" %>
-    <br/>
-    <label for="access_tab[comment]">Comment: </label>
+    </div>
+    </div><!--/control-group-->
+
+    <div class="control-group">
+    <label for="access_tab[comment]" class="control-label">Comment: </label>
+    <div class="controls">
     <%= text_field_tag "access_tab[comment]" %>
-    <br/>
-    <%= submit_tag %>
+    </div>
+    </div><!--/control-group-->
+
+    <div class="form-actions">
+    <%= submit_tag"Submit", :class => "btn btn-primary" %>
     <%= link_to "new", "#", :id => "new_access" %>
+    </div><!--/form-actions-->    
+   
+
+
   <% end %>
+  </div><!--/span-->
+  </div><!--/row-fluid-->
 <% end %>

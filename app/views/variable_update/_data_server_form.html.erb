@@ -1,5 +1,5 @@
 <% unless @data_server.nil? %>
-  <table class="data_server_table" style="margin: 10px">
+  <table class="data_server_table table table-bordered">
     <tr>
       <th>Server</th>
       <th>Description</th>
@@ -20,21 +20,47 @@
       </tr>
     <% end %>
   </table>
-  <%= form_tag data_server_submit_path, :method => "POST", :remote => true do %>
+
+<div class="row-fluid">
+  <div class="span6">
+  <%= form_tag data_server_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true do %>
     <%= hidden_field_tag "data_server_new_record", true %>
     <%= hidden_field_tag "data_server_tab[position]", @data_server.count %>
-    <label for="data_server_tab[description]">Description: </label>
+
+    <div class="control-group">
+    <label for="data_server_tab[description]" class="control-label">Description: </label>
+    <div class="controls">
     <%= text_field_tag "data_server_tab[description]" %>
-    <br/>
-    <label for="data_server_tab[server]">Public server address: </label>
+    </div>
+    </div><!--/control-group-->
+
+    <div class="control-group">
+    <label for="data_server_tab[server]" class="control-label">Public server address: </label>
+    <div class="controls">
     <%= text_field_tag "data_server_tab[server]" %>
-    <label for="data_server_tab[ip_internal]">Internal IP Address: </label>
+    </div>
+    </div><!--/control-group-->
+
+    <div class="control-group">
+    <label for="data_server_tab[ip_internal]" class="control-label">Internal IP Address: </label>
+    <div class="controls">
     <%= text_field_tag "data_server_tab[ip_internal]" %>
-    <br/>
-    <label for="data_server_tab[priority]">Priority: </label>
+    </div>
+    </div><!--/control-group-->
+    
+    <div class="control-group">
+    <label for="data_server_tab[priority]" class="control-label">Priority: </label>
+    <div class="controls">
     <%= select_tag "data_server_tab[priority]", options_for_data_server_priority %>
-    <br/>
-    <%= submit_tag %>
+    </div>
+    </div><!--/control-group-->
+    
+    <div class="form-actions">
+    <%= submit_tag"Submit", :class =>"btn btn-primary" %>
     <%= link_to "new", "#", :id => "new_data_server" %>
+    </div><!--/form-actions-->
   <% end %>
+  </div><!--/span-->
+</div><!--/row-fluid-->
+
 <% end %>

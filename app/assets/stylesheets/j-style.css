@@ -1,0 +1,73 @@
+/*******************************************
+         Jelena Style for MetaTrader
+********************************************/
+
+
+/*** 
+      UNIC CLASSES
+      ************************/
+
+.normal{
+	font-weight: normal;
+}
+
+
+
+
+/*** 
+      COLORS
+      ************************/
+
+.red-bg{
+	background: #e51400;
+}
+.blue-bg{
+	background: #368ee0;
+}
+.blue{
+	color: #368ee0;
+}
+
+/*** COMMON ***/
+.table-bordered {
+border: 3px solid #ddd!important;
+}
+.common-table td:first-child{
+	background: #f6f6f6;
+	color: #777;
+}
+
+/*** ACCESS ****/
+.table-border{
+	border:1px solid #ddd!important;
+}
+.table-access-form td,
+.table-access-form th{
+	border:1px dotted #ddd;
+}
+.table-access-form th label{
+	font-weight: bold;
+}
+/*** Data server ***/
+
+.form-data-server .form-actions{
+	margin: 8px 0;
+	padding: 5px 0 5px 180px;
+}
+.border{
+	border:1px solid #ddd;
+}
+/*** Time ***/
+.table.time-table tr th, 
+.table.time-table tr td {
+padding: 0px 0px 3px 0!important;
+border-top: 1px dotted #ddd;
+text-align: center;
+}
+.table.time-table tr td:first-child{
+	background: #eee;
+	font-weight: bold;
+}
+.table.time-table tr td:hover{
+	background: #eee;
+}

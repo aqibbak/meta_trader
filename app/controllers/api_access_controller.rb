@@ -25,7 +25,7 @@ class ApiAccessController < ApplicationController
     @holiday = api.getHoliday(session)
     @security = api.getSecurity(session)
     @symbol_group = api.getSymbolGroup(session)
-    @symbol = api.getSymbol(session)
+    #@symbol = api.getSymbol(session)
     @sym = api.symbolWithEmptySessions
     # @backup = api.getBackup(session)
     # @group = api.getGroup(session)
