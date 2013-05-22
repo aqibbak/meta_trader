@@ -1,26 +1,70 @@
+<% if can? :manage, :common %>
 <%= render "fixed_update/common_form" %>
+<% end %>
 
+<% if can? :manage, :access %>
 <%= render "variable_update/access_form" %>
+<% end %>
 
+<% if can? :manage, :data_server %>
 <%= render "variable_update/data_server_form" %>
+<% end %>
 
+<% if can? :manage, :time %>
 <%= render "fixed_update/time_form" %>
+<% end %>
 
+<% if can? :manage, :holiday %>
 <%= render "variable_update/holiday_form" %>
+<% end %>
 
+<% if can? :manage, :symbol_group %>
 <%= render "symbol/symbol_group_form" %>
+<% end %>
 
+<% if can? :manage, :symbols %>
 <%#= render "symbol/symbols_tab" %>
+<% end %>
 
+<% if can? :manage, :backup %>
 <%= render "fixed_update/backup_form" %>
+<% end %>
 
-<%#= render "group/group_tab" %>
+<% if can? :manage, :group %>
+<div id="group-form-tab">
+<%= render "group/group_tab" %>
+</div>
+<% end %>
 
-<%#= render "manager/manager_tab" %>
+<% if can? :manage, :manager %>
+<%= render "manager/manager_tab" %>
+<% end %>
 
-<%#= render "feeder/feeder_tab" %>
+<% if can? :manage, :feeder %>
+<%= render "feeder/feeder_tab" %>
+<% end %>
 
-<%#= render "synchronization/synchronization_tab" %>
+<% if can? :manage, :synchronization %>
+<%= render "synchronization/synchronization_tab" %>
+<% end %>
+
+<% if can? :manage, :plugin %>
+<div id="plugin-form-tab">
+<%= render "plugin/plugin_tab" %>
+</div>
+<% end %>
+
+<% if can? :manage, :account %>
+<div id="account-form-tab">
+<%= render "account/account_tab" %>
+</div>
+<% end %>
+
+<% if can? :manage, :order %>
+<div id="order-form-tab">
+<%= render "order/order_tab" %>
+</div>
+<% end %>
 
 <script>
   var ping_timer;

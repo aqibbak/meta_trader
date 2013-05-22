@@ -1,6 +1,9 @@
 MetaTrader::Application.routes.draw do
 
-  post "login", :to => "api_access#login", :as => "login"
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  devise_for :users, :controllers => { :sessions => "users/sessions" }
+
   get "main_page", :to => "api_access#main_page", :as => "main_page"
 
   post "ping_session", :to => "api_access#ping_session", :as => "ping_session"
@@ -15,6 +18,7 @@ MetaTrader::Application.routes.draw do
 
   get "fetch_symbol", :to => "symbol#fetch_symbol", :as => "fetch_symbol"
   post "tabs/symbol/submit", :to => "symbol#symbol_submit", :as => "symbol_submit"
+  get "new_symbol", :to => "symbol#new_symbol", :as => "new_symbol"
 
   get "fetch_group", :to => "group#fetch_group", :as => "fetch_group"
   post "tabs/group/submit", :to => "group#group_submit", :as => "group_submit"
@@ -28,6 +32,16 @@ MetaTrader::Application.routes.draw do
   get "fetch_synchronization", :to => "synchronization#fetch_synchronization", :as => "fetch_synchronization"
   post "tabs/synchronization/submit", :to => "synchronization#synchronization_submit", :as => "synchronization_submit"
 
+  get "fetch_plugin", :to => "plugin#fetch_plugin", :as => "fetch_plugin"
+  post "tabs/plugin/submit", :to => "plugin#plugin_submit", :as => "plugin_submit"
+
+  post "filter_account", :to => "account#filter_account", :as => "filter_account"
+  get "fetch_account", :to => "account#fetch_account", :as => "fetch_account"
+  post "tabs/account/submit", :to => "account#account_submit", :as => "account_submit"
+
+  get "fetch_order", :to => "order#fetch_order", :as => "fetch_order"
+  post "tabs/order/submit", :to => "order#order_submit", :as => "order_submit"
+
   post "tabs/access/submit", :to => "variable_update#access_submit", :as => "access_submit"
   delete "tabs/access/:position", :to => "variable_update#access_delete", :as => "delete_access_row"
 
@@ -37,7 +51,7 @@ MetaTrader::Application.routes.draw do
   post "tabs/data_server/submit", :to => "variable_update#data_server_submit", :as => "data_server_submit"
   delete "tabs/data_server/:position", :to => "variable_update#data_server_delete", :as => "delete_data_server_row"
 
-  root :to => "api_access#login_form"
+  root :to => "api_access#main_page"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
