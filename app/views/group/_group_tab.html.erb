@@ -1,0 +1,65 @@
+
+<% if @group %>
+
+<div class="row-fluid">
+  <div class="span5">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th style="width:600px;">Company</th>
+        <th>MC/SO</th>
+        <th style="width:600px;">Securities</th>
+      </tr>
+      <% @group.each_with_index do |group, ix|%>
+        <tr class="group-row" data-pos="<%= ix %>">
+          <td><%= group["group"] %></td>
+          <td><%= group["company"] %></td>
+          <td><%= group["margin_call"] %>/<%= group["margin_stopout"] %>%</td>
+          <td><%= group_securities(group, @security) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div id="group-form" class="span7">
+    <%= render "group/group_form" %>
+  </div>
+</div>
+-----------------------------------------------------------------------------------
+<br/>
+
+<%= @group.last["secmargins"] %>
+<br/>
+----------------------------------------------------------------------------------------------------
+<br/>
+  { "archive_max_balance"=>0, "archive_pending_period"=>0, "archive_period"=>0, "close_reopen"=>0, "copies"=>0, "credit"=>0, "hedge_largeleg"=>0, "interestrate"=>0, "margin_call"=>0, "margin_mode"=>0, "margin_stopout"=>0, "margin_type"=>0, "news_languages_total"=>0, "reports"=>0, 
+  "secmargins"=>[], "secmargins_total"=>0, "signature"=>"", "smtp_login"=>"", "smtp_password"=>"", "smtp_server"=>"", "stopout_skip_hedged"=>0, "support_email"=>"", "templates"=>""}
+
+  "secgroups"=>[
+
+
+{"autocloseout_mode"=>0,
+
+"comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0,
+
+"execution"=>1, "freemargin_mode"=>0, "ie_deviation"=>4, "ie_quick_mode"=>0, 
+
+"lot_max"=>1000000, "lot_min"=>1, "lot_step"=>1,
+
+"show"=>1, "spread_diff"=>0, "trade"=>1, "trade_rights"=>0},
+
+{"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>1, "freemargin_mode"=>0, "ie_deviation"=>4, "ie_quick_mode"=>0, "lot_max"=>1000000, "lot_min"=>1, "lot_step"=>1, "show"=>1, "spread_diff"=>0, "trade"=>1, "trade_rights"=>0},
+
+{"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>1, "freemargin_mode"=>0, "ie_deviation"=>4, "ie_quick_mode"=>0, "lot_max"=>1000000, "lot_min"=>1, "lot_step"=>1, "show"=>1, "spread_diff"=>0, "trade"=>1, "trade_rights"=>0},
+
+{"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>1, "freemargin_mode"=>0, "ie_deviation"=>4, "ie_quick_mode"=>0, "lot_max"=>1000000, "lot_min"=>1, "lot_step"=>1, "show"=>1, "spread_diff"=>0, "trade"=>1, "trade_rights"=>0},
+
+{"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0},
+
+{"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>1, "spread_diff"=>0, "trade"=>0, "trade_rights"=>3},
+
+{"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}, 
+
+   {"autocloseout_mode"=>0, "comm_agent"=>0, "comm_agent_lots"=>0, "comm_agent_type"=>0, "comm_base"=>0, "comm_lots"=>0, "comm_tax"=>0, "comm_type"=>0, "confirmation"=>0, "execution"=>0, "freemargin_mode"=>0, "ie_deviation"=>0, "ie_quick_mode"=>0, "lot_max"=>0, "lot_min"=>0, "lot_step"=>0, "show"=>0, "spread_diff"=>0, "trade"=>0, "trade_rights"=>0}],
+
+
+<% end %>

@@ -1,0 +1,72 @@
+<div class="row-fluid">
+  <div class="span7">
+    Timeout: <%= text_field_tag "group[timeout]", @grp["timeout"], :style => "width: 40px" %> seconds for confirmation
+  </div>
+  <div class="span5">
+    News: <%= select_tag "group[news]", options_for_group_news(@grp["news"]), :style => "width: 120px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    News languages: <%= @grp["news_languages"] %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    Maximum symbols: <%= select_tag "group[maxsecurities]", options_for_group_maxsecurities(@grp["maxsecurities"]), :style => "width: 120px" %>
+  </div>
+  <div class="span6">
+    Maximum orders: <%= select_tag "group[maxpositions]", options_for_group_maxpositions(@grp["maxpositions"]), :style => "width: 120px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+    Trade signals: <%= select_tag "group[rights]", options_for_group_rights(@grp["rights"]), :style => "width: 280px" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+     <%= hidden_field_tag "[aa]", '0' %>
+     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable internal mail system(FIND THIS)
+  </div>
+  <div class="span6">
+     <%= hidden_field_tag "group[check_ie_prices]", '0' %>
+     <%= check_box_tag "group[check_ie_prices]", '1', @grp["check_ie_prices"]==1 %> Check request prices in IE
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+     <%= hidden_field_tag "group[use_swap]", '0' %>
+     <%= check_box_tag "group[use_swap]", '1', @grp["use_swap"]==1 %> Enable charge of swaps
+  </div>
+  <div class="span6">
+     <%= hidden_field_tag "group[hedge_prohibited]", '0' %>
+     <%= check_box_tag "group[hedge_prohibited]", '1', @grp["hedge_prohibited"]==1 %> Prohibit hedge positions
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+     <%= hidden_field_tag "[aa]", '0' %>
+     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable trailing stops(FIND THIS)
+  </div>
+  <div class="span6">
+     <%= hidden_field_tag "group[close_fifo]", '0' %>
+     <%= check_box_tag "group[close_fifo]", '1', @grp["close_fifo"]==1 %> Position closing according to FIFO Rule
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+     <%= hidden_field_tag "[aa]", '0' %>
+     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable trading by expert advisors(FIND THIS)
+  </div>
+  <div class="span6">
+     <%= hidden_field_tag "group[close_reopen]", '0' %>
+     <%= check_box_tag "group[close_reopen]", '1', @grp["close_reopen"]==1 %> Use partial close with full close of initial position
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12">
+     <%= hidden_field_tag "[aa]", '0' %>
+     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable expiration of pending orders(FIND THIS)
+  </div>
+</div>

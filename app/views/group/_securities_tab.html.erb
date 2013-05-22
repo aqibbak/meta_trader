@@ -1,0 +1,143 @@
+<div class="row-fluid">
+  <div class="span5">
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Trade</th>
+        <th>Execution</th>
+        <th>Spread</th>
+        <th>Commission</th>
+      </tr>
+      <% @grp["secgroups"].each_with_index do |secgroup, sgix|%>
+        <% unless @symbol_group[sgix]["name"] == "" %>
+          <tr class="secgroup-row" data-pos="<%= sgix %>">
+            <td><%= @symbol_group[sgix]["name"] %></td>
+            <td><%= ["No", "Yes"][secgroup["trade"]] %></td>
+            <td><%= ["Manual","Auto","Manual/Auto"][secgroup["execution"]] %></td>
+            <td><%= secgroup["spread_diff"]==0 ? "Default" : secgroup["spread_diff"] %></td>
+            <td><%= secgroup["comm_base"] %>pt/<%= secgroup["comm_agent"] %>pt</td>
+          </tr>
+        <% end %>
+      <% end if @grp["secgroups"] %>
+    </table>
+  </div>
+  <div class="span7">
+    <% @grp["secgroups"].each_with_index do |secgroup, sgix|%>
+      <% unless @symbol_group[sgix]["name"] == "" %>
+        <div id="secgroup<%= sgix %>" style="display:none;" class="secgroup-div">
+          <div class="row-fluid">
+            <div class="span12">
+              <%= hidden_field_tag "group[secgroups][#{sgix}][show]", '0' %>
+              <%= check_box_tag "group[secgroups][#{sgix}][show]", '1', secgroup["show"]==1 %> Enable
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span4">
+              <%= hidden_field_tag "group[secgroups][#{sgix}][trade]", '0' %>
+              <%= check_box_tag "group[secgroups][#{sgix}][trade]", '1', secgroup["trade"]==1 %> Trade
+            </div>
+            <div class="span8">
+              <%= hidden_field_tag "group[secgroups][#{sgix}][confirmation]", '0' %>
+              <%= check_box_tag "group[secgroups][#{sgix}][confirmation]", '1', secgroup["confirmation"]==1 %> Use confirmations in REQUEST mode
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              Execution: <%= select_tag "group[secgroups][#{sgix}][execution]", options_for_secgroup_execution(secgroup["execution"]), :style => "width: 340px" %>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span5">
+              Spread difference: <%= select_tag "group[secgroups][#{sgix}][spread_diff]", options_for_secgroup_spread_diff(secgroup["spread_diff"]), :style => "width: 55px" %>
+            </div>
+            <div class="span7">
+              <%= hidden_field_tag "group[secgroups][#{sgix}][freemargin_mode]", '0' %>
+              <%= check_box_tag "group[secgroups][#{sgix}][freemargin_mode]", '1', secgroup["freemargin_mode"]==1 %> Do not check free margin after dealer's answer
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span5">
+              Maximum deviation: <%= select_tag "group[secgroups][#{sgix}][ie_deviation]", options_for_secgroup_ie_deviation(secgroup["ie_deviation"]), :style => "width: 55px" %>
+            </div>
+            <div class="span7">
+              <%= hidden_field_tag "group[secgroups][#{sgix}][ie_quick_mode]", '0' %>
+              <%= check_box_tag "group[secgroups][#{sgix}][ie_quick_mode]", '1', secgroup["ie_quick_mode"]==1 %> Fast confirmation on IE with deviation specified
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              Close by
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span6">
+              <%#= hidden_field_tag "group[secgroups][#{sgix}][ie_quick_mode]", '0' %>
+              <%#= check_box_tag "group[secgroups][#{sgix}][ie_quick_mode]", '1', secgroup["ie_quick_mode"]==1 %> Checkbox for 'Close by Enable' - NEED TO FIND
+            </div>
+            <div class="span6">
+              <%#= hidden_field_tag "group[secgroups][#{sgix}][ie_quick_mode]", '0' %>
+              <%#= check_box_tag "group[secgroups][#{sgix}][ie_quick_mode]", '1', secgroup["ie_quick_mode"]==1 %> Checkbox for 'Close by Multiple close by orders' - NEED TO FIND
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              Auto close-out: <%= select_tag "group[secgroups][#{sgix}][autocloseout_mode]", options_for_secgroup_autocloseout_mode(secgroup["autocloseout_mode"]), :style => "width: 400px" %>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              Lots
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span4">
+              Minimum: <%= select_tag "group[secgroups][#{sgix}][lot_min]", options_for_secgroup_lot_min(secgroup["lot_min"]), :style => "width: 80px" %>
+            </div>
+            <div class="span4">
+              Maximum: <%= select_tag "group[secgroups][#{sgix}][lot_max]", options_for_secgroup_lot_max(secgroup["lot_max"]), :style => "width: 85px" %>
+            </div>
+            <div class="span4">
+              Steps: <%= select_tag "group[secgroups][#{sgix}][lot_step]", options_for_secgroup_lot_step(secgroup["lot_step"]), :style => "width: 80px" %>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              Commissions
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span2">
+              Standard:
+            </div>
+            <div class="span2">
+              <%= text_field_tag "group[secgroups][#{sgix}][comm_base]", secgroup["comm_base"], :style => "width: 40px" %>
+            </div>
+            <div class="span3">
+              <%= select_tag "group[secgroups][#{sgix}][comm_type]", options_for_secgroup_comm_type(secgroup["comm_type"]), :style => "width: 100px" %>
+            </div>
+            <div class="span2">
+              <%= select_tag "group[secgroups][#{sgix}][comm_lots]", options_for_secgroup_comm_lots(secgroup["comm_lots"]), :style => "width: 80px" %>
+            </div>
+            <div class="span3">
+              Taxes: <%= text_field_tag "group[secgroups][#{sgix}][comm_tax]", secgroup["comm_tax"], :style => "width: 40px"  %>%
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span3">
+              Agent points:
+            </div>
+            <div class="span2">
+              <%= text_field_tag "group[secgroups][#{sgix}][comm_agent]", secgroup["comm_agent"], :style => "width: 40px" %>
+            </div>
+            <div class="span3">
+              <%= select_tag "group[secgroups][#{sgix}][comm_agent_type]", options_for_secgroup_comm_agent_type(secgroup["comm_agent_type"]), :style => "width: 100px" %>
+            </div>
+            <div class="span2">
+              <%= select_tag "group[secgroups][#{sgix}][comm_agent_lots]", options_for_secgroup_comm_lots(secgroup["comm_agent_lots"]), :style => "width: 80px" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end if @grp["secgroups"] %>
+  </div>
+</div>
