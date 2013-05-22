@@ -709,4 +709,47 @@ module ApplicationHelper
     return options.html_safe
   end
 
+  def options_for_gtlt(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected=='0'}></option>"
+    options += "<option value='='#{' selected=true' if selected=='='}>=</option>"
+    options += "<option value='<>'#{' selected=true' if selected=='<>'}><></option>"
+    options += "<option value='>'#{' selected=true' if selected=='>'}>></option>"
+    options += "<option value='<'#{' selected=true' if selected=='<'}><</option>"
+    options += "<option value='>='#{' selected=true' if selected=='>='}>>=</option>"
+    options += "<option value='<='#{' selected=true' if selected=='<='}><=</option>"
+    return options.html_safe
+  end
+
+  def options_for_like_equal(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected=='0'}></option>"
+    options += "<option value='='#{' selected=true' if selected=='='}>=</option>"
+    options += "<option value='<>'#{' selected=true' if selected=='<>'}><></option>"
+    options += "<option value='LIKE'#{' selected=true' if selected=='LIKE'}>LIKE</option>"
+    return options.html_safe
+  end
+
+
+  def options_for_order_type(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>BUY</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>SELL</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>BUY LIMIT</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>SELL LIMIT</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>BUY STOP</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>SELL STOP</option>"
+    options += "<option value='6'#{' selected=true' if selected==6}>BALANCE</option>"
+    options += "<option value='7'#{' selected=true' if selected==7}>CREDIT</option>"
+    return options.html_safe
+  end
+
+  def options_for_order_symbol(selected=nil, symbols)
+    options = "<option value=''#{' selected=true' if selected==""}></option>"
+    symbols.each_with_index do |symbol, si|
+      options += "<option value='#{symbol["symbol"]}'#{' selected=true' if selected==symbol["symbol"]}>#{symbol["symbol"]}</option>"
+    end
+    return options.html_safe
+  end
+
 end
