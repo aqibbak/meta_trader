@@ -1,0 +1,36 @@
+<%= form_tag synchronization_submit_path, :method => "POST", :remote => true do %>
+  <%= hidden_field_tag "new_sync", @sync.empty? %>
+  <%= hidden_field_tag "sync_key", @sync["server"] %>
+  <div class="row-fluid">
+    <div class="span12">
+      <%= hidden_field_tag "synchronization[enable]", '0' %>
+      <%= check_box_tag "synchronization[enable]", '1', @sync["enable"]==1 %> Enable
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span7">
+      Server: <%= text_field_tag "synchronization[server]", @sync["server"], :style => "width: 300px" %>
+    </div>
+    <div class="span5">
+      <%= select_tag "synchronization[mode]", options_for_synchronization_mode(@sync["mode"]), :style => "width: 200px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      Symbols: <%= text_field_tag "synchronization[securities]", @sync["securities"], :style => "width: 300px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      <%= hidden_field_tag "synchronization[limits]", '0' %>
+      <%= check_box_tag "synchronization[limits]", '1', (@sync["from"]!=0 || @sync["to"]!=0) && !@sync.empty? %> Limits
+    </div>
+    <div class="span8">
+      <%= text_field_tag "synchronization[from][year]", @sync.empty?||@sync["from"]==0 ? "" : Time.at(@sync["from"]).year, :style => "width:35px;" %>.<%= text_field_tag "synchronization[from][month]", @sync.empty?||@sync["from"]==0 ? "" : '%02i'%Time.at(@sync["from"]).month, :style => "width:20px;" %>.<%= text_field_tag "synchronization[from][day]", @sync.empty?||@sync["from"]==0 ? "" : '%02i'%Time.at(@sync["from"]).day, :style => "width:20px;" %>.
+      <%= text_field_tag "synchronization[from][hour]", @sync.empty?||@sync["from"]==0 ? "" : '%02i'%Time.at(@sync["from"]).hour, :style => "width:20px;" %>:<%= text_field_tag "synchronization[from][minute]", @sync.empty?||@sync["from"]==0 ? "" : '%02i'%Time.at(@sync["from"]).min, :style => "width:20px;" %> -
+      <%= text_field_tag "synchronization[to][year]", @sync.empty?||@sync["to"]==0 ? "" : Time.at(@sync["to"]).year, :style => "width:35px;" %>.<%= text_field_tag "synchronization[to][month]", @sync.empty?||@sync["to"]==0 ? "" : '%02i'%Time.at(@sync["to"]).month, :style => "width:20px;" %>.<%= text_field_tag "synchronization[to][day]", @sync.empty?||@sync["to"]==0 ? "" : '%02i'%Time.at(@sync["to"]).day, :style => "width:20px;" %>.
+      <%= text_field_tag "synchronization[to][hour]", @sync.empty?||@sync["to"]==0 ? "" : '%02i'%Time.at(@sync["to"]).hour, :style => "width:20px;" %>:<%= text_field_tag "synchronization[to][minute]", @sync.empty?||@sync["to"]==0 ? "" : '%02i'%Time.at(@sync["to"]).min, :style => "width:20px;" %>
+    </div>
+  </div>
+  <%= submit_tag %>
+<% end %>

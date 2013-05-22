@@ -1,0 +1,25 @@
+<% unless @synchronization.nil? %>
+  
+  <div class="row-fluid">
+    <div class="span5">
+      <table>
+        <tr>
+          <th>Server</th>
+          <th>Mode</th>
+          <th>Symbols</th>
+        </tr>
+        <% @synchronization.each_with_index do |synchronization, ix|%>
+          <tr class="synchronization-row" data-pos="<%= ix %>">
+            <td><%= synchronization["server"] %></td>
+            <td><%= ["Add", "Update", "Replace"][synchronization["mode"]] %></td>
+            <td><%= synchronization["securities"]=="" ? "All" : synchronization["securities"] %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div id="synchronization-form" class="span7">
+      <%= render "synchronization/synchronization_form" %>
+    </div>
+  </div>
+
+<% end %>
