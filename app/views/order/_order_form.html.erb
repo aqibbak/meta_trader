@@ -1,0 +1,101 @@
+<%= form_tag order_submit_path, :method => "POST", :remote => true do %>
+
+{"activation"=>0, "close_price"=>0, "close_time"=>1364444674, "cmd"=>6, "comment"=>"Dummy transaction", "commission"=>0, "commission_agent"=>0, "conv_rates"=>[0, 0], "conv_reserv"=>0, "digits"=>0, "expiration"=>0, "internal_id"=>0, "login"=>1, "magic"=>0, "margin_rate"=>0, "open_price"=>0, "open_time"=>1364444674, "order"=>1289778, "profit"=>0, "sl"=>0, "spread"=>0, "state"=>0, "storage"=>0, "symbol"=>"", "taxes"=>0, "timestamp"=>1369150262, "tp"=>0, "value_date"=>0, "volume"=>0}
+
+  <%= hidden_field_tag "order[order]", @ord["order"].nil? ? @ord["ticket"] : @ord["order"] %>
+  <%= hidden_field_tag "order[activation]", @ord["activation"] %>
+  <%= hidden_field_tag "order[digits]", @ord["digits"] %>
+  <%= hidden_field_tag "order[magic]", @ord["magic"] %>
+  <%= hidden_field_tag "order[spread]", @ord["spread"] %>
+  <%= hidden_field_tag "order[state]", @ord["state"] %>
+  <%= hidden_field_tag "order[storage]", @ord["storage"] %>
+  <%= hidden_field_tag "order[timestamp]", @ord["timestamp"] %>
+  <%#= hidden_field_tag "order[volume]", @ord["volume"] %>
+
+  <div class="row-fluid">
+    <div class="span4">
+      Login: <%= text_field_tag "order[login]", @ord["login"], :style => "width: 100px", :disabled => true %>
+    </div>
+    <div class="span4">
+      Gateway order: <%= text_field_tag "order[internal_id]", @ord["internal_id"], :style => "width: 100px" %>
+    </div>
+    <div class="span4">
+      &nbsp;
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      Type: <%= select_tag "order[cmd]", options_for_order_type(@ord["cmd"]), :style => "width: 120px" %>
+    </div>
+    <div class="span4">
+      Lots: <%= text_field_tag "order[volume]", @ord["volume"].nil? ? 0.0 : @ord["volume"] / 100.0 %>
+    </div>
+    <div class="span4">
+      Symbol: <%= select_tag "order[symbol]", options_for_order_symbol(@ord["symbol"], @symbol), :style => "width: 120px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      Open time: <%= text_field_tag "order[open_time][year]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : Time.at(@ord["open_time"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[open_time][month]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[open_time][day]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).day, :style => "width:20px;" %>-<%= text_field_tag "order[open_time][hour]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).hour, :style => "width:20px;" %>:<%= text_field_tag "order[open_time][min]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).min, :style => "width:20px;" %>
+    </div>
+    <div class="span3">
+      Open price: <%= number_field_tag "order[open_price]", @ord["open_price"].to_f, :style => "width: 65px", :step => "any" %>
+    </div>
+    <div class="span3">
+      Stop loss:  <%= number_field_tag "order[sl]", @ord["sl"].to_f, :style => "width: 65px", :step => "any" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      Close time: <%= text_field_tag "order[close_time][year]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : Time.at(@ord["close_time"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[close_time][month]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[close_time][day]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).day, :style => "width:20px;" %>-<%= text_field_tag "order[close_time][hour]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).hour, :style => "width:20px;" %>:<%= text_field_tag "order[close_time][min]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).min, :style => "width:20px;" %>
+    </div>
+    <div class="span3">
+      Close price: <%= number_field_tag "order[close_price]", @ord["close_price"], :style => "width: 65px", :step => "any" %>
+    </div>
+    <div class="span3">
+      Take profit:  <%= number_field_tag "order[tp]", @ord["tp"].to_f, :style => "width: 65px", :step => "any" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      1st conv.rate: <%= number_field_tag "order[conv_rates][0]", @ord["conv_rates"].nil? ? @ord["conv_rate1"] : @ord["conv_rates"][0], :style => "width: 100px", :step => "any" %>
+    </div>
+    <div class="span4">
+      2nd conv.rate: <%= number_field_tag "order[conv_rates][1]", @ord["conv_rates"].nil? ? @ord["conv_rate2"] : @ord["conv_rates"][1], :style => "width: 100px", :step => "any" %>
+    </div>
+    <div class="span4">
+      Margin rate:  <%= number_field_tag "order[margin_rate]", @ord["margin_rate"].to_f, :style => "width: 100px", :step => "any" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span4">
+      Comission: <%= text_field_tag "order[commission]", @ord["commission"].to_f, :style => "width: 90px" %>
+    </div>
+    <div class="span4">
+      Agent comission: <%= text_field_tag "order[commission_agent]", @ord["commission_agent"].to_f, :style => "width: 90px" %>
+    </div>
+    <div class="span4">
+      Swaps: <%= text_field_tag "order[storage]", @ord["storage"].to_f, :style => "width: 90px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span8">
+      Comment: <%= text_field_tag "order[comment]", @ord["comment"], :style => "width: 200px" %>
+    </div>
+    <div class="span4">
+      Taxes: <%= text_field_tag "order[taxes]", @ord["taxes"].to_f, :style => "width: 100px" %>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span5">
+      Expiration date: <%= text_field_tag "order[expiration][year]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : Time.at(@ord["expiration"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[expiration][month]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : '%02i'%Time.at(@ord["expiration"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[expiration][day]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : '%02i'%Time.at(@ord["expiration"]).day, :style => "width:20px;" %>
+    </div>
+    <div class="span4">
+      Value date: <%= text_field_tag "order[value_date][year]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : Time.at(@ord["value_date"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[value_date][month]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : '%02i'%Time.at(@ord["value_date"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[value_date][day]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : '%02i'%Time.at(@ord["value_date"]).day, :style => "width:20px;" %>
+    </div>
+    <div class="span3">
+      Profit: <%= text_field_tag "order[profit]", @ord["profit"].to_f, :style => "width: 70px" %>
+    </div>
+  </div>
+  <%= submit_tag %>
+<% end %>

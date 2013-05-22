@@ -1,0 +1,10 @@
+<% unless @order.nil? %>
+<div class="row-fluid">
+  <div id="order-table" class="span6">
+    <%= render "order/order_table" %>
+  </div>
+  <div id="order-form" class="span6">
+    <%= render "order/order_form" %>
+  </div>
+</div>
+<% end %>
