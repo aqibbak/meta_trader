@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <th>Login</th>
+    <th>Name</th>
+    <th>Group</th>
+    <th>City</th>
+    <th>Email</th>
+    <th>Balance</th>
+    <th>Status</th>
+  </tr>
+  <% @account.each_with_index do |account, ix|%>
+    <tr class="account-row" data-login="<%= account["login"] %>">
+      <td><%= account["login"] %></td>
+      <td><%= account["name"] %></td>
+      <td><%= account["group"] %></td>
+      <td><%= account["city"] %></td>
+      <td><%= account["email"] %></td>
+      <td><%= account["balance"] %></td>
+      <td><%= "" %></td>
+    </tr>
+  <% end %>
+</table>
