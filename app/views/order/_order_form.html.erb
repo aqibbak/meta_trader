@@ -15,6 +15,7 @@
   <div class="row-fluid">
     <div class="span4">
       Login: <%= text_field_tag "order[login]", @ord["login"], :style => "width: 100px", :disabled => true %>
+      <%= hidden_field_tag "order[login]", @ord["login"] %>
     </div>
     <div class="span4">
       Gateway order: <%= text_field_tag "order[internal_id]", @ord["internal_id"], :style => "width: 100px" %>

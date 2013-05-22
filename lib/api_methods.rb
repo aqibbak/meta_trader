@@ -783,7 +783,7 @@ class ApiMethods
         update_string += '"'+key.to_s+'":'+time_int.to_s+''
       elsif key=="volume"
         update_string += ',' unless ix==0
-        update_string += '"'+key.to_s+'":'+(data[key]*100.0).to_s
+        update_string += '"'+key.to_s+'":'+(data[key].to_f*100.0).to_s
       else
         if key=="comment"||key=="symbol"
           update_string += ',' unless ix==0

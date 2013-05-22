@@ -2,6 +2,7 @@ class FeederController < ApplicationController
   include ApplicationHelper
 
   def feeder_submit
+    authorize! :update, :feeder
     data = params[:feeder]
     key = params[:feeder_key]
     api = ApiMethods.new
@@ -10,6 +11,7 @@ class FeederController < ApplicationController
   end
 
   def fetch_feeder
+    authorize! :read, :feeder
     pos = params[:pos]
     api = ApiMethods.new
     @feeder = api.getFeeder(session)
