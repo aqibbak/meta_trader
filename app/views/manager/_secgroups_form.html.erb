@@ -1,0 +1,28 @@
+<div class="row-fluid">
+  <div class="span6">
+     <%= hidden_field_tag "manager[broker]", '0' %>
+     <%= check_box_tag "manager[broker]", '1', @mgr["broker"]==1 %> Dealer
+  </div>
+  <div class="span6">
+     <%= hidden_field_tag "manager[trades]", '0' %>
+     <%= check_box_tag "manager[trades]", '1', @mgr["trades"]==1 %> Edit/delete trades
+  </div>
+</div>
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Use</th>
+    <th>Minimum lots</th>
+    <th>Maximum lots</th>
+  </tr>
+  <% @mgr["secgroups"].each_with_index do |secgroup, ind|%>
+    <% if ind < 4 || ind == 5 %>
+      <tr>
+        <td><%= @symbol_group[ind]["name"] %></td>
+        <td><%= select_tag "manager[secgroups][#{ind}][enable]", options_for_yes_no(secgroup["enable"]), style: "width:100px;" %></td>
+        <td><%= text_field_tag "manager[secgroups][#{ind}][minimum_lots]", secgroup["minimum_lots"] %></td>
+        <td><%= text_field_tag "manager[secgroups][#{ind}][maximum_lots]", secgroup["maximum_lots"] %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

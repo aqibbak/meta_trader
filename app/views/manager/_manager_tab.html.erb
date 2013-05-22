@@ -1,0 +1,65 @@
+<% if @manager %>
+
+<div class="row-fluid">
+  <div class="span5">
+    <table>
+      <tr>
+        <th>Login</th>
+        <th>Name</th>
+        <th>Mailbox</th>
+        <th>Groups</th>
+        <th>Rights</th>
+      </tr>
+      <% @manager.each_with_index do |manager, ix|%>
+        <tr class="manager-row" data-pos="<%= ix %>">
+          <td><%= manager["login"] %></td>
+          <td><%= manager["name"] %></td>
+          <td><%= manager["mailbox"] %></td>
+          <td><%= manager["groups"] %></td>
+          <td><%= list_manager_rights(manager) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <div id="manager-form" class="span7">
+    <%= render "manager/manager_form" %>
+  </div>
+</div>
+
+{"admin"=>1, "broker"=>1, "email"=>1, "exp_time"=>0, "groups"=>",*,", "info_depth"=>0, "ip_from"=>0, "ip_to"=>0, "ipfilter"=>0, "login"=>1, "logs"=>1, "mailbox"=>"admin", "manager"=>1, "market_watch"=>1, "money"=>1, "name"=>"First Admin (do not delete this", "news"=>1, "online"=>1, "plugins"=>1, "reports"=>1, "riskman"=>1, "see_trades"=>1, "server_reports"=>1, "techsupport"=>0, "trades"=>1, "user_details"=>1}
+
+"secgroups"=>[
+{"enable"=>1, "maximum_lots"=>10000000, "minimum_lots"=>0},
+{"enable"=>1, "maximum_lots"=>10000000, "minimum_lots"=>0}, 
+{"enable"=>1, "maximum_lots"=>10000000, "minimum_lots"=>0}, 
+{"enable"=>1, "maximum_lots"=>10000000, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
+{"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}]
+
+<% end %>
