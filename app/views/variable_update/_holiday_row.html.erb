@@ -1,0 +1,11 @@
+<tr class="holiday_row" data-position="<%= ix %>" data-day="<%= row["day"] %>" data-month="<%= row["month"] %>" data-year="<%= row["year"] %>" data-from="<%= row["from"] %>" data-to="<%= row["to"] %>"  data-symbol="<%= row["symbol"] %>" data-description="<%= row["description"] %>" data-enable="<%= row["enable"] %>">
+  <td class="el"><%= row["year"].to_i==0 ? "****" : row["year"] %>.<%= row["month"].to_s.rjust(2, '0') %>.<%= row["day"].to_s.rjust(2, '0') %></td>
+  <td class="el"><%= "#{(row['from'].is_a? Integer) ? (row['from']/60).to_i.to_s.rjust(2, '0') : row['from']['hour'].rjust(2, '0')}:#{(row['from'].is_a? Integer) ? ((row['from'].to_i-(row['from']/60).to_i*60).to_s.rjust(2, '0')) : row['from']['minute'].rjust(2, '0')}" %></td>
+  <td class="el"><%= "#{(row['to'].is_a? Integer) ? (row['to']/60).to_i.to_s.rjust(2, '0') : row['to']['hour'].rjust(2, '0')}:#{(row['to'].is_a? Integer) ? ((row['to'].to_i-(row['to']/60).to_i*60).to_s.rjust(2, '0')) : row['to']['minute'].rjust(2, '0')}" %></td>
+  <td class="el"><%= row["symbol"] %></td>
+  <td class="el"><%= row["description"] %></td>
+  <td>
+    <a href=""><i class="icon-pencil"></i></a>
+    &nbsp;&nbsp;&nbsp;
+    <%= link_to glyph(:remove) + "", delete_holiday_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+</tr>

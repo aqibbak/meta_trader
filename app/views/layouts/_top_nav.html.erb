@@ -12,7 +12,9 @@
 	  <div class="user">
 	    <ul class="icon-nav">
 	      <li>
-	        <a href="#" class='lock-screen' rel='tooltip' title="Logout" data-placement="bottom"><i class="icon-lock"></i></a>
+	      	<%= link_to destroy_user_session_path, :method => :delete, data: { placement: "bottom"}, :class => 'lock-screen', :rel => 'tooltip', :title => "Logout" do %>
+	        	<i class="icon-lock"></i>
+	      	<% end %>
 	      </li>
 	    </ul>
 	  </div>

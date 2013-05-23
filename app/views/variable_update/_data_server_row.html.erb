@@ -1,0 +1,12 @@
+<tr class="data_server_row" data-position="<%= ix %>" data-description="<%= row["description"] %>"
+  data-ip="<%= ApiMethods.long2ip(row["ip"]) %>" data-ipinternal="<%= ApiMethods.long2ip(row["ip_internal"]) %>" data-priority="<%= row["priority"] %>" data-server="<%= row["server"] %>">
+  <td class="el"><%= row["server"] %></td>
+  <td class="el"><%= row["description"] %></td>
+  <td class="el"><%= ApiMethods.long2ip(row["ip_internal"]) %></td>
+  <td class="el"><%= row["priority"] == 255 ? "Idle" : row["priority"] %></td>
+  <td class="el"><%= row["loading"] == 4294967295 ? "n/a" : row["loading"] %></td>
+  <td>
+     <a class="data-server-edit" href="#"><i class="icon-pencil"></i></a>
+   &nbsp;&nbsp;&nbsp;
+   <%= link_to glyph(:remove) + "", delete_data_server_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+</tr>

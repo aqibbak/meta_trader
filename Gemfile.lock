@@ -168,8 +168,8 @@ PLATFORMS
 DEPENDENCIES
   cancan (= 1.6.8)
   coffee-rails (~> 3.2.1)
-  heroku_san
   devise (= 2.1.0)
+  heroku_san
   jquery-rails
   json
   logical_tabs

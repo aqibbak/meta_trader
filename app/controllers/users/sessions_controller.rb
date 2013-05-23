@@ -2,6 +2,8 @@ class Users::SessionsController < Devise::SessionsController
 
   skip_before_filter :check_api_connection
 
+  layout "login/application"
+
   def create
     api = ApiMethods.new
     result = api.login(session, params[:user][:login], params[:user][:password])

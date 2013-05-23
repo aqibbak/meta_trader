@@ -2,7 +2,7 @@
 alert("An error occured while executing this operation");
 <% elsif @new && @result[:success] %>
   $("#access_new_record").val("true");
-  $(".access_table").append('<tr class="access_row" data-position="<%= @data["position"] %>" data-action="<%= @data["action"] %>" data-from="<%= @data["from"] %>" data-to="<%= @data["to"] %>" data-comment="<%= @data["comment"] %>"><td><%= @data["from"] %></td><td><%= @data["to"] %></td><td><%= @data["comment"] %></td><td><%= link_to "delete", delete_access_row_path(:position => @data["position"]), :remote=> true, :method => :delete %></td></tr>');
+  $(".access_table").append('<%= escape_javascript(render "variable_update/access_row", :row => @data, :ix => @data["position"]) %>');
   $("#access_tab_position").val('<%= @data["position"].to_i + 1 %>');
   $("#access_tab_action").val("");
   $("#access_tab_from").val("");

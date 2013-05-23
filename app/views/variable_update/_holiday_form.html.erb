@@ -1,62 +1,131 @@
 <% unless @holiday.nil? %>
-  <table class="holiday_table table hover-table holiday-table">
-    <thead>
-    <tr>
-      <th>Day</th>
-      <th>From</th>
-      <th>To</th>
-      <th>Securities</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-    </thead>
-    <% @holiday.each_with_index do |row, ix| %>
-      <tr class="holiday_row" data-position="<%= ix %>" data-day="<%= row["day"] %>" data-month="<%= row["month"] %>" data-year="<%= row["year"] %>" data-from="<%= row["from"] %>" data-to="<%= row["to"] %>"  data-symbol="<%= row["symbol"] %>" data-description="<%= row["description"] %>" data-enable="<%= row["enable"] %>">
-        <td class="el"><%= row["year"]==0 ? "****" : row["year"] %>.<%= row["month"].to_s.rjust(2, '0') %>.<%= row["day"].to_s.rjust(2, '0') %></td>
-        <td class="el"><%= "#{(row['from']/60).to_i.to_s.rjust(2, '0')}:#{(row['from'].to_i-(row['from']/60).to_i*60).to_s.rjust(2, '0')}" %></td>
-        <td class="el"><%= "#{(row['to']/60).to_i.to_s.rjust(2, '0')}:#{(row['to'].to_i-(row['to']/60).to_i*60).to_s.rjust(2, '0')}" %></td>
-        <td class="el"><%= row["symbol"] %></td>
-        <td class="el"><%= row["description"] %></td>
-        <td>
-          <a href=""><i class="icon-pencil"></i></a>
-          &nbsp;&nbsp;&nbsp;
-          <%= link_to glyph(:remove) + "", delete_holiday_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+  <div class="section section-holiday">
+    <h2 class="normal blue"><i class="icon-picture"></i> Holiday
+    <%= link_to glyph(:plus) + " New", "#modal-holiday", :id => "new_holiday", :class =>"btn btn-primary pull-right" %></h2>
+
+<!-- This button need to be replaced with button above. -->
+<!--a href="#modal-holiday" role="button" class="btn btn-primary" data-toggle="modal"><i class="icon-plus"></i> New</a-->
+    <table class="holiday_table table hover-table holiday-table">
+      <thead>
+      <tr>
+        <th>Day</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Securities</th>
+        <th>Description</th>
+        <th></th>
       </tr>
+      </thead>
+      <% @holiday.each_with_index do |row, ix| %>
+        <%= render "variable_update/holiday_row", :row => row, :ix => ix %>
+      <% end %>
+    </table>
+    <!--
+    <%= form_tag holiday_submit_path, :method => "POST", :remote => true do %>
+      <%= hidden_field_tag "holiday_new_record", true %>
+      <%= hidden_field_tag "holiday_tab[position]", @holiday.count %>
+      <div class="check-line">
+      <label class="inline" for="holiday_tab[enable]">Enable </label>
+      <%= hidden_field_tag "holiday_tab[enable]", '0' %>
+      <%= check_box_tag "holiday_tab[enable]", '1', true, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
+      </div>
+      <br/>
+      <label>Date: </label>
+      <%= text_field_tag "holiday_tab[year]", nil, :class =>"spinner single-line" %> . 
+      <%= text_field_tag "holiday_tab[month]", nil, :class =>"spinner single-line" %> . 
+      <%= text_field_tag "holiday_tab[day]", nil, :class =>"spinner single-line" %>
+      <div class="check-left check-line">
+       <%= check_box_tag "holiday_tab_yearly_check", '1', nil, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
+       <label class='inline' for="holiday_tab_yearly_check">Every Year</label>
+       </div>
+      <br/>
+      <label for="holiday_tab[from]">From: </label>
+      <%= text_field_tag "holiday_tab[from][hour]", nil, :class =>"spinner single-line"  %> 
+      : <%= text_field_tag "holiday_tab[from][minute]", nil, :class =>"spinner single-line"  %>
+      <label for="holiday_tab[to]">to: </label>
+      <%= text_field_tag "holiday_tab[to][hour]", nil, :class =>"spinner single-line"  %> : 
+      <%= text_field_tag "holiday_tab[to][minute]", nil, :class =>"spinner single-line"  %>
+      <br/>
+      <label for="holiday_tab[symbol]">Symbol: </label>
+      <%= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
+      <br/>
+      <label for="holiday_tab[description]">Description: </label>
+      <%= text_field_tag "holiday_tab[description]"%>
+      <br/>
+      <%= submit_tag "Submit", :class =>"btn btn-primary" %>
+      <%= link_to "new", "#", :id => "new_holiday" %>
+    <% end %>-->
+
+
+
+    <!-- Modal for holiday -->
+  <div id="modal-holiday" class="modal hide in modal-form modal-holiday" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel" class="normal">Add (ili Edit) Holiday</h3>
+      </div>
+      <div class="modal-body">
+        <%= form_tag holiday_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true, :id => "form-holiday-modal" do %>
+      <%= hidden_field_tag "holiday_new_record", true %>
+      <%= hidden_field_tag "holiday_tab[position]", @holiday.count, :class =>"icheck-me"  %>
+
+      <div class="control-group thin-row">
+      <label for="holiday_tab[enable]" class="control-label">Enable: </label>
+      <div class="controls ">
+       <%= hidden_field_tag "holiday_tab[enable]", '0' %>
+      <%= check_box_tag "holiday_tab[enable]", '1', true, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'}  %>
+      </div>
+      </div><!--/control-group-->
+
+      <div class="control-group">
+      <label class="control-label">Date: </label>
+      <div class="controls">
+       <%= text_field_tag "holiday_tab[year]", nil, :class =>" spinner single-line"  %>
+       <%= text_field_tag "holiday_tab[month]", nil, :class =>"spinner single-line"  %>
+       <%= text_field_tag "holiday_tab[day]", nil, :class =>"spinner single-line" %>
+       <div class="check-left check-line">
+       <%= check_box_tag "holiday_tab_yearly_check", '1', nil, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
+       <label class='inline' for="holiday_tab_yearly_check">Every Year</label>
+       </div>
+      </div>
+      </div><!--/control-group-->
+
+      <div class="control-group">
+      <label for="holiday_tab[from]" class="control-label">From: </label>
+      <div class="controls">
+      <%= text_field_tag "holiday_tab[from][hour]", nil, :class =>"spinner single-line"  %>
+      <%= text_field_tag "holiday_tab[from][minute]", nil, :class =>"spinner single-line"  %>
+      </div>
+      </div><!--/control-group-->
+
+      <div class="control-group">
+      <label for="holiday_tab[to]" class="control-label">To: </label>
+      <div class="controls">
+      <%= text_field_tag "holiday_tab[to][hour]", nil, :class =>"spinner single-line" %>
+      <%= text_field_tag "holiday_tab[to][minute]", nil, :class =>"spinner single-line" %>
+      </div>   
+      </div><!--/control-group-->
+
+      <div class="control-group">
+      <label for="holiday_tab[symbol]" class="control-label">Symbol: </label>
+      <div class="controls">
+      <%= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security), :class =>"single-line" %>
+      </div>   
+      </div><!--/control-group-->
+
+      <div class="control-group">
+      <label for="holiday_tab[description]" class="control-label">Description: </label>
+      <div class="controls">
+      <%= text_field_tag "holiday_tab[description]", nil, :class =>"single-line" %>
+      </div>   
+      </div><!--/control-group-->
+
+      <div class="form-actions">
+      <%= submit_tag"Submit", :class => "btn btn-primary" %>
+      </div><!--/form-actions-->
     <% end %>
-  </table>
-  <!--
-  <%= form_tag holiday_submit_path, :method => "POST", :remote => true do %>
-    <%= hidden_field_tag "holiday_new_record", true %>
-    <%= hidden_field_tag "holiday_tab[position]", @holiday.count %>
-    <div class="check-line">
-    <label class="inline" for="holiday_tab[enable]">Enable </label>
-    <%= hidden_field_tag "holiday_tab[enable]", '0' %>
-    <%= check_box_tag "holiday_tab[enable]", '1', true, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
-    </div>
-    <br/>
-    <label>Date: </label>
-    <%= text_field_tag "holiday_tab[year]", nil, :class =>"spinner single-line" %> . 
-    <%= text_field_tag "holiday_tab[month]", nil, :class =>"spinner single-line" %> . 
-    <%= text_field_tag "holiday_tab[day]", nil, :class =>"spinner single-line" %>
-    <div class="check-left check-line">
-     <%= check_box_tag "holiday_tab_yearly_check", '1', nil, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
-     <label class='inline' for="holiday_tab_yearly_check">Every Year</label>
-     </div>
-    <br/>
-    <label for="holiday_tab[from]">From: </label>
-    <%= text_field_tag "holiday_tab[from][hour]", nil, :class =>"spinner single-line"  %> 
-    : <%= text_field_tag "holiday_tab[from][minute]", nil, :class =>"spinner single-line"  %>
-    <label for="holiday_tab[to]">to: </label>
-    <%= text_field_tag "holiday_tab[to][hour]", nil, :class =>"spinner single-line"  %> : 
-    <%= text_field_tag "holiday_tab[to][minute]", nil, :class =>"spinner single-line"  %>
-    <br/>
-    <label for="holiday_tab[symbol]">Symbol: </label>
-    <%#= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
-    <br/>
-    <label for="holiday_tab[description]">Description: </label>
-    <%= text_field_tag "holiday_tab[description]"%>
-    <br/>
-    <%= submit_tag "Submit", :class =>"btn btn-primary" %>
-    <%= link_to "new", "#", :id => "new_holiday" %>
-  <% end %>-->
+      </div>
+
+    </div><!--/modal-holiday-->
+  </div>
 <% end %>

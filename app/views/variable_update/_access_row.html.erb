@@ -1,0 +1,11 @@
+<tr class="access_row" data-position="<%= ix %>" data-action="<%= row["action"] %>" data-from="<%= ApiMethods.long2ip(row["from"]) %>" data-to="<%= ApiMethods.long2ip(row["to"]) %>" data-comment="<%= row["comment"] %>">
+  <td class="el"><%= ApiMethods.long2ip(row["from"]) %></td>
+  <td class="el"><%= ApiMethods.long2ip(row["to"]) %></td>
+  <td class="el"><%= row["comment"] %></td>
+  <td>          
+    <a href="#" class="access-edit"><i class="icon-pencil"></i></a>
+   &nbsp;&nbsp;&nbsp;
+
+   <%= link_to glyph(:remove) + "", delete_access_row_path(:position => ix), :remote=> true, :method => :delete %>
+ </td>
+</tr>

@@ -1,15 +1,18 @@
-<h2>Sign in</h2>
-
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :login %><br />
-  <%= f.text_field :login %></div>
-
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
+<h2>SIGN IN</h2>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:class => "form-validate") do |f| %>
+  <div class="control-group">
+    <div class="controls">
+      <input type="text" name='user[login]' placeholder="Username" class="input-block-level" data-rule-required="true">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="pw controls">
+      <input type="password" name="user[password]" placeholder="Password" class="input-block-level" data-rule-required="true">
+    </div>
+  </div>
+  <div class="submit">
+    <input type="submit" value="Sign me in" class="btn btn-primary">
+  </div>
 <% end %>
+
+<div>&nbsp;</div>

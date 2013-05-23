@@ -1,41 +1,53 @@
 $(document).ready(function(){
-  $(".access_row td.el").click(function(){
-    $("#access_tab_position").val($(this).parent().attr("data-position"));
-    $("#access_tab_action").val($(this).parent().attr("data-action"));
-    $("#access_tab_from").val($(this).parent().attr("data-from"));
-    $("#access_tab_to").val($(this).parent().attr("data-to"));
+  $("#form-access-modal").bind("ajax:complete",function(){
+    $("#modal-1").modal("hide");
+  })
+  $(".access_row .access-edit").click(function(){
+    $("#access_tab_position").val($(this).parent().parent().attr("data-position"));
+    $("#access_tab_action").val($(this).parent().parent().attr("data-action"));
+    $("#access_tab_from").val($(this).parent().parent().attr("data-from"));
+    $("#access_tab_to").val($(this).parent().parent().attr("data-to"));
     $("#access_tab_comment").val($(this).parent().attr("data-comment"));
     $("#access_new_record").val("false");
+    $("#modal-1").modal();
+    return false;
   });
   $("#new_access").click(function(){
-    var last_position = $(".access_table").find("tr").last().attr("data-position");
+    var last_position = parseInt($(".access_table").find("tr").last().attr("data-position"));
     $("#access_tab_position").val(last_position + 1);
     $("#access_tab_action").val("");
     $("#access_tab_from").val("");
     $("#access_tab_to").val("");
     $("#access_tab_comment").val("");
     $("#access_new_record").val("true");
+    $("#modal-1").modal();
     return false;
   });
 });
 
 $(document).ready(function(){
-  $(".data_server_row td.el").click(function(){
-    $("#data_server_tab_position").val($(this).parent().attr("data-position"));
-    $("#data_server_tab_description").val($(this).parent().attr("data-description"));
-    $("#data_server_tab_server").val($(this).parent().attr("data-server"));
-    $("#data_server_tab_ip_internal").val($(this).parent().attr("data-ipinternal"));
-    $("#data_server_tab_priority").val($(this).parent().attr("data-priority"));
+  $("#form-data-server-modal").bind("ajax:complete",function(){
+    $("#modal-data-server").modal("hide");
+  })
+  $(".data_server_row .data-server-edit").click(function(){
+    $("#data_server_tab_position").val($(this).parent().parent().attr("data-position"));
+    $("#data_server_tab_description").val($(this).parent().parent().attr("data-description"));
+    $("#data_server_tab_server").val($(this).parent().parent().attr("data-server"));
+    $("#data_server_tab_ip_internal").val($(this).parent().parent().attr("data-ipinternal"));
+    $("#data_server_tab_priority").val($(this).parent().parent().attr("data-priority"));
     $("#data_server_new_record").val("false");
+    $("#modal-data-server").modal();
+    return false;
   });
   $("#new_data_server").click(function(){
-    var last_position = $(".data_server_table").find("tr").last().attr("data-position");
+    var last_position = parseInt($(".data_server_table").find("tr").last().attr("data-position"));
     $("#data_server_tab_position").val(last_position + 1);
     $("#data_server_tab_description").val("");
     $("#data_server_tab_server").val("");
     $("#data_server_tab_ip_internal").val("");
     $("#data_server_tab_priority").val("");
     $("#data_server_new_record").val("true");
+    $("#modal-data-server").modal();
     return false;
   });
 });
@@ -54,6 +66,9 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
+  $("#form-holiday-modal").bind("ajax:complete",function(){
+    $("#modal-holiday").modal("hide");
+  });
   $('#holiday_tab_yearly_check').change(function () {
     if($(this).prop("checked")){
       $("#holiday_tab_year").val("0").hide();
@@ -85,9 +100,11 @@ $(document).ready(function(){
     $("#holiday_tab_symbol").val($(this).parent().attr("data-symbol"));
     $("#holiday_tab_description").val($(this).parent().attr("data-description"));
     $("#holiday_new_record").val("false");
+    $("#modal-holiday").modal();
+    return false;
   });
   $("#new_holiday").click(function(){
-    var last_position = $(".holiday_table").find("tr").last().attr("data-position");
+    var last_position = parseInt($(".holiday_table").find("tr").last().attr("data-position"));
     $("#holiday_tab_position").val(last_position + 1);
     $("input[name='holiday_tab[enable]'][type='checkbox']").prop("checked", true);
     $("#holiday_tab_month").val("");
@@ -101,6 +118,7 @@ $(document).ready(function(){
     $("#holiday_tab_comment").val("");
     $("#holiday_tab_symbol").val("");
     $("#holiday_tab_description").val("");
+    $("#modal-holiday").modal();
     return false;
   });
 });
@@ -108,7 +126,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $('.symbol_group_field').change(function () {
-    console.log("CHANGE");
     console.log($(this).parent().parent().find(".symbol_group_changed").first());
     $(this).parent().parent().find(".symbol_group_changed").first().val(true);
   });

@@ -31,6 +31,7 @@ class VariableUpdateController < ApplicationController
       @data = api.getDataServer(session,position)
       @data["position"] = position
     rescue => e
+      puts e
       @error = true
     end
   end
