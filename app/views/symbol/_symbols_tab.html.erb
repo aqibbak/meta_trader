@@ -1,7 +1,8 @@
 <% unless @symbol.nil? %>
 <div class="row-fluid">
-  <div class="span4">
-    <table>
+  <div class="">
+    <table class="table hover-table symbol-table">
+      <thead>
       <tr>
         <th>Symbol</th>
         <th>Type</th>
@@ -13,7 +14,9 @@
         <th>Short</th>
         <th>Digits</th>
         <th>Trade</th>
+        <th></th>
       </tr>
+      </thead>
       <% @symbol.each_with_index do |symbol, ix|%>
         <tr class="symbol-row" data-pos="<%= ix %>">
           <td><%= symbol["symbol"] %></td>
@@ -30,6 +33,12 @@
           <td>
             <%= case symbol["trade"] ; when 0 ; "No" ; when 1 ; "Close" ; when 2 ; "Full" ; end %>
           </td>
+          <td>
+            <a href=""><i class="icon-pencil"></i></a>
+         &nbsp;&nbsp;&nbsp;
+            <a href=""><i class="icon-remove"></i></a>
+         
+          </td>
         </tr>
       <% end %>
     </table>
@@ -44,7 +53,8 @@
     {"ask_tickvalue"=>0, "bid_tickvalue"=>0, "count"=>32, "count_original"=>0, "expiration"=>0, 
     "filter_reserved"=>0, "multiply"=>100000, "point"=>1.0e-05, "profit_reserved"=>0, "starting"=>0, value_date"=>0}
   </div>
-  <div class="span6">
+  <div class="">
+
     "sessions"=>[
 
 {"quote"=>[{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},

@@ -1,11 +1,11 @@
 <% unless @access.nil? %>
-  <table class="access_table table table-bordered">
+  <table class="access_table table access-table hover-table">
     <thead>
     <tr>
       <th>From</th>
       <th>To</th>
       <th>Comment</th>
-      <th>Delete</th>
+      <th></th>
     </tr>
     </thead>
     <% @access.each_with_index do |row, ix| %>
@@ -13,12 +13,18 @@
         <td class="el"><%= ApiMethods.long2ip(row["from"]) %></td>
         <td class="el"><%= ApiMethods.long2ip(row["to"]) %></td>
         <td class="el"><%= row["comment"] %></td>
-        <td><%= link_to "delete", delete_access_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+        <td>          
+          <a href=""><i class="icon-pencil"></i></a>
+         &nbsp;&nbsp;&nbsp;
+
+         <%= link_to glyph(:remove) + "", delete_access_row_path(:position => ix), :remote=> true, :method => :delete %>
+       </td>
       </tr>
     <% end %>
   </table>
   <div class="row-fluid">
   <div class="span6">
+    <!--
   <%= form_tag access_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true do %>
     <%= hidden_field_tag "access_new_record", true %>
     <%= hidden_field_tag "access_tab[position]", @access.count %>
@@ -28,37 +34,36 @@
     <div class="controls">
      <%= select_tag "access_tab[action]", options_for_access_action %>
     </div>
-    </div><!--/control-group-->
+    </div>
 
     <div class="control-group">
     <label for="access_tab[from]" class="control-label">From: </label>
     <div class="controls">
     <%= text_field_tag "access_tab[from]" %>
     </div>
-    </div><!--/control-group-->
+    </div>
 
     <div class="control-group">
     <label for="access_tab[to]" class="control-label">To: </label>
     <div class="controls">
     <%= text_field_tag "access_tab[to]" %>
     </div>
-    </div><!--/control-group-->
+    </div>
 
     <div class="control-group">
     <label for="access_tab[comment]" class="control-label">Comment: </label>
     <div class="controls">
     <%= text_field_tag "access_tab[comment]" %>
     </div>
-    </div><!--/control-group-->
+    </div>
 
     <div class="form-actions">
     <%= submit_tag"Submit", :class => "btn btn-primary" %>
-    <%= link_to "new", "#", :id => "new_access" %>
-    </div><!--/form-actions-->    
+    </div>    
    
 
 
-  <% end %>
+  <% end %>-->
   </div><!--/span-->
   </div><!--/row-fluid-->
 <% end %>

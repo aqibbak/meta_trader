@@ -1,23 +1,5 @@
 <div class="container-fluid">
-  <div class="page-header">
-    <div class="pull-left">
-      <h1>Section</h1>
-    </div>
-  </div>
-  <div class="breadcrumbs">
-    <ul>
-      <li>
-        <a href="#">Sections</a>
-        <i class="icon-angle-right"></i>
-      </li>
-      <li>
-        <a href="#" class="section-name">All</a>
-      </li>
-    </ul>
-    <div class="close-bread">
-      <a href="#"><i class="icon-remove"></i></a>
-    </div>
-  </div>
+  
 
   <div class="section section-common">
     <h2 class="blue normal"><i class="icon-cogs"></i> Common</h2>
@@ -25,12 +7,27 @@
   </div>
 
   <div class="section section-access">
-    <h2 class="normal blue"><i class="icon-wrench"></i> Access</h2>
+    <h2 class="normal blue"><i class="icon-wrench"></i> Access
+
+
+    <%= link_to glyph(:plus) + " New", "#modal-1", :id => "new_access", :class =>"btn btn-primary pull-right" %></h2>
+
+<!-- This button need to be replaced with button above. -->
+<!--a href="#modal-1" role="button" class="btn btn-primary" data-toggle="modal"><i class="icon-plus"></i> New</a-->
+ 
+
+
     <%= render "variable_update/access_form" %>
   </div>
 
   <div class="section section-data_server">
-    <h2 class="normal blue"><i class="icon-tasks"></i> Data Server</h2>
+    <h2 class="normal blue"><i class="icon-tasks"></i> Data Server
+
+      <%= link_to glyph(:plus) + " New", "#modal-data-server", :id => "new_data_server", :class =>"btn btn-primary pull-right" %></h2>
+
+      <!-- This button need to be replaced with button above. -->
+<!--a href="#modal-data-server" role="button" class="btn btn-primary pull-right" data-toggle="modal"><i class="icon-plus"></i> New</a-->
+
     <%= render "variable_update/data_server_form" %>
   </div>
 
@@ -40,17 +37,25 @@
   </div>
 
   <div class="section section-holiday">
-    <h2 class="normal blue"><i class="icon-picture"></i> Holiday</h2>
+    <h2 class="normal blue"><i class="icon-picture"></i> Holiday
+
+    <%= link_to glyph(:plus) + " New", "#modal-holiday", :id => "new_holiday", :class =>"btn btn-primary pull-right" %></h2>
+
+<!-- This button need to be replaced with button above. -->
+<!--a href="#modal-holiday" role="button" class="btn btn-primary" data-toggle="modal"><i class="icon-plus"></i> New</a-->
     <%= render "variable_update/holiday_form" %>
   </div>
 
   <div class="section section-group">
     <h2 class="normal blue"><i class="icon-group"></i> Group</h2>
+
     <%= render "symbol/symbol_group_form" %>
   </div>
 
   <div class="section section-symbols">
-    <h2>Symbols</h2>
+    <h2 class="normal blue"><i class="icon-credit-card"></i> Symbols
+      <a href="" class="btn btn-primary"><i class="icon-plus"></i> New</a>
+  </h2>
     <%= render "symbol/symbols_tab" %>
   </div>
 
@@ -79,3 +84,176 @@
   </script>
 
 </div><!-- /container-fluid -->
+
+
+<!-- Modal -->
+<!--div id="modal-1" class="modal hide in modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal">Add (ili Edit) New Access</h3>
+    </div>
+    <div class="modal-body">
+        <%= form_tag access_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true do %>
+    <%= hidden_field_tag "access_new_record", true %>
+    <%= hidden_field_tag "access_tab[position]", @access.count %>
+
+    <div class="control-group">
+    <label for="access_tab[action]" class="control-label">Action: </label>
+    <div class="controls">
+      <div  class="input-xlarge">
+        <%= select_tag "access_tab[action]", options_for_access_action, :class =>"single-line chosen-select" %>
+      </div>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="access_tab[from]" class="control-label">From: </label>
+    <div class="controls">
+    <%= text_field_tag "access_tab[from]", nil, :class =>"single-line" %>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="access_tab[to]" class="control-label">To: </label>
+    <div class="controls">
+    <%= text_field_tag "access_tab[to]", nil, :class =>"single-line"  %>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="access_tab[comment]" class="control-label">Comment: </label>
+    <div class="controls">
+    <%= text_field_tag "access_tab[comment]", nil, :class =>"single-line" %>
+    </div>
+    </div><!--/control-group--
+      <div class="form-actions">
+    <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div><!--/form-actions--
+  <% end %>
+    </div>
+    <!--div class="modal-footer">
+    <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div-->
+  </div--><!--/modal-1-->
+
+  <!-- Modal Data-Server -->
+<!--div id="modal-data-server" class="modal hide in modal-form modal-data-server" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal">Add (ili Edit) Data Server</h3>
+    </div>
+    <div class="modal-body">
+  <%= form_tag access_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true do %>
+    <%= hidden_field_tag "data_server_new_record", true %>
+    <%= hidden_field_tag "data_server_tab[position]", @data_server.count %>
+
+    <div class="control-group">
+    <label for="data_server_tab[description]" class="control-label">Description: </label>
+    <div class="controls">
+      <div  class="input-xlarge">
+     <%= text_field_tag "data_server_tab[description]", nil, :class =>"single-line" %>
+      </div>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="data_server_tab[server]" class="control-label">Public server address: </label>
+    <div class="controls">
+    <%= text_field_tag "data_server_tab[server]", nil, :class =>"single-line" %>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="data_server_tab[ip_internal]" class="control-label">Internal IP Address: </label>
+    <div class="controls">
+    <%= text_field_tag "data_server_tab[ip_internal]", nil, :class =>"single-line"  %>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="data_server_tab[priority]" class="control-label">Priority: </label>
+    <div class="controls">
+    <div  class="input-xlarge">
+        <%= select_tag "data_server_tab[priority]", options_for_data_server_priority, :class =>"single-line chosen-select" %>
+      </div>
+    </div>
+    </div><!--/control-group--
+      <div class="form-actions">
+    <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div><!--/form-actions--
+  <% end %>
+    </div>
+
+  </div--><!--/modal-data-server-->
+
+
+  <!-- Modal for holiday -->
+<!--div id="modal-holiday" class="modal hide in modal-form modal-holiday" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal">Add (ili Edit) Holiday</h3>
+    </div>
+    <div class="modal-body">
+      <%= form_tag holiday_submit_path, :class =>"form-horizontal form-bordered form-data-server border", :method => "POST", :remote => true do %>
+    <%= hidden_field_tag "holiday_new_record", true %>
+    <%= hidden_field_tag "holiday_tab[position]", @holiday.count, :class =>"icheck-me"  %>
+
+    <div class="control-group thin-row">
+    <label for="holiday_tab[enable]" class="control-label">Enable: </label>
+    <div class="controls ">
+     <%= hidden_field_tag "holiday_tab[enable]", '0' %>
+    <%= check_box_tag "holiday_tab[enable]", '1', true, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'}  %>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label class="control-label">Date: </label>
+    <div class="controls">
+     <%= text_field_tag "holiday_tab[year]", nil, :class =>" spinner single-line"  %>
+     <%= text_field_tag "holiday_tab[month]", nil, :class =>"spinner single-line"  %>
+     <%= text_field_tag "holiday_tab[day]", nil, :class =>"spinner single-line" %>
+     <div class="check-left check-line">
+     <%= check_box_tag "holiday_tab_yearly_check", '1', nil, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
+     <label class='inline' for="holiday_tab_yearly_check">Every Year</label>
+     </div>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="holiday_tab[from]" class="control-label">From: </label>
+    <div class="controls">
+    <%= text_field_tag "holiday_tab[from][hour]", nil, :class =>"spinner single-line"  %>
+    <%= text_field_tag "holiday_tab[from][minute]", nil, :class =>"spinner single-line"  %>
+    </div>
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="holiday_tab[to]" class="control-label">To: </label>
+    <div class="controls">
+    <%= text_field_tag "holiday_tab[to][hour]", nil, :class =>"spinner single-line" %>
+    <%= text_field_tag "holiday_tab[to][minute]", nil, :class =>"spinner single-line" %>
+    </div>   
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="holiday_tab[symbol]" class="control-label">Symbol: </label>
+    <div class="controls">
+    <%#= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security), nil, :class =>"single-line" %>
+    </div>   
+    </div><!--/control-group--
+
+    <div class="control-group">
+    <label for="holiday_tab[description]" class="control-label">Description: </label>
+    <div class="controls">
+    <%= text_field_tag "holiday_tab[description]", nil, :class =>"single-line" %>
+    </div>   
+    </div><!--/control-group--
+
+    <div class="form-actions">
+    <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div><!--/form-actions--
+  <% end %>
+    </div>
+
+  </div--><!--/modal-holiday-->
+

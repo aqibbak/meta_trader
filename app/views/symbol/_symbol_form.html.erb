@@ -1,7 +1,17 @@
+<!-- Modal -->
+<div id="modal-1" class="modal hide in modal-form modal-symbol tab-forms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: block;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal">Add (ili Edit) New Access</h3>
+    </div>
+    <div class="modal-body ">
+
+
 <%= form_tag symbol_submit_path, :method => "POST", :remote => true do %>
   <%= hidden_field_tag "new_symbol", @sym.empty? %>
   <%= hidden_field_tag "symbol_key", @sym["symbol"] %>
   <%= tabbed_panel do |tp| %>
+    
     <% tp.add_tab("Symbol") do %>
       <%= render "symbol/symbol_tab" %>
     <% end %>
@@ -17,6 +27,15 @@
     <% tp.add_tab("Sessions") do %>
       <%= render "symbol/sessions_tab" %>
     <% end %>
-    <%= submit_tag %>
+
   <% end %>
+
+    <div class="form-actions">
+      <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div> 
+
 <% end %>
+
+    </div><!--/modal-body-->
+    
+  </div><!--/modal-1-->

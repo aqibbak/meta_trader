@@ -1,13 +1,15 @@
 <% unless @data_server.nil? %>
-  <table class="data_server_table table table-bordered">
+  <table class="data_server_table table hover-table data-server-table">
+    <thead>
     <tr>
       <th>Server</th>
       <th>Description</th>
       <th>Internal IP Address</th>
       <th>Priority</th>
       <th>Loading</th>
-      <th>Delete</th>
+      <th></th>
     </tr>
+    </thead>
     <% @data_server.each_with_index do |row, ix| %>
       <tr class="data_server_row" data-position="<%= ix %>" data-description="<%= row["description"] %>"
         data-ip="<%= ApiMethods.long2ip(row["ip"]) %>" data-ipinternal="<%= ApiMethods.long2ip(row["ip_internal"]) %>" data-priority="<%= row["priority"] %>" data-server="<%= row["server"] %>">
@@ -16,7 +18,10 @@
         <td class="el"><%= ApiMethods.long2ip(row["ip_internal"]) %></td>
         <td class="el"><%= row["priority"] == 255 ? "Idle" : row["priority"] %></td>
         <td class="el"><%= row["loading"] == 4294967295 ? "n/a" : row["loading"] %></td>
-        <td><%= link_to "delete", delete_data_server_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+        <td>
+           <a href=""><i class="icon-pencil"></i></a>
+         &nbsp;&nbsp;&nbsp;
+         <%= link_to glyph(:remove) + "", delete_data_server_row_path(:position => ix), :remote=> true, :method => :delete %></td>
       </tr>
     <% end %>
   </table>

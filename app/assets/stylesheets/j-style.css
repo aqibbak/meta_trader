@@ -10,8 +10,12 @@
 .normal{
 	font-weight: normal;
 }
-
-
+.clear{
+	clear: both;
+}
+.padd-10{
+	padding: 10px;
+}
 
 
 /*** 
@@ -28,18 +32,122 @@
 	color: #368ee0;
 }
 
-/*** COMMON ***/
+/*** Common
+     ==================================================== 
+     ****/
+.section h2{
+	margin: 15px 0;
+}
 .table-bordered {
-border: 3px solid #ddd!important;
+border: 1px solid #ddd!important;
 }
 .common-table td:first-child{
-	background: #f6f6f6;
-	color: #777;
+	/*background: #f6f6f6;*/
+	color: #555;
 }
 
-/*** ACCESS ****/
+.table-striped tbody>tr:nth-child(odd)>td, 
+.table-striped tbody>tr:nth-child(odd)>th {
+background-color: #f9f9f9;
+}
+.table.common-table tr th, 
+.table.common-table tr td{
+	padding: 6px 10px 4px 10px;
+}
+
+select.single-line,
+input.single-line{
+	background: none;
+}
+select.single-line:hover,
+select.single-line:active,
+select.single-line:focus,
+select.single-line:visited,
+input.single-line:hover[type="text"],
+input.single-line:active[type="text"],
+input.single-line:focus[type="text"],
+input.single-line:visited[type="text"]{
+	border-bottom: 1px solid #0088cc;
+}
+input.single-line:focus[type="text"]{
+	color:  rgb(38, 111, 179);
+}
+select.single-line,
+input.single-line[type="text"], 
+input.single-line[type="password"], 
+input.single-line[type="datetime"], 
+input.single-line[type="datetime-local"], 
+input.single-line[type="date"], 
+input.single-line[type="month"], 
+input.single-line[type="time"], 
+input.single-line[type="week"], 
+input.single-line[type="number"], 
+input.single-line[type="email"], 
+input.single-line[type="url"], 
+input.single-line[type="search"], 
+input.single-line[type="tel"], 
+input.single-line[type="color"], 
+.uneditable-input {
+	background: none;
+	border-top: none!important;
+	border-left: none!important;
+	border-right: none!important;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 5px;
+}
+.ui-spinner{
+	border-color: transparent!important;
+}
+.chzn-container{
+	width: 220px!important;
+}
+.chzn-drop{
+	width: 218px!important;
+}
+.chzn-container-single .chzn-search input {
+width: 184px!important;
+}
+.chzn-container.chzn-container-single .chzn-single {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #ddd;
+}
+.chzn-container.chzn-container-single .chzn-single:hover{
+	border-bottom: 1px solid #08c;
+}
+.chzn-container.chzn-container-single .chzn-single:active,
+.chzn-container.chzn-container-single .chzn-single:focus,
+.chzn-container.chzn-container-single .chzn-single:visited{
+	border: 1px solid #DDD;
+}
+.chzn-container.chzn-container-single .chzn-single-with-drop{
+	border: 1px solid #aaa;
+}
+/*** Access
+     ==================================================== 
+     ****/
 .table-border{
 	border:1px solid #ddd!important;
+}
+.access-table a {
+	color: #ccc;
+}
+.hover-table thead tr th,
+.symbol-table thead tr th,
+.group-table thead tr th{
+	color: rgb(155, 155, 155);
+	background: transparent;
+	border-bottom: 3px solid #eee;
+}
+.hover-table thead tr:hover{
+	background: transparent;
+}
+.hover-table tr:hover{
+	background: #eee;
+}
+.hover-table tr td:last-child{
+	width: 50px;
 }
 .table-access-form td,
 .table-access-form th{
@@ -48,8 +156,53 @@ border: 3px solid #ddd!important;
 .table-access-form th label{
 	font-weight: bold;
 }
-/*** Data server ***/
-
+.modal-form .modal-header{
+	border-bottom: none;
+	color: rgb(155, 155, 155);
+	font-weight: 200;
+	padding: 9px 9px 9px 10px;
+}
+.modal-form .modal-header h3{
+	font-weight: 400;
+	font-size: 16px;
+}
+.modal-form .modal-body{
+	padding: 0;
+}
+.modal-form .modal-footer{
+	text-align: center;
+	border-top: none;
+}
+.modal-form .modal-body .form-horizontal.form-bordered .control-group .controls {
+	border-left: 1px dotted #DDD;
+}
+.modal-form .modal-body .form-horizontal.form-bordered .control-group{
+	border-bottom: 1px dotted #DDD;
+}
+.modal-form .modal-body .form-horizontal.form-bordered .control-group:last-child{
+	border-bottom: none;
+}
+.modal-form .border{
+	border-top:1px dotted #DDD;
+}
+.modal-form .form-horizontal.form-bordered .control-group .control-label {
+color: rgb(155, 155, 155);
+}
+/*** Data server
+     ==================================================== 
+     ****/
+.data-server-table td:last-child a,
+.group-table td:last-child a,
+.symbol-table td:last-child a,
+.holiday-table td:last-child a{
+	color: #ccc;
+}
+.holiday-table td:last-child a:hover,
+.holiday-table td:last-child a:focus,
+.data-server-table td:last-child a:hover, 
+.data-server-table td:last-child a:focus {
+	color: #005580;
+}
 .form-data-server .form-actions{
 	margin: 8px 0;
 	padding: 5px 0 5px 180px;
@@ -57,7 +210,13 @@ border: 3px solid #ddd!important;
 .border{
 	border:1px solid #ddd;
 }
-/*** Time ***/
+.modal-data-server .modal-body{
+	overflow: visible;
+}
+
+/*** Time
+     ==================================================== 
+     ****/
 .table.time-table tr th, 
 .table.time-table tr td {
 padding: 0px 0px 3px 0!important;
@@ -70,4 +229,58 @@ text-align: center;
 }
 .table.time-table tr td:hover{
 	background: #eee;
+}
+/*** Holiday
+     ==================================================== 
+     ****/
+
+.modal-holiday .modal-body{
+	max-height: 650px;
+}
+
+.form-horizontal.form-bordered .control-group.thin-row .control-label{
+	padding: 3px 10px;
+}
+.form-horizontal.form-bordered .control-group.thin-row .controls {
+	padding: 3px 10px;
+}
+.check-line{
+	display: inline-block;
+}
+.check-left.check-line .inline{
+	width: 90px;
+}
+/*** Symbol page, tab-forms
+     ==================================================== 
+     ****/
+.tab-forms .tabbed_panel{
+	margin-top: 0;
+}
+li.tab.tab_unselected{
+	background-color: rgb(233, 233, 233);
+	border-top:1px solid #DDD;
+	font-weight: normal;
+}
+.panes{
+	height: auto!important;
+	padding: 0!important;
+}
+.modal.modal-symbol{
+	width: 600px;
+}
+.modal-symbol .modal-body{
+	max-height: 550px;
+}
+.inline-row{
+	display: table-cell;
+}
+.tab-forms .inline-row input{
+	margin: 0;
+}
+.tab-forms .inline-row input[type="text"]{
+	font-size: 10px;
+	padding: 0px 2.9px;
+}
+.tab-forms .hover-table tr td:last-child{
+	width: auto;
 }

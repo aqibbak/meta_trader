@@ -1,3 +1,5 @@
+<div class="padd-10">
+
 <div class="row-fluid">
   <div class="span12">
     Contract size: <%= text_field_tag "symbol[contract_size]", @sym["contract_size"], :style => "width:100px;" %>
@@ -42,3 +44,5 @@
      <%= check_box_tag "symbol[margin_hedged_strong]", '1', @sym["margin_hedged_strong"]==1 %> Strong hedged margin mode
   </div>
 </div>
+
+</div><!--/padd-10-->
