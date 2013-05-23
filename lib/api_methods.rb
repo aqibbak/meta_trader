@@ -224,29 +224,38 @@ class ApiMethods
   def updateManager(mgr_key,data,session)
     update_string = ""
     data.keys.each_with_index do |key, ix|
-      if key=="source"
-        value = data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }
+      if key=="ip_from" || key=="ip_to"
+        value = ApiMethods.ip2long(data[key].to_s).to_s
         if value != ""        
           update_string += ',' unless ix==0
-          update_string += '{"field": "'+key.to_s+'", "value": "'+value+'"}'
+          update_string += '{"field": "'+key.to_s+'", "value": '+value+'}'
         end
-      elsif key=="instant_max_volume"
-        value = data[key].to_i * 100
-        update_string += ',' unless ix==0
-        update_string += '{"field": "'+key.to_s+'", "value": '+value.to_s+'}'
+      elsif key=="secgroups"
+=begin
+        secgroups = data[key].map { |k,v| v }
+        secgroups.each_with_index do |secgroup,i|
+          secgroup_string = '[{"field":"enable","value":'+secgroup["enable"]+'},{"field":"maximum_lots","value":'+secgroup["maximum_lots"]+'},{"field":"minimum_lots","value":'+secgroup["minimum_lots"]+'}]'
+          updateData('{"method": "CfgUpdateManager", "key" : '+mgr_key+', "field": "secgroups", "index":'+i.to_s+',"value":'+secgroup_string+'}', session)
+
+          #secgroup_string += ',' unless i==0
+          #secgroup_string += '[{"field":"enable","value":'+secgroup["enable"]+'},{"field":"maximum_lots","value":'+secgroup["maximum_lots"]+'},{"field":"minimum_lots","value":'+secgroup["minimum_lots"]+'}]'
+        end
+        #update_string += ',' unless ix==0
+        #update_string += '{"field": "'+key.to_s+'", "value": ['+secgroup_string+']}'
+=end
       else
-        if key=="symbol"||key=="description"||key=="margin_currency"
+        if key=="groups"||key=="mailbox"
           update_string += ',' unless ix==0
           update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
         else
-          if data[key].to_s != "" && key!="background_color"
+          if data[key].to_s != ""
             update_string += ',' unless ix==0
             update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
           end
         end
       end
     end
-    update_string = '{"method": "CfgUpdateManager", "key" : "'+mgr_key+'", "update": ['+update_string+']}'
+    update_string = '{"method": "CfgUpdateManager", "key" : '+mgr_key+', "update": ['+update_string+']}'
     return updateData(update_string, session)
   end
 
@@ -342,6 +351,9 @@ class ApiMethods
         update_string += '{"field": "'+key.to_s+'", "value": '+value.to_s+'}'
       elsif key=="margin_divider"
         value = 100 / data[key].to_f
+        if value == Float::INFINITY
+          value = 0.0
+        end
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key.to_s+'", "value": '+value.to_s+'}'
       elsif key=="sessions"
@@ -592,6 +604,21 @@ class ApiMethods
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
 =end
+      elsif key=="rights"
+        rights = 0
+        rights += 1 if data[key]["email"].to_i==1
+        rights += 2 if data[key]["trailing"].to_i==1
+        rights += 4 if data[key]["advisor"].to_i==1
+        rights += 8 if data[key]["expiration"].to_i==1
+        rights += 16 if data[key]["trade_signals"].to_i==1
+        rights += 32 if data[key]["trade_signals"].to_i==2
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": '+rights.to_s+'}'
+      elsif key=="secmargins"
+        secmargins = data["secmargins"].map { |k,v| v }
+        secmargins.each_with_index do |secmargin, sec_ix|
+          updateData('{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "field": "secmargins", "index": 0, "value": [{"field": "symbol", "value": "'+secmargin["symbol"]+'"},{"field": "swap_long", "value": '+secmargin["swap_long"]+'},{"field": "swap_short", "value": '+secmargin["swap_short"]+'},{"field": "margin_divider", "value": '+(secmargin["margin_divider"].to_f).to_s+'}]}',session)
+        end
       else
         if key=="group"||key=="company"||key=="currency"||key=="signature"||key=="smtp_login"||key=="smtp_password"||key=="smtp_server"||key=="support_email"||key=="templates"
           update_string += ',' unless ix==0
@@ -633,7 +660,7 @@ class ApiMethods
     return getData('{"method":"CfgRequestSync"}', session)
   end
 
-  def updateSynchronization(sync_key,data,session)
+  def updateSynchronization(sync_pos,data,session)
     update_string = ""
     data.keys.each_with_index do |key, ix|
       if key=="limits"
@@ -642,20 +669,10 @@ class ApiMethods
           data["to"] = 0
         else
           from_date = Time.new
-          from_date.year = data["from"]["year"]
-          from_date.month = data["from"]["month"]
-          from_date.day = data["from"]["day"]
-          from_date.hour = data["from"]["hour"]
-          from_date.min = data["from"]["min"]
-          data["from"] = from_date.to_i
+          data["from"] = from_date.change(year: data["from"]["year"].to_i, month: data["from"]["month"].to_i, day: data["from"]["day"].to_i, hour: data["from"]["hour"].to_i, min: data["from"]["min"].to_i).to_i
 
           to_date = Time.new
-          to_date.year = data["to"]["year"]
-          to_date.month = data["to"]["month"]
-          to_date.day = data["to"]["day"]
-          to_date.hour = data["to"]["hour"]
-          to_date.min = data["to"]["min"]
-          data["to"] = to_date.to_i
+          data["to"] = to_date.change(year: data["to"]["year"].to_i, month: data["to"]["month"].to_i, day: data["to"]["day"].to_i, hour: data["to"]["hour"].to_i, min: data["to"]["min"].to_i).to_i
         end
       else
         if key=="server"||key=="securities"
@@ -669,8 +686,144 @@ class ApiMethods
         end
       end
     end
-    update_string = '{"method": "CfgUpdateSync", "key" : "'+sync_key+'", "update": ['+update_string+']}'
+    update_string = '{"method": "CfgUpdateSync", "position" : '+sync_pos+', "update": ['+update_string+']}'
     return updateData(update_string, session)
+  end
+
+  def getPlugin(session)
+    return getData('{"method":"CfgRequestPlugin"}', session)
+  end
+
+  def updatePlugin(plg_key,data,session)
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="plugin"
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": [{"field":"manager_access", "value":'+data[key]["manager_access"].to_s+'},{"field":"enabled", "value":'+data[key]["enabled"].to_s+'}]}'
+      elsif key=="params"
+
+        param_string =""
+        params = data[key].map { |k,v| v }
+        params.each_with_index do |param, par_ix|
+          param_string += ',' unless par_ix==0
+          param_string += '[{"field": "name", "value": "'+param["name"]+'"},{"field": "value", "value": "'+param["value"]+'"}]'
+        end
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": ['+param_string+']}'
+
+      else
+        if data[key].to_s != ""
+          update_string += ',' unless ix==0
+          update_string += '{"field": "'+key.to_s+'", "value": '+data[key].to_s+'}'
+        end
+      end
+    end
+    update_string = '{"method": "CfgUpdatePlugin", "key" : "'+plg_key+'", "update": ['+update_string+']}'
+    return updateData(update_string, session)
+  end
+
+  def getAccount(session,filter=nil)
+    if filter.nil?
+      return getData('{"method":"AdmUsersRequestD"}', session)
+    else
+      filter_string = ""
+      comma = false
+      filter.keys.each_with_index do |key, ix|
+        if filter[key]["condition"] != "0"
+          filter_string += "," if comma
+          comma = true
+          if key=="login"||key=="balance"
+            filter_string += '{"field":"'+key.to_s+'", "condition":"'+filter[key]["condition"].to_s+'", "value":'+filter[key]["value"].to_s+'}'
+          else
+            filter_string += '{"field":"'+key.to_s+'", "condition":"'+filter[key]["condition"].to_s+'", "value":"'+filter[key]["value"].to_s+'"}'
+          end
+        end
+      end
+      if filter_string != ""
+        filter_string = '"filters":['+filter_string+']'
+        return getData('{"method":"AdmUsersRequestR",'+filter_string+'}', session)
+      else
+        return getData('{"method":"AdmUsersRequestD"}', session)
+      end
+    end
+  end
+
+  def getOrder(session,filter=nil,open_only=0)
+    if filter.nil?
+      return getData('{"method":"AdmTradesRequestD","open_only":'+open_only.to_s+'}', session)
+    else
+      filter_string = ""
+      comma = false
+      filter.keys.each_with_index do |key, ix|
+        if filter[key]["condition"] != "0"
+          filter_string += "," if comma
+          comma = true
+          if key=="symbol"
+            filter_string += '{"field":"'+key.to_s+'", "condition":"'+filter[key]["condition"].to_s+'", "value":"'+filter[key]["value"].to_s+'"}'
+          else
+            filter_string += '{"field":"'+key.to_s+'", "condition":"'+filter[key]["condition"].to_s+'", "value":'+filter[key]["value"].to_s+'}'
+          end
+        end
+      end
+      if filter_string != ""
+        filter_string = '"filters":['+filter_string+']'
+        return getData('{"method":"AdmTradesRequestR",'+filter_string+'}', session)
+      else
+        return getData('{"method":"AdmTradesRequestD","open_only":'+open_only.to_s+'}', session)
+      end
+    end
+  end
+
+  def updateOrder(data, session)
+
+#    {"close_price":0,"close_time":1364444640,"comment":"Dummy transaction2","commission":0,"commission_agent":0,
+#     "conv_rates":[0,0],"expiration":-3600,"margin_rate":0,"open_price":0,"open_time":1364441040,"profit":0,
+#     "sl":0,"storage":0,"symbol":"","taxes":0,"ticket":1289778,"timestamp":1369087200,"tp":0,"type":0}
+
+
+#    integer "activation", double "close_price", integer "close_time", integer "cmd", double "commission",
+#    double "commission_agent", integer "digits", integer "expiration", integer "login", integer "magic",
+#    double "margin_rate", double "open_price", integer "open_time", integer "order", double "profit",
+#    double "sl", integer "spread", integer "state", double "storage", double "taxes", integer "timestamp",
+#    double "tp", integer "value_date", integer "volume", string "comment", string "symbol",
+#    double x 2 "conv_rates"
+    puts data
+#{"type"=>"0", "symbol"=>"", "open_price"=>"0.0", "sl"=>"0.0", "close_price"=>"0", "tp"=>"0.0", "conv_rates"=>{"0"=>"0", "1"=>"0"}, "margin_rate"=>"0.0", "commission"=>"0.0", "commission_agent"=>"0.0", "storage"=>"0.0", "comment"=>"Dummy transaction2", "taxes"=>"0.0", "profit"=>"0.0"}
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key=="conv_rates"
+        update_string += ',' unless ix==0
+        update_string += '"'+key.to_s+'":['+data[key]["0"].to_s+','+data[key]["1"].to_s+']'
+      elsif key=="open_time"||key=="close_time"||key=="expiration"||key=="value_date"
+        time = Time.new
+        if data[key]["year"]==""||data[key]["month"]||data[key]["day"]==""
+          time_int = 0
+        else
+          time_int = time.change(year: data[key]["year"].to_i, month: data[key]["month"].to_i, day: data[key]["day"].to_i, hour: data[key]["hour"].to_i, min: data[key]["min"].to_i).to_i
+        end
+        update_string += ',' unless ix==0
+        update_string += '"'+key.to_s+'":'+time_int.to_s+''
+      elsif key=="volume"
+        update_string += ',' unless ix==0
+        update_string += '"'+key.to_s+'":'+(data[key].to_f*100.0).to_s
+      else
+        if key=="comment"||key=="symbol"
+          update_string += ',' unless ix==0
+          update_string += '"'+key.to_s+'":"'+data[key].to_s+'"'
+        else
+          if data[key].to_s != ""
+            update_string += ',' unless ix==0
+            update_string += '"'+key.to_s+'":'+data[key].to_s
+          end
+        end
+      end
+    end
+    update_string = '{"method":"AdmTradeRecordModify", "record": {'+update_string+'}}'
+    return updateData(update_string, session)
+  end
+
+  def SrvChartsSync(session)
+    return getData('{"method":"SrvChartsSync"}', session)
   end
 
   def ping(session)
@@ -680,4 +833,5 @@ class ApiMethods
       login(session,session["api_userid"],session["api_password"])
     end
   end
+
 end

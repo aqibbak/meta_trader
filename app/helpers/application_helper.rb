@@ -435,11 +435,21 @@ module ApplicationHelper
     return options.html_safe
   end
 
-  def options_for_group_rights(selected=nil)
+  def options_for_group_trade_signals(rights)
+    brokers = rights&16
+    servers = rights&32
+    if servers==32
+      selected = 2
+    elsif brokers==16
+      selected = 1
+    else
+      selected = 0
+    end
+        
     options = ""
-    options += "<option value='1'#{' selected=true' if selected==1}>Disable</option>"
-    options += "<option value='17'#{' selected=true' if selected==17}>Enable all signals from all brokers</option>"
-    options += "<option value='33'#{' selected=true' if selected==33}>Enable signals from my servers only</option>"
+    options += "<option value='0'#{' selected=true' if selected==0}>Disable</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>Enable all signals from all brokers</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>Enable signals from my servers only</option>"
     return options.html_safe
   end
 
@@ -486,7 +496,7 @@ module ApplicationHelper
     return options.html_safe   
   end
 
-  def options_for_secgroup_execution(selected)
+  def options_for_secgroup_execution(selected=nil)
     options = ""
     options += "<option value='0'#{' selected=true' if selected==0}>manual only, no automation</option>"
     options += "<option value='1'#{' selected=true' if selected==1}>automatic only</option>"
@@ -706,6 +716,49 @@ module ApplicationHelper
     options += "<option value='0'#{' selected=true' if selected==0}>Add</option>"
     options += "<option value='1'#{' selected=true' if selected==1}>Update</option>"
     options += "<option value='2'#{' selected=true' if selected==2}>Replace</option>"
+    return options.html_safe
+  end
+
+  def options_for_gtlt(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected=='0'}></option>"
+    options += "<option value='='#{' selected=true' if selected=='='}>=</option>"
+    options += "<option value='<>'#{' selected=true' if selected=='<>'}><></option>"
+    options += "<option value='>'#{' selected=true' if selected=='>'}>></option>"
+    options += "<option value='<'#{' selected=true' if selected=='<'}><</option>"
+    options += "<option value='>='#{' selected=true' if selected=='>='}>>=</option>"
+    options += "<option value='<='#{' selected=true' if selected=='<='}><=</option>"
+    return options.html_safe
+  end
+
+  def options_for_like_equal(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected=='0'}></option>"
+    options += "<option value='='#{' selected=true' if selected=='='}>=</option>"
+    options += "<option value='<>'#{' selected=true' if selected=='<>'}><></option>"
+    options += "<option value='LIKE'#{' selected=true' if selected=='LIKE'}>LIKE</option>"
+    return options.html_safe
+  end
+
+
+  def options_for_order_type(selected=nil)
+    options = ""
+    options += "<option value='0'#{' selected=true' if selected==0}>BUY</option>"
+    options += "<option value='1'#{' selected=true' if selected==1}>SELL</option>"
+    options += "<option value='2'#{' selected=true' if selected==2}>BUY LIMIT</option>"
+    options += "<option value='3'#{' selected=true' if selected==3}>SELL LIMIT</option>"
+    options += "<option value='4'#{' selected=true' if selected==4}>BUY STOP</option>"
+    options += "<option value='5'#{' selected=true' if selected==5}>SELL STOP</option>"
+    options += "<option value='6'#{' selected=true' if selected==6}>BALANCE</option>"
+    options += "<option value='7'#{' selected=true' if selected==7}>CREDIT</option>"
+    return options.html_safe
+  end
+
+  def options_for_order_symbol(selected=nil, symbols)
+    options = "<option value=''#{' selected=true' if selected==""}></option>"
+    symbols.each_with_index do |symbol, si|
+      options += "<option value='#{symbol["symbol"]}'#{' selected=true' if selected==symbol["symbol"]}>#{symbol["symbol"]}</option>"
+    end
     return options.html_safe
   end
 

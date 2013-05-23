@@ -1,0 +1,17 @@
+<a href="#" id="new-plugin-param">Add</a>
+<table id="plugin-param-table">
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th>&nbsp;</th>
+  </tr>
+  <% @plg["params"].each_with_index do |param, par_ix|%>
+    <tr data-pos="<%=par_ix%>">
+      <td><%= text_field_tag "plugin[params][#{par_ix}][name]", param["name"] %></td>
+      <td><%= text_field_tag "plugin[params][#{par_ix}][value]", param["value"] %></td>
+      <td><a class="plugin-param-del" href="#">x</a></td>
+    </tr>
+  <% end %>
+</table>
+<%= hidden_field_tag "last_param_pos", @plg["params"].size-1 %>
+<%= render "plugin/param_form" %>

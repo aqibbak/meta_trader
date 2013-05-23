@@ -1,0 +1,33 @@
+<table>
+  <tr>
+    <th>Deal</th>
+    <th>Login</th>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Symbol</th>
+    <th>Lots</th>
+    <th>Price</th>
+    <th>S / L</th>
+    <th>T / P</th>
+    <th>Price</th>
+    <th>Swap</th>
+    <th>Profit</th>
+  </tr>
+  <% @order.each_with_index do |order, ix|%>
+    <tr class="order-row" data-order="<%= ix %>">
+      <td><%= order["order"] %></td>
+      <td><%= order["login"] %></td>
+      <td><%= Time.zone.at(order["open_time"]).strftime("%Y.%m.%d %H:%M") %></td>
+      <td><%= ["buy","sell","buy limit","sell limit","buy stop","sell stop","balance","credit"][order["cmd"].to_i] %></td>
+      <td><%= order["symbol"] %></td>
+      <td><%= "NTF" %></td>
+      <td><%= order["open_price"] %></td>
+      <td><%= order["sl"] %></td>
+      <td><%= order["tp"] %></td>
+      <td><%= order["close_price"] %></td>
+      <td><%= order["storage"] %></td>
+      <td><%= order["profit"] %></td>
+    </tr>
+  <% end %>
+</table>
+

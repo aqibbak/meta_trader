@@ -1,0 +1,28 @@
+<%= form_tag group_submit_path, :method => "POST", :remote => true do %>
+  <%= hidden_field_tag "new_group", @grp.empty? %>
+  <%= hidden_field_tag "group_key", @grp["group"] %>
+  <%= tabbed_panel do |tp| %>
+    <% tp.add_tab("Common") do %>
+      <%= render "group/common_tab" %>
+    <% end %>
+    <% tp.add_tab("Permissions") do %>
+      <%= render "group/permissions_tab" %>
+    <% end %>
+    <% tp.add_tab("Archiving") do %>
+      <%= render "group/archiving_tab" %>
+    <% end %>
+    <% tp.add_tab("Margins") do %>
+      <%= render "group/margins_tab" %>
+    <% end %>
+    <% tp.add_tab("Securities") do %>
+      <%= render "group/securities_tab" %>
+    <% end %>
+    <% tp.add_tab("Symbols") do %>
+      <%= render "group/symbols_tab" %>
+    <% end %>
+    <% tp.add_tab("Reports") do %>
+      <%= render "group/reports_tab" %>
+    <% end %>
+    <%= submit_tag %>
+  <% end %>
+<% end %>

@@ -1,0 +1,10 @@
+<% unless @account.nil? %>
+<div class="row-fluid">
+  <div id="account-table" class="span5">
+    <%= render "account/account_table" %>
+  </div>
+  <div id="account-form" class="span7">
+    <%= render "account/account_form" %>
+  </div>
+</div>
+<% end %>

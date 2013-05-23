@@ -1,11 +1,13 @@
 <div class="container-fluid">
   
-
+<% if can? :manage, :common %>
   <div class="section section-common">
     <h2 class="blue normal"><i class="icon-cogs"></i> Common</h2>
     <%= render "fixed_update/common_form" %>
   </div>
+<% end %>
 
+<% if can? :manage, :access %>
   <div class="section section-access">
     <h2 class="normal blue"><i class="icon-wrench"></i> Access
 
@@ -19,7 +21,9 @@
 
     <%= render "variable_update/access_form" %>
   </div>
+<% end %>
 
+<% if can? :manage, :data_server %>
   <div class="section section-data_server">
     <h2 class="normal blue"><i class="icon-tasks"></i> Data Server
 
@@ -30,11 +34,18 @@
 
     <%= render "variable_update/data_server_form" %>
   </div>
+<% end %>
+
+
+<% if can? :manage, :time %>
 
   <div class="section section-time">
     <h2 class="normal blue"><i class="icon-time"></i> Time</h2>
     <%= render "fixed_update/time_form" %>
   </div>
+<% end %>
+
+<% if can? :manage, :holiday %>
 
   <div class="section section-holiday">
     <h2 class="normal blue"><i class="icon-picture"></i> Holiday
@@ -46,28 +57,68 @@
     <%= render "variable_update/holiday_form" %>
   </div>
 
+<% end %>
+
+
+<% if can? :manage, :symbol_group %>
+
   <div class="section section-group">
     <h2 class="normal blue"><i class="icon-group"></i> Group</h2>
 
     <%= render "symbol/symbol_group_form" %>
   </div>
 
+<% end %>
+
+<% if can? :manage, :symbols %>
   <div class="section section-symbols">
     <h2 class="normal blue"><i class="icon-credit-card"></i> Symbols
       <a href="" class="btn btn-primary"><i class="icon-plus"></i> New</a>
   </h2>
     <%= render "symbol/symbols_tab" %>
+
   </div>
+<% end %>
 
-  <%#= render "fixed_update/backup_form" %>
+<% if can? :manage, :backup %>
+<%#= render "fixed_update/backup_form" %>
+<% end %>
 
-  <%#= render "group/group_tab" %>
+<% if can? :manage, :group %>
+<div id="group-form-tab">
+<%= render "group/group_tab" %>
+</div>
+<% end %>
 
-  <%#= render "manager/manager_tab" %>
+<% if can? :manage, :manager %>
+<%#= render "manager/manager_tab" %>
+<% end %>
 
-  <%#= render "feeder/feeder_tab" %>
+<% if can? :manage, :feeder %>
+<%#= render "feeder/feeder_tab" %>
+<% end %>
 
-  <%#= render "synchronization/synchronization_tab" %>
+<% if can? :manage, :synchronization %>
+<%#= render "synchronization/synchronization_tab" %>
+<% end %>
+
+<% if can? :manage, :plugin %>
+<div id="plugin-form-tab">
+<%#= render "plugin/plugin_tab" %>
+</div>
+<% end %>
+
+<% if can? :manage, :account %>
+<div id="account-form-tab">
+<%#= render "account/account_tab" %>
+</div>
+<% end %>
+
+<% if can? :manage, :order %>
+<div id="order-form-tab">
+<%#= render "order/order_tab" %>
+</div>
+<% end %>
 
   <script>
     var ping_timer;

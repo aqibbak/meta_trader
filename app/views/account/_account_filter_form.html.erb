@@ -1,0 +1,9 @@
+<%= form_tag filter_account_path, :method => "POST", :remote => true do  %>
+  Login <%= select_tag "account_filter[login][condition]", options_for_gtlt, style: "width:70px;" %> <%= text_field_tag "account_filter[login][value]", "" %><br/>
+  Name <%= select_tag "account_filter[name][condition]", options_for_like_equal, style: "width:70px;" %> <%= text_field_tag "account_filter[name][value]", "" %><br/>
+  Group <%= select_tag "account_filter[group][condition]", options_for_like_equal, style: "width:70px;" %> <%= text_field_tag "account_filter[group][value]", "" %><br/>
+  City <%= select_tag "account_filter[city][condition]", options_for_like_equal, style: "width:70px;" %> <%= text_field_tag "account_filter[city][value]", "" %><br/>
+  Email <%= select_tag "account_filter[email][condition]", options_for_like_equal, style: "width:70px;" %> <%= text_field_tag "account_filter[email][value]", "" %><br/>
+  Balance <%= select_tag "account_filter[balance][condition]", options_for_gtlt, style: "width:70px;" %> <%= text_field_tag "account_filter[balance][value]", "" %><br/>
+  <%= submit_tag "Filter" %>
+<% end %>

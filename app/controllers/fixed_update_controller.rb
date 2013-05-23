@@ -2,6 +2,7 @@ class FixedUpdateController < ApplicationController
   include ApplicationHelper
 
   def common_submit
+    authorize! :update, :common
     data = params[:common_tab]
     api = ApiMethods.new
     begin
@@ -19,6 +20,7 @@ class FixedUpdateController < ApplicationController
   end
 
   def time_submit
+    authorize! :update, :time
     data = params[:time_tab].map { |k,v| v.to_i }
     api = ApiMethods.new
     begin
@@ -36,6 +38,7 @@ class FixedUpdateController < ApplicationController
   end
 
   def backup_submit
+    authorize! :update, :backup
     data = params[:backup_tab]
     api = ApiMethods.new
     begin

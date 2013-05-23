@@ -1,0 +1,47 @@
+<div class="row-fluid">
+  <div class="span5">
+    <table>
+      <tr>
+        <th>Symbol</th>
+        <th>Long</th>
+        <th>Short</th>
+        <th>Percantage</th>
+      </tr>
+      <% @grp["secmargins"].each_with_index do |secmargin, smix|%>
+        <tr class="secmargin-row" data-pos="<%= smix %>">
+          <td><%= secmargin["symbol"] %></td>
+          <td><%= secmargin["swap_long"] %></td>
+          <td><%= secmargin["swap_short"] %></td>
+          <td><%= secmargin["margin_divider"] ? number_with_precision((100/secmargin["margin_divider"].to_f), :precision => 2) : "" %></td>
+        </tr>
+      <% end if @grp["secmargins"] %>
+    </table>
+  </div>
+  <div class="span7">
+    <% @grp["secmargins"].each_with_index do |secmargin, smix|%>
+      <div id="secmargin<%= smix %>"  class="secmargin-div">
+        <div class="row-fluid">
+          <div class="span12">
+            Symbol: <%= select_tag "group[secmargins][#{smix}][symbol]", options_for_secmargin_symbol(secmargin["symbol"], @symbol), :style => "width: 400px" %>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            Long position swap: <%= select_tag "group[secmargins][#{smix}][swap_long]", options_for_secmargin_swap_long(secmargin["swap_long"], @symbol, secmargin["symbol"]), :style => "width: 200px" %>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            Short position swap: <%= select_tag "group[secmargins][#{smix}][swap_short]", options_for_secmargin_swap_short(secmargin["swap_short"], @symbol, secmargin["symbol"]), :style => "width: 200px" %>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12">
+            Margin percentage: <%= select_tag "group[secmargins][#{smix}][margin_divider]", options_for_secmargin_margin_divider(secmargin["margin_divider"], @symbol, secmargin["symbol"]), :style => "width: 200px" %>
+          </div>
+        </div>
+
+      </div>
+    <% end if @grp["secmargins"] %>
+  </div>
+</div>

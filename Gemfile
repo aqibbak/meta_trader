@@ -9,6 +9,10 @@ gem 'logical_tabs'
 
 gem 'json'
 
+gem 'devise', '2.1.0'
+gem 'cancan', '1.6.8'
+gem 'rails_admin'
+
 group :production do
   gem "pg", :require => "pg"
 end

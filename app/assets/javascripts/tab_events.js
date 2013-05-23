@@ -108,7 +108,9 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $('.symbol_group_field').change(function () {
-    $(this).parent().find(".symbol_group_changed").first().val(true);
+    console.log("CHANGE");
+    console.log($(this).parent().parent().find(".symbol_group_changed").first());
+    $(this).parent().parent().find(".symbol_group_changed").first().val(true);
   });
   $('.symbol_group_form').bind("ajax:complete",function(){
     $(".symbol_group_changed").val(false);

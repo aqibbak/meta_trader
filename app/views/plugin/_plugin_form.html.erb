@@ -1,0 +1,21 @@
+<%= form_tag plugin_submit_path, :method => "POST", :remote => true do %>
+  <%= hidden_field_tag "plugin_key", @plg["plugin"]["file"] %>
+  <%= submit_tag %>
+  <div class="row-fluid">
+    <div class="span12">
+      <%= hidden_field_tag "plugin[plugin][enabled]", '0' %>
+      <%= check_box_tag "plugin[plugin][enabled]", '1', @plg["plugin"]["enabled"]==1 %> Load at server startup
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span12">
+      <%= hidden_field_tag "plugin[plugin][manager_access]", '0' %>
+      <%= check_box_tag "plugin[plugin][manager_access]", '1', @plg["plugin"]["manager_access"]==1 %> Configurable by managers
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div id="plugin-parameters" class="span12">
+      <%= render "plugin/parameters" %>
+    </div>
+  </div>
+<% end %>
