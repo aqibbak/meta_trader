@@ -20,7 +20,7 @@
             <%= text_field_tag "symbol_group_tab[#{ix}][description]", sg["description"], :class => "symbol_group_field single-line"%>
           </td>
           <td>
-            <%= text_field_tag "symbol_group_symbols", get_symbol_group_symbols(ix, @symbol), :disabled => true, :class =>"single-line" %>
+            <%= text_field_tag "symbol_group_symbols", get_symbol_group_symbols(ix, @symbol), :disabled => true, :style => "width: 99%;" %>
           </td>
         </tr>
       <% end %>
