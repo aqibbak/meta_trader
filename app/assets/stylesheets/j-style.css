@@ -284,3 +284,12 @@ li.tab.tab_unselected{
 .tab-forms .hover-table tr td:last-child{
 	width: auto;
 }
+.input-small .chzn-container{
+	width: 90px!important;
+}
+.input-small .chzn-drop{
+	width: 88px!important;
+}
+.input-small .chzn-container-single .chzn-search input{
+	width: 53px!important;
+}

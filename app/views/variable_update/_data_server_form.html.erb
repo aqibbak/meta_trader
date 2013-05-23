@@ -56,7 +56,9 @@
     <div class="control-group">
     <label for="data_server_tab[priority]" class="control-label">Priority: </label>
     <div class="controls">
-    <%= select_tag "data_server_tab[priority]", options_for_data_server_priority %>
+    <div  class="input-xlarge">
+        <%= select_tag "data_server_tab[priority]", options_for_data_server_priority, :class =>"single-line chosen-select" %>
+      </div>
     </div>
     </div><!--/control-group-->
     
