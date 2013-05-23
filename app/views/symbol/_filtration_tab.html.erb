@@ -1,3 +1,5 @@
+<div class="padd-10">
+
 <div class="row-fluid">
   <div class="span12">
      <%= hidden_field_tag "symbol[realtime]", '0' %>
@@ -35,3 +37,5 @@
     Smoothing: <%= select_tag "symbol[filter_smoothing]", options_for_symbol_filter_smoothing(@sym["filter_smoothing"]), :style => "width:71px;" %> ticks
   </div>
 </div>
+
+</div><!--/padd-10-->

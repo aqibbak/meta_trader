@@ -40,7 +40,8 @@
         <td>Full backup time</td>
         <td>
           <% time = @backup["fullbackup_shift"] %>
-          <%= number_field_tag "backup_tab[fullbackup_shift][hour]", (time/60).to_i %>:<%= number_field_tag "backup_tab[fullbackup_shift][minute]", time.to_i - (time/60).to_i*60 %>
+          <%= number_field_tag "backup_tab[fullbackup_shift][hour]", (time/60).to_i %> : 
+          <%= number_field_tag "backup_tab[fullbackup_shift][minute]", time.to_i - (time/60).to_i*60 %>
         </td>
       </tr>
       <tr>
@@ -52,7 +53,7 @@
       </tr>
       <tr>
         <td>Shift of archive backup time</td>
-        <td><%= number_field_tag "backup_tab[archive_shift]", @backup["archive_shift"] %> minute(s)</td>
+        <td><%= text_field_tag "backup_tab[archive_shift]", @backup["archive_shift"], nil, :class =>"spinner single-line" %> minute(s)</td>
       </tr>
       <tr>
         <td>Keep archival backups within</td>

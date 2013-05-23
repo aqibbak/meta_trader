@@ -1,13 +1,15 @@
 <% unless @holiday.nil? %>
-  <table class="holiday_table" style="margin: 10px">
+  <table class="holiday_table table hover-table holiday-table">
+    <thead>
     <tr>
       <th>Day</th>
       <th>From</th>
       <th>To</th>
       <th>Securities</th>
       <th>Description</th>
-      <th>Delete</th>
+      <th></th>
     </tr>
+    </thead>
     <% @holiday.each_with_index do |row, ix| %>
       <tr class="holiday_row" data-position="<%= ix %>" data-day="<%= row["day"] %>" data-month="<%= row["month"] %>" data-year="<%= row["year"] %>" data-from="<%= row["from"] %>" data-to="<%= row["to"] %>"  data-symbol="<%= row["symbol"] %>" data-description="<%= row["description"] %>" data-enable="<%= row["enable"] %>">
         <td class="el"><%= row["year"]==0 ? "****" : row["year"] %>.<%= row["month"].to_s.rjust(2, '0') %>.<%= row["day"].to_s.rjust(2, '0') %></td>
@@ -15,33 +17,46 @@
         <td class="el"><%= "#{(row['to']/60).to_i.to_s.rjust(2, '0')}:#{(row['to'].to_i-(row['to']/60).to_i*60).to_s.rjust(2, '0')}" %></td>
         <td class="el"><%= row["symbol"] %></td>
         <td class="el"><%= row["description"] %></td>
-        <td><%= link_to "delete", delete_holiday_row_path(:position => ix), :remote=> true, :method => :delete %></td>
+        <td>
+          <a href=""><i class="icon-pencil"></i></a>
+          &nbsp;&nbsp;&nbsp;
+          <%= link_to glyph(:remove) + "", delete_holiday_row_path(:position => ix), :remote=> true, :method => :delete %></td>
       </tr>
     <% end %>
   </table>
+  <!--
   <%= form_tag holiday_submit_path, :method => "POST", :remote => true do %>
     <%= hidden_field_tag "holiday_new_record", true %>
     <%= hidden_field_tag "holiday_tab[position]", @holiday.count %>
-    <label for="holiday_tab[enable]">Enable: </label>
+    <div class="check-line">
+    <label class="inline" for="holiday_tab[enable]">Enable </label>
     <%= hidden_field_tag "holiday_tab[enable]", '0' %>
-    <%= check_box_tag "holiday_tab[enable]", '1', true %>
+    <%= check_box_tag "holiday_tab[enable]", '1', true, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
+    </div>
     <br/>
     <label>Date: </label>
-    <%= number_field_tag "holiday_tab[year]" %>.<%= number_field_tag "holiday_tab[month]" %>.<%= number_field_tag "holiday_tab[day]" %>
-    <%= check_box_tag "holiday_tab_yearly_check" %>Every year
+    <%= text_field_tag "holiday_tab[year]", nil, :class =>"spinner single-line" %> . 
+    <%= text_field_tag "holiday_tab[month]", nil, :class =>"spinner single-line" %> . 
+    <%= text_field_tag "holiday_tab[day]", nil, :class =>"spinner single-line" %>
+    <div class="check-left check-line">
+     <%= check_box_tag "holiday_tab_yearly_check", '1', nil, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
+     <label class='inline' for="holiday_tab_yearly_check">Every Year</label>
+     </div>
     <br/>
     <label for="holiday_tab[from]">From: </label>
-    <%= number_field_tag "holiday_tab[from][hour]" %>:<%= number_field_tag "holiday_tab[from][minute]" %>
+    <%= text_field_tag "holiday_tab[from][hour]", nil, :class =>"spinner single-line"  %> 
+    : <%= text_field_tag "holiday_tab[from][minute]", nil, :class =>"spinner single-line"  %>
     <label for="holiday_tab[to]">to: </label>
-    <%= number_field_tag "holiday_tab[to][hour]" %>:<%= number_field_tag "holiday_tab[to][minute]" %>
+    <%= text_field_tag "holiday_tab[to][hour]", nil, :class =>"spinner single-line"  %> : 
+    <%= text_field_tag "holiday_tab[to][minute]", nil, :class =>"spinner single-line"  %>
     <br/>
     <label for="holiday_tab[symbol]">Symbol: </label>
-    <%= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
+    <%#= select_tag "holiday_tab[symbol]", options_for_holiday_securities(@security) %>
     <br/>
     <label for="holiday_tab[description]">Description: </label>
     <%= text_field_tag "holiday_tab[description]"%>
     <br/>
-    <%= submit_tag %>
+    <%= submit_tag "Submit", :class =>"btn btn-primary" %>
     <%= link_to "new", "#", :id => "new_holiday" %>
-  <% end %>
+  <% end %>-->
 <% end %>
