@@ -231,8 +231,20 @@ class ApiMethods
           update_string += '{"field": "'+key.to_s+'", "value": '+value+'}'
         end
       elsif key=="secgroups"
+=begin
+        secgroups = data[key].map { |k,v| v }
+        secgroups.each_with_index do |secgroup,i|
+          secgroup_string = '[{"field":"enable","value":'+secgroup["enable"]+'},{"field":"maximum_lots","value":'+secgroup["maximum_lots"]+'},{"field":"minimum_lots","value":'+secgroup["minimum_lots"]+'}]'
+          updateData('{"method": "CfgUpdateManager", "key" : '+mgr_key+', "field": "secgroups", "index":'+i.to_s+',"value":'+secgroup_string+'}', session)
+
+          #secgroup_string += ',' unless i==0
+          #secgroup_string += '[{"field":"enable","value":'+secgroup["enable"]+'},{"field":"maximum_lots","value":'+secgroup["maximum_lots"]+'},{"field":"minimum_lots","value":'+secgroup["minimum_lots"]+'}]'
+        end
+        #update_string += ',' unless ix==0
+        #update_string += '{"field": "'+key.to_s+'", "value": ['+secgroup_string+']}'
+=end
       else
-        if key=="login"||key=="groups"||key=="mailbox"
+        if key=="groups"||key=="mailbox"
           update_string += ',' unless ix==0
           update_string += '{"field": "'+key.to_s+'", "value": "'+data[key].to_s.gsub(/(\\|<\/|\r\n|[\n\r"])/) { JSON_ESCAPE_MAP[$1] }+'"}'
         else
@@ -592,10 +604,20 @@ class ApiMethods
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
 =end
+      elsif key=="rights"
+        rights = 0
+        rights += 1 if data[key]["email"].to_i==1
+        rights += 2 if data[key]["trailing"].to_i==1
+        rights += 4 if data[key]["advisor"].to_i==1
+        rights += 8 if data[key]["expiration"].to_i==1
+        rights += 16 if data[key]["trade_signals"].to_i==1
+        rights += 32 if data[key]["trade_signals"].to_i==2
+        update_string += ',' unless ix==0
+        update_string += '{"field": "'+key.to_s+'", "value": '+rights.to_s+'}'
       elsif key=="secmargins"
         secmargins = data["secmargins"].map { |k,v| v }
         secmargins.each_with_index do |secmargin, sec_ix|
-          updateData('{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "field": "secmargins", "index": 0, "value": [{"field": "symbol", "value": "'+secmargin["symbol"]+'"},{"field": "swap_long", "value": '+secmargin["swap_long"]+'},{"field": "swap_short", "value": '+secmargin["swap_short"]+'},{"field": "margin_divider", "value": "'+(100.0/secmargin["margin_divider"].to_f).to_s+'"}]}',session)
+          updateData('{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "field": "secmargins", "index": 0, "value": [{"field": "symbol", "value": "'+secmargin["symbol"]+'"},{"field": "swap_long", "value": '+secmargin["swap_long"]+'},{"field": "swap_short", "value": '+secmargin["swap_short"]+'},{"field": "margin_divider", "value": '+(secmargin["margin_divider"].to_f).to_s+'}]}',session)
         end
       else
         if key=="group"||key=="company"||key=="currency"||key=="signature"||key=="smtp_login"||key=="smtp_password"||key=="smtp_server"||key=="support_email"||key=="templates"
@@ -638,7 +660,7 @@ class ApiMethods
     return getData('{"method":"CfgRequestSync"}', session)
   end
 
-  def updateSynchronization(sync_key,data,session)
+  def updateSynchronization(sync_pos,data,session)
     update_string = ""
     data.keys.each_with_index do |key, ix|
       if key=="limits"
@@ -664,7 +686,7 @@ class ApiMethods
         end
       end
     end
-    update_string = '{"method": "CfgUpdateSync", "key" : "'+sync_key+'", "update": ['+update_string+']}'
+    update_string = '{"method": "CfgUpdateSync", "position" : '+sync_pos+', "update": ['+update_string+']}'
     return updateData(update_string, session)
   end
 

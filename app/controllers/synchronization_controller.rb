@@ -4,19 +4,19 @@ class SynchronizationController < ApplicationController
   def synchronization_submit
     authorize! :update, :synchronization
     data = params[:synchronization]
-    key = params[:sync_key]
+    position = params[:position]
     api = ApiMethods.new
-    @result = api.updateSynchronization(key,data,session)
+    @result = api.updateSynchronization(position,data,session)
     render :nothing => true
   end
 
   def fetch_synchronization
     authorize! :read, :synchronization
-    pos = params[:pos]
+    @pos = params[:pos]
     api = ApiMethods.new
     @synchronization = api.getSynchronization(session)
 
-    @sync = @synchronization[pos.to_i]
+    @sync = @synchronization[@pos.to_i]
 
   end
 

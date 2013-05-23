@@ -1,6 +1,7 @@
 <%= form_tag synchronization_submit_path, :method => "POST", :remote => true do %>
   <%= hidden_field_tag "new_sync", @sync.empty? %>
   <%= hidden_field_tag "sync_key", @sync["server"] %>
+  <%= hidden_field_tag "position", @pos %>
   <div class="row-fluid">
     <div class="span12">
       <%= hidden_field_tag "synchronization[enable]", '0' %>

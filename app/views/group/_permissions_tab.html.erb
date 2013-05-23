@@ -21,13 +21,13 @@
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Trade signals: <%= select_tag "group[rights]", options_for_group_rights(@grp["rights"]), :style => "width: 280px" %>
+    Trade signals: <%= select_tag "group[rights][trade_signals]", options_for_group_trade_signals(@grp["rights"]), :style => "width: 280px" %>
   </div>
 </div>
 <div class="row-fluid">
   <div class="span6">
-     <%= hidden_field_tag "[aa]", '0' %>
-     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable internal mail system(FIND THIS)
+     <%= hidden_field_tag "group[rights][mail]", '0' %>
+     <%= check_box_tag "group[rights][mail]", '1', (@grp["rights"]&1)==1 %> Enable internal mail system
   </div>
   <div class="span6">
      <%= hidden_field_tag "group[check_ie_prices]", '0' %>
@@ -46,8 +46,8 @@
 </div>
 <div class="row-fluid">
   <div class="span6">
-     <%= hidden_field_tag "[aa]", '0' %>
-     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable trailing stops(FIND THIS)
+     <%= hidden_field_tag "group[rights][trailing]", '0' %>
+     <%= check_box_tag "group[rights][trailing]", '1', (@grp["rights"]&2)==2 %> Enable trailing stops
   </div>
   <div class="span6">
      <%= hidden_field_tag "group[close_fifo]", '0' %>
@@ -56,8 +56,8 @@
 </div>
 <div class="row-fluid">
   <div class="span6">
-     <%= hidden_field_tag "[aa]", '0' %>
-     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable trading by expert advisors(FIND THIS)
+     <%= hidden_field_tag "group[rights][advisor]", '0' %>
+     <%= check_box_tag "group[rights][advisor]", '1', (@grp["rights"]&4)==4 %> Enable trading by expert advisors
   </div>
   <div class="span6">
      <%= hidden_field_tag "group[close_reopen]", '0' %>
@@ -66,7 +66,7 @@
 </div>
 <div class="row-fluid">
   <div class="span12">
-     <%= hidden_field_tag "[aa]", '0' %>
-     <%= check_box_tag "[aa]", '1', @grp["aa"]==1 %> Enable expiration of pending orders(FIND THIS)
+     <%= hidden_field_tag "group[rights][expiration]", '0' %>
+     <%= check_box_tag "group[rights][expiration]", '1', (@grp["rights"]&8)==8 %> Enable expiration of pending orders
   </div>
 </div>
