@@ -87,6 +87,7 @@ class ApiMethods
           session["session_expires"] = 3.minutes.from_now
           return response["answer"]
         else
+          puts response
           return nil
         end
       end
@@ -548,58 +549,21 @@ class ApiMethods
     update_string = ""
     data.keys.each_with_index do |key, ix|
       if key=="secgroups"
-=begin
-        sessions = data[key].map { |k,v| v }
-        session_string = ""
-        sessions.each_with_index do |session,i|
-          quotes = session["quote"].map { |k,v| v }
-          trades = session["trade"].map { |k,v| v }
-          session_string += ',' unless i==0
-            
-          quotes_string = ''
-          quotes.each_with_index do |quote,qix|
-            close = (quote["close_hour"].to_i * 60 + quote["close_min"].to_i).to_s
-            close_hour = quote["close_hour"].to_i.to_s
-            close_min = quote["close_min"].to_i.to_s
-            open = (quote["open_hour"].to_i * 60 + quote["open_min"].to_i).to_s
-            open_hour = quote["open_hour"].to_i.to_s
-            open_min = quote["open_min"].to_i.to_s
-            
-            quotes_string += ',' unless qix==0
-            quotes_string += '[{"field":"close","value":'+close+'},'+
-                              '{"field":"close_hour","value":'+close_hour+'},'+
-                              '{"field":"close_min","value":'+close_min+'},'+
-                              '{"field":"open","value":'+open+'},'+
-                              '{"field":"open_hour","value":'+open_hour+'},'+
-                              '{"field":"open_min","value":'+open_min+'}]'
+        secgroups = data[key].map { |k,v| v }
+        secgroups.each_with_index do |secgroup, sec_ix|
+          secgroup_string = ''
+          secgroup.keys.each_with_index do |key, key_ix|
+            secgroup_string += ',' unless key_ix == 0
+            if key==""
+              secgroup_string += '{"field": "'+key.to_s+'", "value": "'+secgroup[key].to_s+'"}'
+            else
+              secgroup_string += '{"field": "'+key.to_s+'", "value": '+secgroup[key].to_s+'}'
+            end
           end
-          quotes_string = '{"field":"quote","value":['+quotes_string+']}'
-
-          trades_string = ''
-          trades.each_with_index do |trade,qix|
-            close = (trade["close_hour"].to_i * 60 + trade["close_min"].to_i).to_s
-            close_hour = trade["close_hour"].to_i.to_s
-            close_min = trade["close_min"].to_i.to_s
-            open = (trade["open_hour"].to_i * 60 + trade["open_min"].to_i).to_s
-            open_hour = trade["open_hour"].to_i.to_s
-            open_min = trade["open_min"].to_i.to_s
-            
-            trades_string += ',' unless qix==0
-            trades_string += '[{"field":"close","value":'+close+'},'+
-                              '{"field":"close_hour","value":'+close_hour+'},'+
-                              '{"field":"close_min","value":'+close_min+'},'+
-                              '{"field":"open","value":'+open+'},'+
-                              '{"field":"open_hour","value":'+open_hour+'},'+
-                              '{"field":"open_min","value":'+open_min+'}]'
-          end
-          trades_string = '{"field":"trade","value":['+trades_string+']}'
-
-          session_string += '['+quotes_string+','+trades_string+']'
+          secgroup_string = '{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "field": "secgroups", "index": '+sec_ix.to_s+', "value": ['+secgroup_string+']}'
+          puts secgroup_string
+          updateData(secgroup_string,session)
         end
-        puts '{"field": "'+key.to_s+'", "value": '+session_string+'}'
-        update_string += ',' unless ix==0
-        update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
-=end
       elsif key=="rights"
         rights = 0
         rights += 1 if data[key]["email"].to_i==1
@@ -611,9 +575,9 @@ class ApiMethods
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key.to_s+'", "value": '+rights.to_s+'}'
       elsif key=="secmargins"
-        secmargins = data["secmargins"].map { |k,v| v }
+        secmargins = data[key].map { |k,v| v }
         secmargins.each_with_index do |secmargin, sec_ix|
-          updateData('{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "field": "secmargins", "index": 0, "value": [{"field": "symbol", "value": "'+secmargin["symbol"]+'"},{"field": "swap_long", "value": '+secmargin["swap_long"]+'},{"field": "swap_short", "value": '+secmargin["swap_short"]+'},{"field": "margin_divider", "value": '+(secmargin["margin_divider"].to_f).to_s+'}]}',session)
+          updateData('{"method": "CfgUpdateGroup", "key" : "'+grp_key+'", "field": "secmargins", "index": '+sec_ix.to_s+', "value": [{"field": "symbol", "value": "'+secmargin["symbol"]+'"},{"field": "swap_long", "value": '+secmargin["swap_long"]+'},{"field": "swap_short", "value": '+secmargin["swap_short"]+'},{"field": "margin_divider", "value": '+(secmargin["margin_divider"].to_f).to_s+'}]}',session)
         end
       else
         if key=="group"||key=="company"||key=="currency"||key=="signature"||key=="smtp_login"||key=="smtp_password"||key=="smtp_server"||key=="support_email"||key=="templates"
