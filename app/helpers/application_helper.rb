@@ -646,7 +646,7 @@ module ApplicationHelper
     list += "personal details, " if manager["user_details"] == 1
   end
 
-  def options_for_manager_exp_time(selected=nil)
+  def options_for_manager_info_depth(selected=nil)
     options = ""
     options += "<option value='0'#{' selected=true' if selected==0}>unlimited</option>"
     options += "<option value='7'#{' selected=true' if selected==7}>7</option>"
