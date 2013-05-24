@@ -672,7 +672,19 @@ module ApplicationHelper
   end
 
   def options_for_feeder_news_langid(selected=nil)
+    languages = {0 => "Any language", 54 => "Afrikaans", 28 => "Albanian", 1=> "Arabic", 43 => "Armenian",
+                 44 => "Azeri", 45 => "Basque", 35 => "Belarusian", 2 => "Bulgarian", 4 => "Chinese", 26 => "Croatian",
+                 5 => "Czech", 6 => "Danish", 19 => "Dutch", 9 => "English", 37 => "Estonian", 11 => "Finnish",
+                 12 => "French", 55 => "Georgian", 7 => "German", 8 => "Greek", 13 => "Hebrew", 57 => "Hindi",
+                 14 => "Hungarian", 33 => "Indonesian", 16 => "Italian", 17 => "Japanese", 18 => "Korean",
+                 38 => "Latvian", 39 => "Lithuanian", 47 => "FYRO Macedonian", 20 => "Norwegian", 41 => "Farsi",
+                 21 => "Polish", 22 => "Portugese", 24 => "Romanian", 25 => "Russian", 27 => "Slovak",
+                 36 => "Slovenian", 10 => "Spanish", 29 => "Swedish", 68 => "Tatar", 30 => "Thai", 31 => "Turkish",
+                 34 => "Ukranian", 32 => "Urdu", 42 => "Vietnamese"}
     options = ""
+    languages.keys.each do |key|
+      options += "<option value='#{key}'#{' selected=true' if selected.to_i==key}>#{languages[key]}</option>"
+    end
     return options.html_safe
   end
 
