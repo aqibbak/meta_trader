@@ -374,14 +374,12 @@ class ApiMethods
             open_min = quote["open_min"].to_i.to_s
             
             quotes_string += ',' unless qix==0
-            quotes_string += '[{"field":"close","value":'+close+'},'+
-                              '{"field":"close_hour","value":'+close_hour+'},'+
-                              '{"field":"close_min","value":'+close_min+'},'+
-                              '{"field":"open","value":'+open+'},'+
-                              '{"field":"open_hour","value":'+open_hour+'},'+
-                              '{"field":"open_min","value":'+open_min+'}]'
+            quotes_string += '{"close_hour":'+close_hour+','+
+                              '"close_min":'+close_min+','+
+                              '"open_hour":'+open_hour+','+
+                              '"open_min":'+open_min+'}'
           end
-          quotes_string = '{"field":"quote","value":['+quotes_string+']}'
+          quotes_string = '"quote":['+quotes_string+']'
 
           trades_string = ''
           trades.each_with_index do |trade,qix|
@@ -393,16 +391,14 @@ class ApiMethods
             open_min = trade["open_min"].to_i.to_s
             
             trades_string += ',' unless qix==0
-            trades_string += '[{"field":"close","value":'+close+'},'+
-                              '{"field":"close_hour","value":'+close_hour+'},'+
-                              '{"field":"close_min","value":'+close_min+'},'+
-                              '{"field":"open","value":'+open+'},'+
-                              '{"field":"open_hour","value":'+open_hour+'},'+
-                              '{"field":"open_min","value":'+open_min+'}]'
+            trades_string += '{"close_hour":'+close_hour+','+
+                             '"close_min":'+close_min+','+
+                             '"open_hour":'+open_hour+','+
+                             '"open_min":'+open_min+'}'
           end
-          trades_string = '{"field":"trade","value":['+trades_string+']}'
+          trades_string = '"trade":['+trades_string+']'
 
-          session_string += '['+quotes_string+','+trades_string+']'
+          session_string += '{'+quotes_string+','+trades_string+'}'
         end
         update_string += ',' unless ix==0
         update_string += '{"field": "'+key.to_s+'", "value": ['+session_string+']}'
