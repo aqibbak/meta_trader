@@ -4,6 +4,7 @@
     <% days = @time["days"] %>
     <%= form_tag time_submit_path, :method => "POST", :remote => true do %>
       <table class="table table-bordered time-table">
+        <thead>
         <tr>
           <th></th>
           <% (0..23).to_a.each do |hour| %>
@@ -11,13 +12,15 @@
           <% end %>
           <th>*</th>
         </tr>
+        </thead>
       <% (0..6).to_a.each do |day| %>
         <tr>
           <td><%= day_of_week(day) %></td>
+          
         <% days[(day*24)+0..(day*24)+23].each_with_index do |hour, ix| %>
-          <td class="time_check">
+          <td class="time_check center">
             <input name="<%= "time_tab[#{(day*24) + ix}]" %>" type="hidden" value="0" />
-            <%= check_box_tag "time_tab[#{(day*24) + ix}]", '1', days[(day*24) + ix] == 1 %>
+            <%= check_box_tag "time_tab[#{(day*24) + ix}]", '1', days[(day*24) + ix] == 1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
           </td>
         <% end %>
           <td>

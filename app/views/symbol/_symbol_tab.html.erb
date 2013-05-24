@@ -7,27 +7,27 @@
     Symbol: <%= text_field_tag "symbol[symbol]", @sym["symbol"], :class =>"single-line input-small"  %>
   </div>
   <div class="span4 controls input-small">
-    Source: <%= select_tag "symbol[source]", options_for_source_select(@symbol, @sym["source"]), :class =>"single-line chosen-select"  %>
+    Source: <%= select_tag "symbol[source]", options_for_source_select(@symbol, @sym["source"]), :class =>"chosen-select"  %>
   </div>
   <div class="span4 input-small">
     Digits: <%= select_tag "symbol[digits]", options_for_symbol_digits(@sym["digits"]), :class =>"single-line chosen-select"  %>
   </div>
 
 </div>
-</div><!--/padd-10-->
 
-  <div class="padd-10">
+
+  
     <div class="row-fluid">
   <div class="span12">
-    Description: <%= text_field_tag "symbol[description]", @sym["description"], :class =>"single-line input-block-level"  %>
+    Description: <%= text_field_tag "symbol[description]", @sym["description"], :class =>" input-block-level"  %>
   </div>
 
 </div>
-</div><!--/padd-10-->
 
-  <div class="padd-10">
+
+  
     <div class="row-fluid">
-  <div class="span4 input-small">
+  <div class="span4 input-small grey-select">
     Type: <%= select_tag "symbol[type]", options_for_symbol_type(@symbol_group, @sym["type"]), :class =>"single-line chosen-select"  %>
   </div>
   <div class="span4 input-small">
@@ -38,9 +38,9 @@
   </div>
 
 </div>
-</div><!--/padd-10-->
 
-  <div class="padd-10">
+
+  
     <div class="row-fluid">
   <div class="span4 input-small">
     Trade: <br>
@@ -54,9 +54,9 @@
   </div>
 
 </div>
-</div><!--/padd-10-->
 
-  <div class="padd-10">
+
+  
     <div class="row-fluid">
   <div class="span6">
     Maximum lots for IE: <%= text_field_tag "symbol[instant_max_volume]", @sym["instant_max_volume"] ? @sym["instant_max_volume"]/100 : "", :style => "width: 50px", :class =>"single-line"  %>
@@ -66,9 +66,9 @@
   </div>
 
 </div>
-</div><!--/padd-10-->
 
-  <div class="padd-10">
+
+  
     <div class="row-fluid">
   <div class="span4">
     Spread by default: <br>
@@ -85,9 +85,9 @@
   </div>
 
 </div>
-</div><!--/padd-10-->
 
-  <div class="padd-10">
+
+  
     <div class="row-fluid">
   <div class="span6">
     Spread balance: <br>

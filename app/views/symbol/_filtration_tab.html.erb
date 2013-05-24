@@ -3,38 +3,38 @@
 <div class="row-fluid">
   <div class="span12">
      <%= hidden_field_tag "symbol[realtime]", '0' %>
-     <%= check_box_tag "symbol[realtime]", '1', @sym["realtime"]==1 %> Allow real-time quotes from datafeeds
+     <%= check_box_tag "symbol[realtime]", '1', @sym["realtime"]==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Allow real-time quotes from datafeeds.
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
     <%= hidden_field_tag "symbol[logging]", '0' %>
-    <%= check_box_tag "symbol[logging]", '1', @sym["logging"]==1 %> Save all incoming prices in a file(this will slow down your server)
+    <%= check_box_tag "symbol[logging]", '1', @sym["logging"]==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Save all incoming prices in a file(this will slow down your server).
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Filtration Level: <%= text_field_tag "symbol[filter]", @sym["filter"], :style => "width:60px;" %> points (must not be less than 4 or 5 times spread by default)
+    Filtration Level: <%= text_field_tag "symbol[filter]", @sym["filter"], :class =>"single-line  input-small" %> points (must not be less than 4 or 5 times spread by default).
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12 input-small">
+    Automatic limit: <%= select_tag "symbol[filter_limit]", options_for_symbol_filter_limit(@sym["filter_limit"]), :class =>"chosen-select"  %>&nbsp; % of the current market price.
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12 input-small">
+    Filter: <%= select_tag "symbol[filter_counter]", options_for_symbol_filter_counter(@sym["filter_counter"]), :class =>"chosen-select"  %>&nbsp; wrong quotes coming one after another.
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Automatic limit: <%= select_tag "symbol[filter_limit]", options_for_symbol_filter_limit(@sym["filter_limit"]), :style => "width:71px;" %> % of the current market price
+    Ignore quotes: <%= text_field_tag "symbol[quotes_delay]", @sym["quotes_delay"], :class =>"single-line  input-small" %> seconds after session starts.
   </div>
 </div>
 <div class="row-fluid">
-  <div class="span12">
-    Filter: <%= select_tag "symbol[filter_counter]", options_for_symbol_filter_counter(@sym["filter_counter"]), :style => "width:71px;" %> wrong quotes coming one after another
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12">
-    Ignore quotes: <%= text_field_tag "symbol[quotes_delay]", @sym["quotes_delay"], :style => "width:60px;" %> seconds after session starts
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span12">
-    Smoothing: <%= select_tag "symbol[filter_smoothing]", options_for_symbol_filter_smoothing(@sym["filter_smoothing"]), :style => "width:71px;" %> ticks
+  <div class="span12 input-small">
+    Smoothing: <%= select_tag "symbol[filter_smoothing]", options_for_symbol_filter_smoothing(@sym["filter_smoothing"]), :class =>"chosen-select"  %>&nbsp; ticks.
   </div>
 </div>
 

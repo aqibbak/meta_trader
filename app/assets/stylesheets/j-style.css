@@ -156,6 +156,9 @@ width: 184px!important;
 .table-access-form th label{
 	font-weight: bold;
 }
+.modal-backdrop, .modal-backdrop.fade.in{
+	opacity: 0.33;
+}
 .modal-form .modal-header{
 	border-bottom: none;
 	color: rgb(155, 155, 155);
@@ -210,6 +213,7 @@ color: rgb(155, 155, 155);
 .border{
 	border:1px solid #ddd;
 }
+.modal-symbol .modal-body,
 .modal-data-server .modal-body{
 	overflow: visible;
 }
@@ -219,16 +223,31 @@ color: rgb(155, 155, 155);
      ****/
 .table.time-table tr th, 
 .table.time-table tr td {
-padding: 0px 0px 3px 0!important;
-border-top: 1px dotted #ddd;
-text-align: center;
+	border-top: 15px solid rgb(255, 255, 255);
+	background: #f5f5f5;
+}
+.table-bordered.time-table{
+	border:none!important;
 }
 .table.time-table tr td:first-child{
-	background: #eee;
-	font-weight: bold;
+	font-weight: normal;
+	background: #f5f5f5;
+	color: #999;
 }
 .table.time-table tr td:hover{
-	background: #eee;
+	background: #EEE;
+}
+.table.time-table tr td:first-child:hover{
+	background: #f5f5f5;
+}
+.table.time-table thead tr th{
+	background: #f5f5f5;
+	color: #999;
+	font-weight: normal;
+}
+.table-bordered.time-table th, 
+.table-bordered.time-table td {
+	border-left: none;
 }
 /*** Holiday
      ==================================================== 
@@ -256,14 +275,38 @@ text-align: center;
 .tab-forms .tabbed_panel{
 	margin-top: 0;
 }
+.tab-forms li.tab{
+	border-left: solid 1px #ddd;
+	border-top: solid 1px #ddd;
+	border-right: solid 1px #aaa;
+}
 li.tab.tab_unselected{
 	background-color: rgb(233, 233, 233);
 	border-top:1px solid #DDD;
 	font-weight: normal;
 }
+li.tab.tab_unselected:hover{
+	background: #368ee0;
+}
+li.tab.tab_unselected a{
+	color: #777;
+}
+li.tab.tab_unselected a:hover{
+	color: #ffffff;
+}
+li.tab.tab_selected a{
+	color: #368ee0;
+}
+li.tab.tab_selected a:hover{
+	color: #1e74c5;
+}
 .panes{
 	height: auto!important;
 	padding: 0!important;
+	border-top:1px solid #aaa!important;
+	border-bottom: none!important;
+	border-left: none!important;
+	border-right: none!important;
 }
 .modal.modal-symbol{
 	width: 600px;
@@ -284,12 +327,43 @@ li.tab.tab_unselected{
 .tab-forms .hover-table tr td:last-child{
 	width: auto;
 }
+
 .input-small .chzn-container{
 	width: 90px!important;
+	margin-bottom: 10px;
 }
 .input-small .chzn-drop{
 	width: 88px!important;
 }
 .input-small .chzn-container-single .chzn-search input{
 	width: 53px!important;
+}
+.modal .icheckbox_minimal-blue, 
+.modal .icheckbox_minimal-blue.static:hover {
+	background-position: 0 0;
+	float: left;
+	margin-right: 5px;
+}
+.input-block .chzn-container {
+	display: block!important;
+	width: 100%!important;
+	margin-bottom: 10px;
+}
+.input-block .chzn-drop{
+	width: 99.589%!important;
+}
+.input-block .chzn-search input {
+	width: 95%!important;
+}
+.grey-select .chzn-container.chzn-container-single{
+	background: #e6e6e6;
+}
+.tab-forms #tabbed_panel_0_tp_symbol_pane input,
+.tab-forms #tabbed_panel_0_tp_symbol_pane select,
+.tab-forms #tabbed_panel_0_tp_filtration_pane input,
+.tab-forms #tabbed_panel_0_tp_filtration_pane select{
+	margin-bottom: 10px;
+}
+.modal-symbol .form-actions{
+	margin-top: 0;
 }
