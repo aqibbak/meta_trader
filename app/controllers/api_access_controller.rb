@@ -16,18 +16,18 @@ class ApiAccessController < ApplicationController
     @backup = api.getBackup(session)
     #@group = api.getGroup(session)
     @grp = {}
-    @manager = api.getManager(session)
-    @mgr = { "secgroups"=> {} }
-    @feeder = api.getFeeder(session)
-    @fdr = {}
-    @synchronization = api.getSynchronization(session)
-    @sync = {}
-    @plugin = api.getPlugin(session)
-    @plg = {"plugin" => {}, "params" => []}
-    @account = api.getAccount(session)
-    @act = {}
-    @order = api.getOrder(session)
-    @ord = { "conv_rates" => [] }
+    #@manager = api.getManager(session)
+    #@mgr = { "secgroups"=> {} }
+    #@feeder = api.getFeeder(session)
+    #@fdr = {}
+    #@synchronization = api.getSynchronization(session)
+    #@sync = {}
+    #@plugin = api.getPlugin(session)
+    #@plg = {"plugin" => {}, "params" => []}
+    #@account = api.getAccount(session)
+    #@act = {}
+    #@order = api.getOrder(session)
+    #@ord = { "conv_rates" => [] }
   end
 
   def ping_session
