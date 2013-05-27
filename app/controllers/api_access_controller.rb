@@ -13,21 +13,21 @@ class ApiAccessController < ApplicationController
     @symbol_group = api.getSymbolGroup(session)
     @symbol = api.getSymbol(session)
     @sym = api.symbolWithEmptySessions
-    #@backup = api.getBackup(session)
-    #@group = api.getGroup(session)
-    #@grp = {}
-    #@manager = api.getManager(session)
-    #@mgr = { "secgroups"=> {} }
-    #@feeder = api.getFeeder(session)
-    #@fdr = {}
-    #@synchronization = api.getSynchronization(session)
-    #@sync = {}
-    #@plugin = api.getPlugin(session)
-    #@plg = {"plugin" => {}, "params" => []}
-    #@account = api.getAccount(session)
-    #@act = {}
-    #@order = api.getOrder(session)
-    #@ord = { "conv_rates" => [] }
+    @backup = api.getBackup(session)
+    @group = api.getGroup(session)
+    @grp = {}
+    @manager = api.getManager(session)
+    @mgr = { "secgroups"=> {} }
+    @feeder = api.getFeeder(session)
+    @fdr = {}
+    @synchronization = api.getSynchronization(session)
+    @sync = {}
+    @plugin = api.getPlugin(session)
+    @plg = {"plugin" => {}, "params" => []}
+    @account = api.getAccount(session)
+    @act = {}
+    @order = api.getOrder(session)
+    @ord = { "conv_rates" => [] }
   end
 
   def ping_session

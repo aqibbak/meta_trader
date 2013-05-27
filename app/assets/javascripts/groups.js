@@ -24,5 +24,9 @@ function initGroupEvents(){
 }
 
 $(document).ready(function(){
+  $("#new-group-link").click(function(){
+    $("#modal-group2").modal("show");
+    return false;
+  });
   initGroupEvents();
 });

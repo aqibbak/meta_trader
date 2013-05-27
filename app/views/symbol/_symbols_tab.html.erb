@@ -2,7 +2,7 @@
 <% unless @symbol.nil? %>
   <div class="section section-symbols">
     <h2 class="normal blue"><i class="icon-credit-card"></i> Symbols
-      <%= link_to glyph(:plus) + " New", "#modal-symbol", :id => "", :class =>"btn btn-primary pull-right" %>
+      <%= link_to glyph(:plus) + " New", "#modal-symbol", :id => "new-symbol-link", :class =>"btn btn-primary pull-right" %>
       <!--a href="" id="modal-symbol" class="btn btn-primary pull-right"><i class="icon-plus"></i> New</a-->
     </h2>
 
@@ -50,7 +50,7 @@
           <% end %>
         </table>
       </div>
-      <div id="symbol-form" class="span8">
+      <div id="symbol-form">
         <%= render "symbol/symbol_form" %>
       </div>
     </div>

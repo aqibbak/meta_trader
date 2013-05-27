@@ -1,9 +1,7 @@
 <% unless @backup.nil? %>
-  <%= @backup %>
-
-    <h1>400 &mdash; Bad Request</h1>
-    <p>Not enough data{"method":"CfgUpdateBackup","update":[{"field":"watch_ip","value":0},{"field":"watch_role","value":0},{"field":"watch_password","value":0},{"field":"watch_opposite","value":0},{"field":"fullbackup_path","value":"C:\\MetaTrader4Backup"},{"field":"fullbackup_period","value":1},{"field":"fullbackup_shift","value":0},{"field":"archive_period","value":4},{"field":"archive_shift","value":0},{"field":"archive_store","value":0},{"field":"external_path","value":""},{"field":"export_securities","value":""},{"field":"export_period","value":4},{"field":"export_path","value":""}]}</p>
-
+  <div class="section section-backup">
+    <h2 class="normal blue"><i class="icon-credit-card"></i> Backup
+    </h2>
 
   <%= form_tag backup_submit_path, :method => "POST", :remote => true do %>
     <%= submit_tag %>
@@ -53,7 +51,7 @@
       </tr>
       <tr>
         <td>Shift of archive backup time</td>
-        <td><%= text_field_tag "backup_tab[archive_shift]", @backup["archive_shift"], nil, :class =>"spinner single-line" %> minute(s)</td>
+        <td><%= text_field_tag "backup_tab[archive_shift]", @backup["archive_shift"], :class =>"spinner single-line" %> minute(s)</td>
       </tr>
       <tr>
         <td>Keep archival backups within</td>
@@ -77,4 +75,5 @@
       </tr>
     </table>
   <% end %>
+</div>
 <% end %>

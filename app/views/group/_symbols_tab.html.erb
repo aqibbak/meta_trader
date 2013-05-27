@@ -1,12 +1,15 @@
+
 <div class="row-fluid">
-  <div class="span5">
-    <table>
+  <div class="">
+    <table class="table hover-table">
+      <thead>
       <tr>
         <th>Symbol</th>
         <th>Long</th>
         <th>Short</th>
         <th>Percantage</th>
       </tr>
+      </thead>
       <% @grp["secmargins"].each_with_index do |secmargin, smix|%>
         <tr class="secmargin-row" data-pos="<%= smix %>">
           <td><%= secmargin["symbol"] %></td>

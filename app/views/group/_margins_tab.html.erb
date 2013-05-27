@@ -1,33 +1,36 @@
+<div class="padd-10">
 <div class="row-fluid">
   <div class="span4">
-    Margin Call level: <%= text_field_tag "group[margin_call]", @grp["margin_call"], :style => "width: 100" %>
+    Margin Call level: <%= text_field_tag "group[margin_call]", @grp["margin_call"], :class =>"single-line input-small" %>
   </div>
   <div class="span4">
-    Stop Out level: <%= text_field_tag "group[margin_stopout]", @grp["margin_stopout"], :style => "width: 100px" %>
+    Stop Out level: <%= text_field_tag "group[margin_stopout]", @grp["margin_stopout"], :class =>"single-line input-small" %>
   </div>
-  <div class="span4">
-    in: <%= select_tag "group[margin_type]", options_for_group_margin_type(@grp["margin_type"]), :style => "width: 150px" %>
+  <div class="span4 input-small">
+    in: <br>
+    <%= select_tag "group[margin_type]", options_for_group_margin_type(@grp["margin_type"]), :class =>"chosen-select" %>
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Free Margin: <%= select_tag "group[margin_mode]", options_for_group_margin_mode(@grp["margin_mode"]), :style => "width: 250px" %>
+    Free Margin: <%= select_tag "group[margin_mode]", options_for_group_margin_mode(@grp["margin_mode"]), :class =>"chosen-select" %>
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Virtual credit: <%= text_field_tag "group[credit]", @grp["credit"], :style => "width: 80px" %>% (applies only to opening new positions)
+    Virtual credit: <%= text_field_tag "group[credit]", @grp["credit"], :class =>"single-line input-small" %>% (applies only to opening new positions)
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
      <%= hidden_field_tag "group[stopout_skip_hedged]", '0' %>
-     <%= check_box_tag "group[stopout_skip_hedged]", '1', @grp["stopout_skip_hedged"]==1 %> Skip fully hedged accounts when checking for stop out
+     <%= check_box_tag "group[stopout_skip_hedged]", '1', @grp["stopout_skip_hedged"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Skip fully hedged accounts when checking for stop out
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
      <%= hidden_field_tag "group[hedge_largeleg]", '0' %>
-     <%= check_box_tag "group[hedge_largeleg]", '1', @grp["hedge_largeleg"]==1 %> Calculate hedged margin using larger leg
+     <%= check_box_tag "group[hedge_largeleg]", '1', @grp["hedge_largeleg"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Calculate hedged margin using larger leg
   </div>
 </div>
+</div><!--/padd-10-->

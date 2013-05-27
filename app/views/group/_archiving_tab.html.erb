@@ -1,15 +1,17 @@
+<div class="padd-10">
 <div class="row-fluid">
-  <div class="span12">
-    Inactivity period: <%= select_tag "group[archive_period]", options_for_group_archive_period(@grp["archive_period"]), :style => "width: 120px" %> days
+  <div class="span12 input-small">
+    Inactivity period: <%= select_tag "group[archive_period]", options_for_group_archive_period(@grp["archive_period"]), :class =>"chosen-select" %> days
   </div>
 </div>
 <div class="row-fluid">
-  <div class="span12">
-    Maximum balance: <%= select_tag "group[archive_max_balance]", options_for_group_archive_max_balance(@grp["archive_max_balance"]), :style => "width: 120px" %>
+  <div class="span12 input-small">
+    Maximum balance: <%= select_tag "group[archive_max_balance]", options_for_group_archive_max_balance(@grp["archive_max_balance"]), :class =>"chosen-select" %>
   </div>
 </div>
 <div class="row-fluid">
-  <div class="span12">
-    Archive deleted pendings older: <%= select_tag "group[archive_pending_period]", options_for_group_archive_pending_period(@grp["archive_pending_period"]), :style => "width: 120px" %> month
+  <div class="span12 input-small">
+    Archive deleted pendings older: <%= select_tag "group[archive_pending_period]", options_for_group_archive_pending_period(@grp["archive_pending_period"]), :class =>"chosen-select" %> month
   </div>
 </div>
+</div><!--/padd-10-->
