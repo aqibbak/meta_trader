@@ -393,3 +393,8 @@ li.tab.tab_selected a:hover{
 	margin: 0;
 	padding: 10px;
 }
+
+
+.loading{
+	display: none;
+}

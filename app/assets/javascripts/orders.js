@@ -1,9 +1,11 @@
 function fetchOrder(order){
+  $("#loading").show();
   $.ajax({
     url: '/fetch_order',
     data:  { order: order },
     dataType: 'script'
   }).success(function(data, status, xhr) {
+    $("#loading").hide();
   });
 }
 
