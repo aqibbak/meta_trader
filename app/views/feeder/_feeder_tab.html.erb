@@ -1,12 +1,19 @@
 <% unless @feeder.nil? %>
+<div class="section section-manager">
+
+  <h2 class="blue normal"><i class="icon-globe"></i> Data Feeds
+  <%= link_to glyph(:plus) + " New", "#", :id => "", :class =>"btn btn-primary pull-right" %></h2>
+
+
 <div class="row-fluid">
-  <div class="span5">
-    <table>
+    <table class="table hover-table feeder-table">
+      <thead>
       <tr>
         <th>Vendor</th>
         <th>Source</th>
         <th>Server</th>
       </tr>
+      </thead>
       <% @feeder.each_with_index do |feeder, ix|%>
         <tr class="feeder-row" data-pos="<%= ix %>">
           <td><%= feeder["name"] %></td>
@@ -15,12 +22,14 @@
         </tr>
       <% end %>
     </table>
-  </div>
-  <div id="feeder-form" class="span7">
+  <div id="feeder-form">
     <%= render "feeder/feeder_form" %>
   </div>
 </div>
-
- {"attemps_sleep"=>5, "enable"=>0, "file"=>"mt4feeder.feed", "keywords"=>"", "login"=>"1001", "mode"=>0, "name"=>"MetaTrader 4 Quotes", "news_langid"=>0, "pass"=>"DemoFeeder", "server"=>"demo.metaquotes.net:443", "timeout"=>120, "timeout_reconnect"=>5, "timeout_sleep"=>60}
-
+</div><!--/section-->
 <% end %>
+
+
+<!--
+ {"attemps_sleep"=>5, "enable"=>0, "file"=>"mt4feeder.feed", "keywords"=>"", "login"=>"1001", "mode"=>0, "name"=>"MetaTrader 4 Quotes", "news_langid"=>0, "pass"=>"DemoFeeder", "server"=>"demo.metaquotes.net:443", "timeout"=>120, "timeout_reconnect"=>5, "timeout_sleep"=>60}
+-->

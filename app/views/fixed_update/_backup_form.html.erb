@@ -1,51 +1,54 @@
 <% unless @backup.nil? %>
   <div class="section section-backup">
-    <h2 class="normal blue"><i class="icon-credit-card"></i> Backup
-    </h2>
+    <h2 class="normal blue"><i class="folder_open"></i> Backup </h2>
 
   <%= form_tag backup_submit_path, :method => "POST", :remote => true do %>
-    <%= submit_tag %>
+   
     <%= hidden_field_tag "backup_tab[watch_ip]", @backup["backup_tab"] %>
-    <table>
+    <table class="table backup-table hover-table">
+      <thead>
       <tr>
         <th>Property</th>
         <th>Value</th>
       </tr>
+      </thead>
       <tr>
+        
         <td>Server role</td>
-        <td><%= select_tag "backup_tab[watch_role]", options_for_watch_role(@backup["watch_role"])%></td>
+        <td><%= select_tag "backup_tab[watch_role]", options_for_watch_role(@backup["watch_role"]), :class =>"single-line chosen-select"%></td>
       </tr>
       <tr>
         <td>Password of the slave server</td>
-        <td><%= password_field_tag "backup_tab[watch_password]", @backup["watch_password"].encode('utf-8', 'iso-8859-1'), :readonly => @backup["watch_role"]==0 %></td>
+        <td><%= password_field_tag "backup_tab[watch_password]", @backup["watch_password"].encode('utf-8', 'iso-8859-1'), :readonly => @backup["watch_role"]==0, :class =>"single-line" %></td>
       </tr>
       <tr>
         <td style="width: 250px;" >Oposite server IP address and port</td>
-        <td><%= text_field_tag "backup_tab[watch_opposite]", @backup["watch_opposite"], :readonly => @backup["watch_role"]==0 %></td>
+        <td><%= text_field_tag "backup_tab[watch_opposite]", @backup["watch_opposite"], :readonly => @backup["watch_role"]==0, :class =>"single-line" %></td>
       </tr>
       <tr>
         <td>Full backup to</td>
-        <td><%= text_field_tag "backup_tab[fullbackup_path]", @backup["fullbackup_path"], :style => "width: 300px;"%></td>
+        <td><%= text_field_tag "backup_tab[fullbackup_path]", @backup["fullbackup_path"], :class =>"single-line"%></td>
       </tr>
       <tr>
         <td>Full backup every</td>
         <td>
-          <%= select_tag "backup_tab[fullbackup_period]", options_for_backup_period(@backup["fullbackup_period"])%>
-          <span style="color: lightgray;"><%= Time.zone.at @backup["fullbackup_lasttime"] %></span>
+          <%= select_tag "backup_tab[fullbackup_period]", options_for_backup_period(@backup["fullbackup_period"]), :class =>"single-line chosen-select" %>
+          <span style="color: lightgray;">
+            <%= Time.zone.at @backup["fullbackup_lasttime"] %></span>
         </td>
       </tr>
       <tr>
         <td>Full backup time</td>
         <td>
           <% time = @backup["fullbackup_shift"] %>
-          <%= number_field_tag "backup_tab[fullbackup_shift][hour]", (time/60).to_i %> : 
-          <%= number_field_tag "backup_tab[fullbackup_shift][minute]", time.to_i - (time/60).to_i*60 %>
+          <%= text_field_tag "backup_tab[fullbackup_shift][hour]", (time/60).to_i, :class =>"spinner single-line" %> <br>
+          <%= text_field_tag "backup_tab[fullbackup_shift][minute]", time.to_i - (time/60).to_i*60, :class =>"spinner single-line" %>
         </td>
       </tr>
       <tr>
         <td>Archival backup every</td>
         <td>
-          <%= select_tag "backup_tab[archive_period]", options_for_arch_backup_period(@backup["archive_period"])%>
+          <%= select_tag "backup_tab[archive_period]", options_for_arch_backup_period(@backup["archive_period"]), :class =>"single-line chosen-select" %>
           <span style="color: lightgray;"><%= Time.zone.at @backup["archive_lasttime"] %></span>
         </td>
       </tr>
@@ -55,25 +58,26 @@
       </tr>
       <tr>
         <td>Keep archival backups within</td>
-        <td><%= select_tag "backup_tab[archive_store]", options_for_archive_store(@backup["archive_store"])%></td>
+        <td><%= select_tag "backup_tab[archive_store]", options_for_archive_store(@backup["archive_store"]), :class =>"single-line chosen-select" %></td>
       </tr>
       <tr>
         <td>Archival backup external processing</td>
-        <td><%= text_field_tag "backup_tab[external_path]", @backup["external_path"], :style => "width: 300px;" %></td>
+        <td><%= text_field_tag "backup_tab[external_path]", @backup["external_path"], :class =>"single-line" %></td>
       </tr>
       <tr>
         <td>Export symbols</td>
-        <td><%=text_field_tag "backup_tab[export_securities]",@backup["export_securities"],:style=>"width: 300px;"%></td>
+        <td><%=text_field_tag "backup_tab[export_securities]",@backup["export_securities"], :class =>"single-line"%></td>
       </tr>
       <tr>
         <td>Export external processing every</td>
-        <td><%= select_tag "backup_tab[export_period]", options_for_export_period(@backup["export_period"])%></td>
+        <td><%= select_tag "backup_tab[export_period]", options_for_export_period(@backup["export_period"]), :class =>"single-line chosen-select" %></td>
       </tr>
       <tr>
         <td>Export external processing</td>
-        <td><%= text_field_tag "backup_tab[export_path]", @backup["export_path"], :style => "width: 300px;" %></td>
+        <td><%= text_field_tag "backup_tab[export_path]", @backup["export_path"], :class =>"single-line" %></td>
       </tr>
     </table>
+     <%= submit_tag "Submit", :class =>"btn btn-primary"%>
   <% end %>
 </div>
 <% end %>

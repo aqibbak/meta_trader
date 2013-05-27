@@ -1,26 +1,40 @@
+<!-- Modal -->
+<div id="modal-manager" class="modal  in modal-manager modal-form tab-forms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal"><i class="icon-calendar"></i> Manager</h3>
+    </div>
+    <div class="modal-body ">
+
+
 <%= form_tag manager_submit_path, :method => "POST", :remote => true do %>
   <%= hidden_field_tag "new_manager", @mgr.empty? %>
   <%= hidden_field_tag "manager_key", @mgr["login"] %>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
-      Login: <%= text_field_tag "manager[login]", @mgr["login"] %>
+      Login: <%= text_field_tag "manager[login]", @mgr["login"], :class =>"single-line" %>
     </div>
     <div class="span6">
-      Available data for: <%= select_tag "manager[info_depth]", options_for_manager_info_depth(@mgr["info_depth"]) %>
+      Available data for: <%= select_tag "manager[info_depth]", options_for_manager_info_depth(@mgr["info_depth"]), :class =>"single-line chosen-select" %>
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span7">
-      Groups: <%= text_field_tag "manager[groups]", @mgr["groups"] %>
+      Groups: <%= text_field_tag "manager[groups]", @mgr["groups"], :class =>"single-line" %>
     </div>
     <div class="span5">
-      Mailbox name: <%= text_field_tag "manager[mailbox]", @mgr["mailbox"] %>
+      Mailbox name: <%= text_field_tag "manager[mailbox]", @mgr["mailbox"], :class =>"single-line" %>
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span2">
        <%= hidden_field_tag "manager[ipfilter]", '0' %>
-       <%= check_box_tag "manager[ipfilter]", '1', @mgr["ipfilter"]==1 %> IP filter
+       <%= check_box_tag "manager[ipfilter]", '1', @mgr["ipfilter"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> IP filter
     </div>
     <div class="span5">
       From: <%= text_field_tag "manager[ip_from]", ApiMethods.long2ip(@mgr["ip_from"]) %>
@@ -29,87 +43,111 @@
       to: <%= text_field_tag "manager[ip_to]", ApiMethods.long2ip(@mgr["ip_to"]) %>
     </div>
   </div>
+  </div>
   <div class="row-fluid">
-    <div class="span12">
+    <div class="padd-10">
       Save role, stored locally on desktop app?
     </div>
   </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[manager]", '0' %>
-       <%= check_box_tag "manager[manager]", '1', @mgr["manager"]==1 %> Manager(add/edit/edit accounts)
+       <%= check_box_tag "manager[manager]", '1', @mgr["manager"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Manager(add/edit/edit accounts)
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[see_trades]", '0' %>
-       <%= check_box_tag "manager[see_trades]", '1', @mgr["see_trades"]==1 %> Supervise trades
+       <%= check_box_tag "manager[see_trades]", '1', @mgr["see_trades"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Supervise trades
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[admin]", '0' %>
-       <%= check_box_tag "manager[admin]", '1', @mgr["admin"]==1 %> Administrator(full access to server configuration)
+       <%= check_box_tag "manager[admin]", '1', @mgr["admin"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Administrator(full access to server configuration)
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[money]", '0' %>
-       <%= check_box_tag "manager[money]", '1', @mgr["money"]==1 %> Accountant(deposit/credit/withdrawal money)
+       <%= check_box_tag "manager[money]", '1', @mgr["money"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Accountant(deposit/credit/withdrawal money)
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[reports]", '0' %>
-       <%= check_box_tag "manager[reports]", '1', @mgr["reports"]==1 %> Reports
+       <%= check_box_tag "manager[reports]", '1', @mgr["reports"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Reports
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[riskman]", '0' %>
-       <%= check_box_tag "manager[riskman]", '1', @mgr["riskman"]==1 %> Risk manager
+       <%= check_box_tag "manager[riskman]", '1', @mgr["riskman"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Risk manager
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[email]", '0' %>
-       <%= check_box_tag "manager[email]", '1', @mgr["email"]==1 %> Internal mail system
+       <%= check_box_tag "manager[email]", '1', @mgr["email"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Internal mail system
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[logs]", '0' %>
-       <%= check_box_tag "manager[logs]", '1', @mgr["logs"]==1 %> Journals(direct access to server journals)
+       <%= check_box_tag "manager[logs]", '1', @mgr["logs"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Journals(direct access to server journals)
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[news]", '0' %>
-       <%= check_box_tag "manager[news]", '1', @mgr["news"]==1 %> Send news
+       <%= check_box_tag "manager[news]", '1', @mgr["news"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Send news
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[market_watch]", '0' %>
-       <%= check_box_tag "manager[market_watch]", '1', @mgr["market_watch"]==1 %> Market watch(edit prices/spreads/execution types)
+       <%= check_box_tag "manager[market_watch]", '1', @mgr["market_watch"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Market watch(edit prices/spreads/execution types)
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[online]", '0' %>
-       <%= check_box_tag "manager[online]", '1', @mgr["online"]==1 %> Connections(show online clients)
+       <%= check_box_tag "manager[online]", '1', @mgr["online"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Connections(show online clients)
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[user_details]", '0' %>
-       <%= check_box_tag "manager[user_details]", '1', @mgr["user_details"]==1 %> Personal details
+       <%= check_box_tag "manager[user_details]", '1', @mgr["user_details"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Personal details
     </div>
   </div>
+  </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[plugins]", '0' %>
-       <%= check_box_tag "manager[plugins]", '1', @mgr["plugins"]==1 %> Configure server plugins
+       <%= check_box_tag "manager[plugins]", '1', @mgr["plugins"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Configure server plugins
     </div>
     <div class="span6">
        <%= hidden_field_tag "manager[server_reports]", '0' %>
-       <%= check_box_tag "manager[server_reports]", '1', @mgr["server_reports"]==1 %> Automatic server reports
+       <%= check_box_tag "manager[server_reports]", '1', @mgr["server_reports"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Automatic server reports
     </div>
+  </div>
   </div>
   <div class="row-fluid">
+  <div class="padd-10">
     <div class="span6">
        <%= hidden_field_tag "manager[techsupport]", '0' %>
-       <%= check_box_tag "manager[techsupport]", '1', @mgr["techsupport"]==1 %> Access to technical support page
+       <%= check_box_tag "manager[techsupport]", '1', @mgr["techsupport"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Access to technical support page
     </div>
   </div>
+  </div>
+  <div class="padd-10">
   <%= render "manager/secgroups_form" %>
-  <%= submit_tag %>
+  </div>
+  <div class="form-actions">
+      <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div> 
 <% end %>
+
+</div>
+</div>
