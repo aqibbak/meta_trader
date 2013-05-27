@@ -76,7 +76,7 @@ $(document).ready(function(){
       $("#holiday_tab_year").val("").show();
     }
   });
-  $(".holiday_row td.el").click(function(){
+  $(".holiday-edit").click(function(){
     $("#holiday_tab_position").val($(this).parent().attr("data-position"));
     var enabled = $(this).parent().attr("data-enable") == 1;
     $("input[name='holiday_tab[enable]'][type='checkbox']").prop("checked", enabled);

@@ -24,8 +24,7 @@ class OrderController < ApplicationController
     @order = api.getOrder(session)
     @symbol = api.getSymbol(session)
 
-    @ord = @order.first
-    puts @ord
+    @ord = @order[order.to_i]
   end
 
 end

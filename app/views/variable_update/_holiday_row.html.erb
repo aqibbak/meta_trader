@@ -5,7 +5,7 @@
   <td class="el"><%= row["symbol"] %></td>
   <td class="el"><%= row["description"] %></td>
   <td>
-    <a href=""><i class="icon-pencil"></i></a>
+    <a class="holiday-edit" href="#"><i class="icon-pencil"></i></a>
     &nbsp;&nbsp;&nbsp;
     <%= link_to glyph(:remove) + "", delete_holiday_row_path(:position => ix), :remote=> true, :method => :delete %></td>
 </tr>

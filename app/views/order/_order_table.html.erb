@@ -20,7 +20,7 @@
       <td><%= Time.zone.at(order["open_time"]).strftime("%Y.%m.%d %H:%M") %></td>
       <td><%= ["buy","sell","buy limit","sell limit","buy stop","sell stop","balance","credit"][order["cmd"].to_i] %></td>
       <td><%= order["symbol"] %></td>
-      <td><%= "NTF" %></td>
+      <td><%= order["volume"]/100.0 %></td>
       <td><%= order["open_price"] %></td>
       <td><%= order["sl"] %></td>
       <td><%= order["tp"] %></td>

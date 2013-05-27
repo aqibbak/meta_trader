@@ -37,7 +37,7 @@
   </div>
   <div class="row-fluid">
     <div class="span6">
-      Open time: <%= text_field_tag "order[open_time][year]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : Time.at(@ord["open_time"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[open_time][month]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[open_time][day]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).day, :style => "width:20px;" %>-<%= text_field_tag "order[open_time][hour]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).hour, :style => "width:20px;" %>:<%= text_field_tag "order[open_time][min]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["open_time"]).min, :style => "width:20px;" %>
+      Open time: <%= text_field_tag "order[open_time][year]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : Time.zone.at(@ord["open_time"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[open_time][month]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["open_time"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[open_time][day]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["open_time"]).day, :style => "width:20px;" %>-<%= text_field_tag "order[open_time][hour]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["open_time"]).hour, :style => "width:20px;" %>:<%= text_field_tag "order[open_time][min]", @ord.empty?||@ord["open_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["open_time"]).min, :style => "width:20px;" %>
     </div>
     <div class="span3">
       Open price: <%= number_field_tag "order[open_price]", @ord["open_price"].to_f, :style => "width: 65px", :step => "any" %>
@@ -48,7 +48,7 @@
   </div>
   <div class="row-fluid">
     <div class="span6">
-      Close time: <%= text_field_tag "order[close_time][year]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : Time.at(@ord["close_time"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[close_time][month]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[close_time][day]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).day, :style => "width:20px;" %>-<%= text_field_tag "order[close_time][hour]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).hour, :style => "width:20px;" %>:<%= text_field_tag "order[close_time][min]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.at(@ord["close_time"]).min, :style => "width:20px;" %>
+      Close time: <%= text_field_tag "order[close_time][year]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : Time.zone.at(@ord["close_time"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[close_time][month]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["close_time"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[close_time][day]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["close_time"]).day, :style => "width:20px;" %>-<%= text_field_tag "order[close_time][hour]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["close_time"]).hour, :style => "width:20px;" %>:<%= text_field_tag "order[close_time][min]", @ord.empty?||@ord["close_time"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["close_time"]).min, :style => "width:20px;" %>
     </div>
     <div class="span3">
       Close price: <%= number_field_tag "order[close_price]", @ord["close_price"], :style => "width: 65px", :step => "any" %>
@@ -89,10 +89,10 @@
   </div>
   <div class="row-fluid">
     <div class="span5">
-      Expiration date: <%= text_field_tag "order[expiration][year]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : Time.at(@ord["expiration"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[expiration][month]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : '%02i'%Time.at(@ord["expiration"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[expiration][day]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : '%02i'%Time.at(@ord["expiration"]).day, :style => "width:20px;" %>
+      Expiration date: <%= text_field_tag "order[expiration][year]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : Time.zone.at(@ord["expiration"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[expiration][month]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["expiration"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[expiration][day]", @ord.empty?||@ord["expiration"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["expiration"]).day, :style => "width:20px;" %>
     </div>
     <div class="span4">
-      Value date: <%= text_field_tag "order[value_date][year]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : Time.at(@ord["value_date"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[value_date][month]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : '%02i'%Time.at(@ord["value_date"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[value_date][day]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : '%02i'%Time.at(@ord["value_date"]).day, :style => "width:20px;" %>
+      Value date: <%= text_field_tag "order[value_date][year]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : Time.zone.at(@ord["value_date"]).year, :style => "width:35px;" %>.<%= text_field_tag "order[value_date][month]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["value_date"]).month, :style => "width:20px;" %>.<%= text_field_tag "order[value_date][day]", @ord.empty?||@ord["value_date"].to_i==0 ? "" : '%02i'%Time.zone.at(@ord["value_date"]).day, :style => "width:20px;" %>
     </div>
     <div class="span3">
       Profit: <%= text_field_tag "order[profit]", @ord["profit"].to_f, :style => "width: 70px" %>

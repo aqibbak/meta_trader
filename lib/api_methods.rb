@@ -87,7 +87,7 @@ class ApiMethods
           session["session_expires"] = 3.minutes.from_now
           return response["answer"]
         else
-          puts response
+          puts response.to_s + " : " + request_body.to_s
           return nil
         end
       end
@@ -620,7 +620,7 @@ class ApiMethods
     return getData('{"method":"CfgRequestSync"}', session)
   end
 
-  def updateSynchronization(sync_pos,data,session)
+  def updateSynchronization(sync_key,data,session)
     update_string = ""
     data.keys.each_with_index do |key, ix|
       if key=="limits"
@@ -646,7 +646,7 @@ class ApiMethods
         end
       end
     end
-    update_string = '{"method": "CfgUpdateSync", "position" : '+sync_pos+', "update": ['+update_string+']}'
+    update_string = '{"method": "CfgUpdateSync", "key" : "'+sync_key.to_s+'", "update": ['+update_string+']}'
     return updateData(update_string, session)
   end
 
@@ -779,6 +779,7 @@ class ApiMethods
       end
     end
     update_string = '{"method":"AdmTradeRecordModify", "record": {'+update_string+'}}'
+    puts update_string
     return updateData(update_string, session)
   end
 
