@@ -15,25 +15,25 @@
 // Set up the click observer on the tabs, and 
 $(document).ready( function(){  
 	$('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});  	  
-	$.Jookie.Initialise("tab_memory", 60*24*365);  
-	$('.tabbed_panel').each(function(){ pre_select_tab($(this))});	                 
+	//$.Jookie.Initialise("tab_memory", 60*24*365);  
+	//$('.tabbed_panel').each(function(){ pre_select_tab($(this))});	                 
 });        
 
 // Given a tabbed_panel div element, checks to see if there's a pre-stored
 // tab association.  If there is, select that tab.                                                                        
 function pre_select_tab(tabbed_panel) {
-    tab_memory = get_tab_memory();
-    tab_id = tab_memory[memory_key_from_tabbed_panel(tabbed_panel.attr('id'))]  
-    if(tab_id != null) {
-      select_tab($("#"+tab_id));
-    }
+    //tab_memory = get_tab_memory();
+    //tab_id = tab_memory[memory_key_from_tabbed_panel(tabbed_panel.attr('id'))]  
+    //if(tab_id != null) {
+      //select_tab($("#"+tab_id));
+    //}
 }   
 
 // Select a tab that's been clicked on and store that preference in a cookie.
 function handle_tab_click(element) {               
   tab = element.parents("li.tab");
   select_tab(tab);    
-  store_tab_preference(tab.attr('id'));
+  //store_tab_preference(tab.attr('id'));
 }
            
            

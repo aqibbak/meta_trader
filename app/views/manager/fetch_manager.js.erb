@@ -1,4 +1,2 @@
 $("#manager-form").html("<%= escape_javascript(render 'manager/manager_form') %>")
 $('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});     
-$.Jookie.Initialise("tab_memory", 60*24*365);
-$('.tabbed_panel').each(function(){ pre_select_tab($(this))});

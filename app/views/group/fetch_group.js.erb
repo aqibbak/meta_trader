@@ -1,6 +1,4 @@
 $("#group-form").html("<%= escape_javascript(render 'group/group_form') %>")
 $('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});     
-$.Jookie.Initialise("tab_memory", 60*24*365);
-$('.tabbed_panel').each(function(){ pre_select_tab($(this))});
 secgroupEvents();
 $("#modal-group2").modal("show");
