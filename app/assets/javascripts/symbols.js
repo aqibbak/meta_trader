@@ -8,9 +8,10 @@ function fetchSymbol(pos){
 }
 
 function initSymbolEvents(){
-  $(".symbol-row").click(function(){
-    var pos = $(this).data().pos;
+  $(".symbol-edit").click(function(){
+    var pos = $(this).parent().parent().data().pos;
     fetchSymbol(pos);
+    return false;
   });
   $("#new-symbol-link").click(function(){
     $.ajax({
