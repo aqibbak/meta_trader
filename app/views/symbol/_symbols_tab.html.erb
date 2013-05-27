@@ -1,4 +1,4 @@
-<div id="symbols-form-tab">
+
 <% unless @symbol.nil? %>
   <div class="section section-symbols">
     <h2 class="normal blue"><i class="icon-credit-card"></i> Symbols
@@ -7,7 +7,6 @@
     </h2>
 
     <div class="row-fluid">
-      <div class="">
         <table class="table hover-table symbol-table">
           <thead>
           <tr>
@@ -49,59 +48,12 @@
             </tr>
           <% end %>
         </table>
-      </div>
       <div id="symbol-form">
         <%= render "symbol/symbol_form" %>
       </div>
     </div>
 
-    <div class="row-fluid">
-      <div class="span6">
-        {"ask_tickvalue"=>0, "bid_tickvalue"=>0, "count"=>32, "count_original"=>0, "expiration"=>0, 
-        "filter_reserved"=>0, "multiply"=>100000, "point"=>1.0e-05, "profit_reserved"=>0, "starting"=>0, value_date"=>0}
-      </div>
-      <div class="">
-
-        "sessions"=>[
-
-            {"quote"=>[{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "quote_overnight"=>-1,
-            "trade"=>[{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "trade_overnight"=>-1},
-
-            {"quote"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "quote_overnight"=>-1,
-            "trade"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "trade_overnight"=>-1},
-            {"quote"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "quote_overnight"=>-1,
-            "trade"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "trade_overnight"=>-1},
-            {"quote"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                       {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], 
-            "quote_overnight"=>-1,
-            "trade"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0},
-                      {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}],
-            "trade_overnight"=>-1},
-            {"quote"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], "quote_overnight"=>-1, "trade"=>[{"close"=>1440, "close_hour"=>24, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], "trade_overnight"=>-1}, {"quote"=>[{"close"=>1380, "close_hour"=>23, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], "quote_overnight"=>-1, "trade"=>[{"close"=>1380, "close_hour"=>23, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], "trade_overnight"=>-1}, {"quote"=>[{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], "quote_overnight"=>-1, "trade"=>[{"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}, {"close"=>0, "close_hour"=>0, "close_min"=>0, "open"=>0, "open_hour"=>0, "open_min"=>0}], "trade_overnight"=>-1}]
-        </div>
-      </div>
-    <% end %>
   </div>
-</div>
+<% end %>
 
 

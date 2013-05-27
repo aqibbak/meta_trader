@@ -1,7 +1,6 @@
 <% unless @plugin.nil? %>
 
 <div class="row-fluid">
-  <div class="span6">
     <table>
       <tr>
         <th style="width:200px;">Name</th>
@@ -18,13 +17,17 @@
         </tr>
       <% end %>
     </table>
-  </div>
   <div id="plugin-form" class="span6">
     <%= render "plugin/plugin_form" %>
   </div>
 </div>
+
+
+<% end %>
+
+
+<!--
 <%= @plugin %>
 {"params"=>[{"name"=>"Dangerous Avg Trade Time", "value"=>"300"}, {"name"=>"Dangerous Confirm Deviation", "value"=>"4"}, {"name"=>"Dangerous Order Deviation", "value"=>"4"}, {"name"=>"Dangerous Pendings", "value"=>"40"}, {"name"=>"Dangerous Request Delay", "value"=>"2"}, {"name"=>"Dangerous Scalping Orders", "value"=>"10"}, {"name"=>"Dangerous Tick Deviation", "value"=>"5"}, {"name"=>"Dangerous Volume", "value"=>"10.00"}, {"name"=>"Groups", "value"=>",*,"}, {"name"=>"Maximum Dangerous Users", "value"=>"10"}, {"name"=>"Maximum Hyperactive Users", "value"=>"20"}, {"name"=>"Maximum Recommendations", "value"=>"10"}]
 , "plugin"=>{"configurable"=>1, "enabled"=>1, "file"=>"LogAnalyser.dll", "info"=>{"copyright"=>"MetaQuotes Software Corp.", "name"=>"LogAnalyser Settings", "version"=>100}, "manager_access"=>0}, "total"=>12}
-
-<% end %>
+-->

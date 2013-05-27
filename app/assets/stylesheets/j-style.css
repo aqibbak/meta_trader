@@ -208,6 +208,7 @@ color: rgb(155, 155, 155);
 .data-server-table td:last-child a:focus {
 	color: #005580;
 }
+
 .form-data-server .form-actions{
 	margin: 8px 0;
 	padding: 5px 0 5px 180px;
@@ -215,6 +216,7 @@ color: rgb(155, 155, 155);
 .border{
 	border:1px solid #ddd;
 }
+.modal-data-feeds .modal-body,
 .modal-group2 .modal-body,
 .modal-symbol .modal-body,
 .modal-data-server .modal-body{
@@ -312,12 +314,17 @@ li.tab.tab_selected a:hover{
 	border-right: none!important;
 }
 .modal.modal-group2,
+.modal.modal-data-feeds,
 .modal.modal-symbol{
 	width: 600px;
 }
+
 .modal-group2 .modal-body,
 .modal-symbol .modal-body{
 	max-height: 550px;
+}
+.modal-data-feeds .modal-body{
+	max-height: 600px;
 }
 .inline-row{
 	display: table-cell;
@@ -369,7 +376,20 @@ li.tab.tab_selected a:hover{
 .tab-forms .tabbed_panel .panes .pane .chzn-container{
 	margin-bottom: 10px;
 }
+
 .modal-group2 .form-actions,
 .modal-symbol .form-actions{
 	margin-top: 0;
+}
+
+/*** Manager
+     ==================================================== 
+     ****/
+.hover-table.feeder-table tr td:last-child,
+.hover-table.manager-table tr td:last-child{
+	width: auto;
+}
+.modal-manager .form-actions{
+	margin: 0;
+	padding: 10px;
 }

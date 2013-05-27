@@ -1,8 +1,10 @@
 <% if @manager %>
-
+<div class="section section-manager">
+  <h2 class="blue normal"><i class="icon-calendar"></i> Manager
+  <%= link_to glyph(:plus) + " New", "#", :id => "", :class =>"btn btn-primary pull-right" %></h2>
 <div class="row-fluid">
-  <div class="span5">
-    <table>
+    <table class="table hover-table manager-table">
+      <thead>
       <tr>
         <th>Login</th>
         <th>Name</th>
@@ -10,6 +12,7 @@
         <th>Groups</th>
         <th>Rights</th>
       </tr>
+      </thead>
       <% @manager.each_with_index do |manager, ix|%>
         <tr class="manager-row" data-pos="<%= ix %>">
           <td><%= manager["login"] %></td>
@@ -20,11 +23,19 @@
         </tr>
       <% end %>
     </table>
-  </div>
-  <div id="manager-form" class="span7">
+
+  <div id="manager-form">
     <%= render "manager/manager_form" %>
   </div>
 </div>
+</div>
+
+
+
+<% end %>
+
+
+<!--
 
 {"admin"=>1, "broker"=>1, "email"=>1, "exp_time"=>0, "groups"=>",*,", "info_depth"=>0, "ip_from"=>0, "ip_to"=>0, "ipfilter"=>0, "login"=>1, "logs"=>1, "mailbox"=>"admin", "manager"=>1, "market_watch"=>1, "money"=>1, "name"=>"First Admin (do not delete this", "news"=>1, "online"=>1, "plugins"=>1, "reports"=>1, "riskman"=>1, "see_trades"=>1, "server_reports"=>1, "techsupport"=>0, "trades"=>1, "user_details"=>1}
 
@@ -61,5 +72,4 @@
 {"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
 {"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}, 
 {"enable"=>0, "maximum_lots"=>0, "minimum_lots"=>0}]
-
-<% end %>
+-->

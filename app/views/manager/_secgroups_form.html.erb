@@ -1,20 +1,22 @@
 <div class="row-fluid">
   <div class="span6">
      <%= hidden_field_tag "manager[broker]", '0' %>
-     <%= check_box_tag "manager[broker]", '1', @mgr["broker"]==1 %> Dealer
+     <%= check_box_tag "manager[broker]", '1', @mgr["broker"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Dealer
   </div>
   <div class="span6">
      <%= hidden_field_tag "manager[trades]", '0' %>
-     <%= check_box_tag "manager[trades]", '1', @mgr["trades"]==1 %> Edit/delete trades
+     <%= check_box_tag "manager[trades]", '1', @mgr["trades"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Edit/delete trades
   </div>
 </div>
-<table>
+<table class="table table-border table-striped">
+  <thead>
   <tr>
     <th>Type</th>
     <th>Use</th>
     <th>Minimum lots</th>
     <th>Maximum lots</th>
   </tr>
+  </thead>
   <% @mgr["secgroups"].each_with_index do |secgroup, ind|%>
     <% if ind < 4 || ind == 5 %>
       <tr>
