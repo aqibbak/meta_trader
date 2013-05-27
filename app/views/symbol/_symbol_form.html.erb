@@ -7,7 +7,7 @@
     <div class="modal-body ">
 
 
-<%= form_tag symbol_submit_path, :method => "POST", :remote => true do %>
+<%= form_tag symbol_submit_path, :method => "POST", :remote => true, :id => "form-symbol-modal" do %>
   <%= hidden_field_tag "new_symbol", @sym.empty? %>
   <%= hidden_field_tag "symbol_key", @sym["symbol"] %>
   <%= tabbed_panel do |tp| %>

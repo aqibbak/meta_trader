@@ -1,6 +1,5 @@
 $("#manager-form").html("<%= escape_javascript(render 'manager/manager_form') %>");
 $('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});     
-$("#modal-manager").modal("show");
 if($('.chosen-select').length > 0)
 {
   $('.chosen-select').each(function(){
@@ -11,3 +10,4 @@ if($('.chosen-select').length > 0)
     $el.chosen(opt);
   });
 }
+$("#modal-manager").modal("show");
