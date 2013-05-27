@@ -30,21 +30,19 @@
 <% end %>
 
 <% if can? :manage, :backup %>
-<%#= render "fixed_update/backup_form" %>
+<%= render "fixed_update/backup_form" %>
 <% end %>
 
 <% if can? :manage, :group %>
-<div id="group-form-tab">
 <%= render "group/group_tab" %>
-</div>
 <% end %>
 
 <% if can? :manage, :manager %>
-<%#= render "manager/manager_tab" %>
+<%= render "manager/manager_tab" %>
 <% end %>
 
 <% if can? :manage, :feeder %>
-<%#= render "feeder/feeder_tab" %>
+<%= render "feeder/feeder_tab" %>
 <% end %>
 
 <% if can? :manage, :synchronization %>

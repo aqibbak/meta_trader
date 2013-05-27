@@ -1,32 +1,33 @@
+<div class="padd-10">
 <div class="row-fluid">
   <div class="span12">
     <%= hidden_field_tag "group[reports]", '0' %>
-    <%= check_box_tag "group[reports]", '1', @grp["reports"]==1 %> Enable 
+    <%= check_box_tag "group[reports]", '1', @grp["reports"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Enable 
   </div>
 </div>
 <div class="row-fluid">
   <div class="span6">
-    SMTP server: <%= text_field_tag "group[smtp_server]", @grp["smtp_server"], :style => "width: 200px" %>
+    SMTP server: <%= text_field_tag "group[smtp_server]", @grp["smtp_server"], :class =>"single-line" %>
   </div>
   <div class="span6">
-    Templates path: <%= text_field_tag "group[templates]", @grp["templates"], :style => "width: 200px" %>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span6">
-    SMTP login: <%= text_field_tag "group[smtp_login]", @grp["smtp_login"], :style => "width: 200px" %>
-  </div>
-  <div class="span6">
-    SMTP password: <%= password_field_tag "group[smtp_password]", @grp["smtp_password"], :style => "width: 200px" %>
+    Templates path: <%= text_field_tag "group[templates]", @grp["templates"], :class =>"single-line" %>
   </div>
 </div>
 <div class="row-fluid">
   <div class="span6">
-    Support email: <%= text_field_tag "group[support_email]", @grp["support_email"], :style => "width: 200px" %>
+    SMTP login: <%= text_field_tag "group[smtp_login]", @grp["smtp_login"], :class =>"single-line" %>
+  </div>
+  <div class="span6">
+    SMTP password: <%= password_field_tag "group[smtp_password]", @grp["smtp_password"], :class =>"single-line" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    Support email: <%= text_field_tag "group[support_email]", @grp["support_email"], :class =>"single-line" %>
   </div>
   <div class="span6">
     <%= hidden_field_tag "group[copies]", '0' %>
-    Copy report to support <%= check_box_tag "group[copies]", '1', @grp["copies"]==1 %>
+    Copy report to support <%= check_box_tag "group[copies]", '1', @grp["copies"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %>
   </div>
 </div>
 <div class="row-fluid">
@@ -39,3 +40,4 @@
     <%= text_area_tag "group[signature]", @grp["signature"], :rows => 6, :style => 'width:500px'  %>
   </div>
 </div>
+</div><!--/padd-10-->

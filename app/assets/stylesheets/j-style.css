@@ -135,7 +135,8 @@ width: 184px!important;
 }
 .hover-table thead tr th,
 .symbol-table thead tr th,
-.group-table thead tr th{
+.group-table thead tr th,
+.group-table2 thead tr th{
 	color: rgb(155, 155, 155);
 	background: transparent;
 	border-bottom: 3px solid #eee;
@@ -196,6 +197,7 @@ color: rgb(155, 155, 155);
      ****/
 .data-server-table td:last-child a,
 .group-table td:last-child a,
+.group-table2 td:last-child a,
 .symbol-table td:last-child a,
 .holiday-table td:last-child a{
 	color: #ccc;
@@ -213,6 +215,7 @@ color: rgb(155, 155, 155);
 .border{
 	border:1px solid #ddd;
 }
+.modal-group2 .modal-body,
 .modal-symbol .modal-body,
 .modal-data-server .modal-body{
 	overflow: visible;
@@ -308,9 +311,11 @@ li.tab.tab_selected a:hover{
 	border-left: none!important;
 	border-right: none!important;
 }
+.modal.modal-group2,
 .modal.modal-symbol{
 	width: 600px;
 }
+.modal-group2 .modal-body,
 .modal-symbol .modal-body{
 	max-height: 550px;
 }
@@ -358,12 +363,13 @@ li.tab.tab_selected a:hover{
 .grey-select .chzn-container.chzn-container-single{
 	background: #e6e6e6;
 }
-.tab-forms #tabbed_panel_0_tp_symbol_pane input,
-.tab-forms #tabbed_panel_0_tp_symbol_pane select,
-.tab-forms #tabbed_panel_0_tp_filtration_pane input,
-.tab-forms #tabbed_panel_0_tp_filtration_pane select{
+.tab-forms .tabbed_panel .panes .pane input{
 	margin-bottom: 10px;
 }
+.tab-forms .tabbed_panel .panes .pane .chzn-container{
+	margin-bottom: 10px;
+}
+.modal-group2 .form-actions,
 .modal-symbol .form-actions{
 	margin-top: 0;
 }

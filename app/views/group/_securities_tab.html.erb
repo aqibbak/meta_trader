@@ -1,6 +1,8 @@
+
 <div class="row-fluid">
-  <div class="span5">
-    <table>
+  <div class="">
+    <table class="table hover-table">
+      <thead>
       <tr>
         <th>Type</th>
         <th>Trade</th>
@@ -8,6 +10,7 @@
         <th>Spread</th>
         <th>Commission</th>
       </tr>
+      </thead>
       <% @grp["secgroups"].each_with_index do |secgroup, sgix|%>
         <% unless @symbol_group[sgix]["name"] == "" %>
           <tr class="secgroup-row" data-pos="<%= sgix %>">
@@ -28,13 +31,13 @@
           <div class="row-fluid">
             <div class="span12">
               <%= hidden_field_tag "group[secgroups][#{sgix}][show]", '0' %>
-              <%= check_box_tag "group[secgroups][#{sgix}][show]", '1', secgroup["show"]==1 %> Enable
+              <%= check_box_tag "group[secgroups][#{sgix}][show]", '1', secgroup["show"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Enable
             </div>
           </div>
           <div class="row-fluid">
             <div class="span4">
               <%= hidden_field_tag "group[secgroups][#{sgix}][trade]", '0' %>
-              <%= check_box_tag "group[secgroups][#{sgix}][trade]", '1', secgroup["trade"]==1 %> Trade
+              <%= check_box_tag "group[secgroups][#{sgix}][trade]", '1', secgroup["trade"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Trade
             </div>
             <div class="span8">
               <%= hidden_field_tag "group[secgroups][#{sgix}][confirmation]", '0' %>
@@ -52,7 +55,7 @@
             </div>
             <div class="span7">
               <%= hidden_field_tag "group[secgroups][#{sgix}][freemargin_mode]", '0' %>
-              <%= check_box_tag "group[secgroups][#{sgix}][freemargin_mode]", '1', secgroup["freemargin_mode"]==1 %> Do not check free margin after dealer's answer
+              <%= check_box_tag "group[secgroups][#{sgix}][freemargin_mode]", '1', secgroup["freemargin_mode"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Do not check free margin after dealer's answer
             </div>
           </div>
           <div class="row-fluid">
@@ -61,7 +64,7 @@
             </div>
             <div class="span7">
               <%= hidden_field_tag "group[secgroups][#{sgix}][ie_quick_mode]", '0' %>
-              <%= check_box_tag "group[secgroups][#{sgix}][ie_quick_mode]", '1', secgroup["ie_quick_mode"]==1 %> Fast confirmation on IE with deviation specified
+              <%= check_box_tag "group[secgroups][#{sgix}][ie_quick_mode]", '1', secgroup["ie_quick_mode"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Fast confirmation on IE with deviation specified
             </div>
           </div>
           <div class="row-fluid">

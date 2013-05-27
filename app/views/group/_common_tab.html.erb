@@ -1,44 +1,47 @@
+<div class="padd-10">
+
 <div class="row-fluid">
   <div class="span12">
      <%= hidden_field_tag "group[enable]", '0' %>
-     <%= check_box_tag "group[enable]", '1', @grp["enable"]==1 %> Enable
+     <%= check_box_tag "group[enable]", '1', @grp["enable"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Enable
   </div>
 </div>
 <div class="row-fluid">
   <div class="span6">
-    Name: <%= text_field_tag "group[group]", @grp["group"], :style => "width: 300px" %>
+    Name: <%= text_field_tag "group[group]", @grp["group"], :class =>"single-line" %>
   </div>
   <div class="span6">
     <%= hidden_field_tag "group[adv_security]", '0' %>
-    <%= check_box_tag "group[adv_security]", '1', @grp["adv_security"]==1 %> Advanced security
+    <%= check_box_tag "group[adv_security]", '1', @grp["adv_security"]==1, :class =>"icheck-me",  :data => { :skin => 'minimal', :color =>'blue'} %> Advanced security
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Company: <%= text_field_tag "group[company]", @grp["company"], :style => "width: 300px" %>
+    Company: <%= text_field_tag "group[company]", @grp["company"], :class =>"single-line" %>
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Support page: <%= text_field_tag "group[page]", @grp["page"], :disabled => true, :style => "width: 300px" %>
+    Support page: <%= text_field_tag "group[page]", @grp["page"], :disabled => true, :class =>"single-line" %>
     (Unresponsive in desktop app?)
   </div>
 </div>
 <div class="row-fluid">
   <div class="span6">
-    Deposit by default: <%= text_field_tag "group[default_deposit]", @grp["default_deposit"], :style => "width: 80px" %>
+    Deposit by default: <%= text_field_tag "group[default_deposit]", @grp["default_deposit"], :class =>"single-line input-small" %>
   </div>
-  <div class="span6">
-    Deposit currency: <%= select_tag "group[currency]", options_for_symbol_currency(@grp["currency"]), :style => "width: 80px" %>
+  <div class="span6 input-small">
+    Deposit currency: <%= select_tag "group[currency]", options_for_symbol_currency(@grp["currency"]), :class =>"chosen-select" %>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12 input-small">
+    Leverage by default: <%= select_tag "group[default_leverage]", options_for_group_default_leverage(@grp["default_leverage"]), :class =>"chosen-select" %> ( used only for trade in Forex )
   </div>
 </div>
 <div class="row-fluid">
   <div class="span12">
-    Leverage by default: <%= select_tag "group[default_leverage]", options_for_group_default_leverage(@grp["default_leverage"]), :style => "width: 80px" %> ( used only for trade in Forex )
+    Annual interest rate: <%= text_field_tag "group[interestrate]", @grp["interestrate"], :class =>"single-line input-small" %> % , [ daily = (free_margin - credit) * interest_rate / 100 / 360 ]
   </div>
 </div>
-<div class="row-fluid">
-  <div class="span12">
-    Annual interest rate: <%= text_field_tag "group[interestrate]", @grp["interestrate"], :style => "width: 80px" %>% , [ daily = (free_margin - credit) * interest_rate / 100 / 360 ]
-  </div>
-</div>
+</div><!--/padd-10-->

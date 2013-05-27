@@ -1,3 +1,12 @@
+<!-- Modal -->
+<div id="modal-group2" class="modal hide in modal-form modal-group2 tab-forms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal"><i class="icon-group"></i> Group</h3>
+    </div>
+    <div class="modal-body ">
+
+
 <%= form_tag group_submit_path, :method => "POST", :remote => true do %>
   <%= hidden_field_tag "new_group", @grp.empty? %>
   <%= hidden_field_tag "group_key", @grp["group"] %>
@@ -23,6 +32,13 @@
     <% tp.add_tab("Reports") do %>
       <%= render "group/reports_tab" %>
     <% end %>
-    <%= submit_tag %>
   <% end %>
+      <div class="form-actions">
+      <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div> 
 <% end %>
+
+
+    </div><!--/modal-body-->
+    
+  </div><!--/modal-1-->
