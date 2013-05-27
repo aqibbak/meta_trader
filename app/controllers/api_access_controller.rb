@@ -4,18 +4,18 @@ class ApiAccessController < ApplicationController
 
   def main_page
     api = ApiMethods.new
-    #@common = api.getCommon(session)
-    #@access = api.getAccess(session)
-    #@data_server = api.getDataServer(session)
-    #@time = api.getTime(session)
-    #@holiday = api.getHoliday(session)
-    #@security = api.getSecurity(session)
+    @common = api.getCommon(session)
+    @access = api.getAccess(session)
+    @data_server = api.getDataServer(session)
+    @time = api.getTime(session)
+    @holiday = api.getHoliday(session)
+    @security = api.getSecurity(session)
     @symbol_group = api.getSymbolGroup(session)
     @symbol = api.getSymbol(session)
     @sym = api.symbolWithEmptySessions
-    #@backup = api.getBackup(session)
-    #@group = api.getGroup(session)
-    #@grp = {}
+    @backup = api.getBackup(session)
+    @group = api.getGroup(session)
+    @grp = {}
     @manager = api.getManager(session)
     @mgr = { "secgroups"=> {} }
     #@feeder = api.getFeeder(session)
