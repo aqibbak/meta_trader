@@ -1,9 +1,11 @@
 function fetchGroup(pos){
+  $("#loading").show();
   $.ajax({
     url: '/fetch_group',
     data:  { pos: pos },
     dataType: 'script'
   }).success(function(data, status, xhr) {
+    $("#loading").hide();
   });
 }
 
