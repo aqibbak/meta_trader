@@ -18,12 +18,12 @@ class ApiAccessController < ApplicationController
     @grp = {}
     @manager = api.getManager(session)
     @mgr = { "secgroups"=> {} }
-    #@feeder = api.getFeeder(session)
-    #@fdr = {}
-    #@synchronization = api.getSynchronization(session)
-    #@sync = {}
-    #@plugin = api.getPlugin(session)
-    #@plg = {"plugin" => {}, "params" => []}
+    @feeder = api.getFeeder(session)
+    @fdr = {}
+    @synchronization = api.getSynchronization(session)
+    @sync = {}
+    @plugin = api.getPlugin(session)
+    @plg = {"plugin" => {}, "params" => []}
     #@account = api.getAccount(session)
     #@act = {}
     #@order = api.getOrder(session)

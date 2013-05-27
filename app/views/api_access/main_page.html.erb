@@ -48,12 +48,12 @@
 <% end %>
 
 <% if can? :manage, :synchronization %>
-<%#= render "synchronization/synchronization_tab" %>
+<%= render "synchronization/synchronization_tab" %>
 <% end %>
 
 <% if can? :manage, :plugin %>
 <div id="plugin-form-tab">
-<%#= render "plugin/plugin_tab" %>
+<%= render "plugin/plugin_tab" %>
 </div>
 <% end %>
 
