@@ -7,7 +7,7 @@ $(document).ready(function(){
     $("#access_tab_action").val($(this).parent().parent().attr("data-action"));
     $("#access_tab_from").val($(this).parent().parent().attr("data-from"));
     $("#access_tab_to").val($(this).parent().parent().attr("data-to"));
-    $("#access_tab_comment").val($(this).parent().attr("data-comment"));
+    $("#access_tab_comment").val($(this).parent().parent().attr("data-comment"));
     $("#access_new_record").val("false");
     $("#modal-1").modal();
     return false;
@@ -54,11 +54,13 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $(".time_switch").click(function(){
-    $(this).parent().parent().find("td.time_check input[type='checkbox']").each(function(ix,el){
+    $(this).parent().parent().find("td.time_check div input[type='checkbox']").each(function(ix,el){
       if($(el).prop("checked") == true){
         $(el).prop("checked", false);
+        $(el).parent().removeClass("checked")
       }else{
         $(el).prop("checked", true);
+        $(el).parent().addClass("checked")
       }
     });
     return false;
@@ -77,12 +79,12 @@ $(document).ready(function(){
     }
   });
   $(".holiday-edit").click(function(){
-    $("#holiday_tab_position").val($(this).parent().attr("data-position"));
-    var enabled = $(this).parent().attr("data-enable") == 1;
+    $("#holiday_tab_position").val($(this).parent().parent().attr("data-position"));
+    var enabled = $(this).parent().parent().attr("data-enable") == 1;
     $("input[name='holiday_tab[enable]'][type='checkbox']").prop("checked", enabled);
-    $("#holiday_tab_month").val($(this).parent().attr("data-month"));
-    $("#holiday_tab_day").val($(this).parent().attr("data-day"));
-    var year = $(this).parent().attr("data-year");
+    $("#holiday_tab_month").val($(this).parent().parent().attr("data-month"));
+    $("#holiday_tab_day").val($(this).parent().parent().attr("data-day"));
+    var year = $(this).parent().parent().attr("data-year");
     if(year=="0"){
       $("#holiday_tab_yearly_check").prop("checked", true);
       $("#holiday_tab_year").val("0").hide();
@@ -90,20 +92,21 @@ $(document).ready(function(){
       $("#holiday_tab_yearly_check").prop("checked", false);
       $("#holiday_tab_year").val(year).show();
     }
-    var from = $(this).parent().attr("data-from");
+    var from = $(this).parent().parent().attr("data-from");
     $("#holiday_tab_from_hour").val(parseInt(from/60));
     $("#holiday_tab_from_minute").val(parseInt(from)-(parseInt(from/60)*60));
-    var to = $(this).parent().attr("data-to");
+    var to = $(this).parent().parent().attr("data-to");
     $("#holiday_tab_to_hour").val(parseInt(to/60));
     $("#holiday_tab_to_minute").val(parseInt(to)-(parseInt(to/60))*60);
-    $("#holiday_tab_comment").val($(this).parent().attr("data-comment"));
-    $("#holiday_tab_symbol").val($(this).parent().attr("data-symbol"));
-    $("#holiday_tab_description").val($(this).parent().attr("data-description"));
+    $("#holiday_tab_comment").val($(this).parent().parent().attr("data-comment"));
+    $("#holiday_tab_symbol").val($(this).parent().parent().attr("data-symbol"));
+    $("#holiday_tab_description").val($(this).parent().parent().attr("data-description"));
     $("#holiday_new_record").val("false");
     $("#modal-holiday").modal();
     return false;
   });
   $("#new_holiday").click(function(){
+    $("#holiday_new_record").val("true");
     var last_position = parseInt($(".holiday_table").find("tr").last().attr("data-position"));
     $("#holiday_tab_position").val(last_position + 1);
     $("input[name='holiday_tab[enable]'][type='checkbox']").prop("checked", true);

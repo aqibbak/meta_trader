@@ -8,6 +8,8 @@ class VariableUpdateController < ApplicationController
     api = ApiMethods.new
     begin
       @result = api.updateAccess(@data,session)
+      @data["to"] = ApiMethods.ip2long(@data["to"])
+      @data["from"] = ApiMethods.ip2long(@data["from"])
     rescue => e
       @error = true
     end
@@ -50,6 +52,9 @@ class VariableUpdateController < ApplicationController
     api = ApiMethods.new
     begin
       @result = api.updateHoliday(@data,session)
+      @data["from"] = @data["from"]["hour"].to_i*60 + @data["from"]["minute"].to_i
+      @data["to"] = @data["to"]["hour"].to_i*60 + @data["to"]["minute"].to_i
+      puts @new
     rescue => e
       @error = true
     end

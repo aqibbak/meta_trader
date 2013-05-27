@@ -8,6 +8,16 @@ alert("An error occured while executing this operation");
   $("#access_tab_from").val("");
   $("#access_tab_to").val("");
   $("#access_tab_comment").val("");
+  $(".access_row .access-edit").click(function(){
+    $("#access_tab_position").val($(this).parent().parent().attr("data-position"));
+    $("#access_tab_action").val($(this).parent().parent().attr("data-action"));
+    $("#access_tab_from").val($(this).parent().parent().attr("data-from"));
+    $("#access_tab_to").val($(this).parent().parent().attr("data-to"));
+    $("#access_tab_comment").val($(this).parent().parent().attr("data-comment"));
+    $("#access_new_record").val("false");
+    $("#modal-1").modal();
+    return false;
+  });
 <% elsif @result[:success] %>
   $("#access_new_record").val("true");
   var row = $(".access_row[data-position='<%= @data['position']%>']")[0];
