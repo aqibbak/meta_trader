@@ -1,2 +1,13 @@
-$("#manager-form").html("<%= escape_javascript(render 'manager/manager_form') %>")
+$("#manager-form").html("<%= escape_javascript(render 'manager/manager_form') %>");
 $('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});     
+$("#modal-manager").modal("show");
+if($('.chosen-select').length > 0)
+{
+  $('.chosen-select').each(function(){
+    var $el = $(this);
+    var search = ($el.attr("data-nosearch") === "true") ? true : false,
+    opt = {};
+    if(search) opt.disable_search_threshold = 9999999;
+    $el.chosen(opt);
+  });
+}
