@@ -5,12 +5,13 @@
     <%= link_to glyph(:plus) + " New", "#modal-sync", :id => "", :class =>"btn btn-primary pull-right" %></h2>
 
   <div class="row-fluid">
-      <table class="table hover-table">
+      <table class="table hover-table sync-table">
         <thead>
         <tr>
           <th>Server</th>
           <th>Mode</th>
           <th>Symbols</th>
+          <th></th>
         </tr>
         </thead>
         <% @synchronization.each_with_index do |synchronization, ix|%>
@@ -18,6 +19,12 @@
             <td><%= synchronization["server"] %></td>
             <td><%= ["Add", "Update", "Replace"][synchronization["mode"]] %></td>
             <td><%= synchronization["securities"]=="" ? "All" : synchronization["securities"] %></td>
+              <td>
+                <a class="symbol-edit" href="#"><i class="icon-pencil"></i></a>
+             &nbsp;&nbsp;&nbsp;
+                <a href="#"><i class="icon-remove"></i></a>
+             
+              </td>
           </tr>
         <% end %>
       </table>

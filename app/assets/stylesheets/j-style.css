@@ -196,12 +196,30 @@ color: rgb(155, 155, 155);
      ==================================================== 
      ****/
 .data-server-table td:last-child a,
+.sync-table td:last-child a,
+.manager-table td:last-child a,
+.feeder-table td:last-child a,
+.plugin-table td:last-child a,
 .group-table td:last-child a,
 .group-table2 td:last-child a,
 .symbol-table td:last-child a,
 .holiday-table td:last-child a{
 	color: #ccc;
 }
+.sync-table td:last-child a:hover,
+.sync-table td:last-child a:focus,
+.manager-table td:last-child a:hover,
+.manager-table td:last-child a:focus,
+.feeder-table td:last-child a:hover,
+.feeder-table td:last-child a:focus,
+.plugin-table td:last-child a:hover,
+.plugin-table td:last-child a:focus,
+.group-table td:last-child a:hover,
+.group-table td:last-child a:focus,
+.group-table2 td:last-child a:hover,
+.group-table2 td:last-child a:focus,
+.symbol-table td:last-child a:hover,
+.symbol-table td:last-child a:focus,
 .holiday-table td:last-child a:hover,
 .holiday-table td:last-child a:focus,
 .data-server-table td:last-child a:hover, 
@@ -378,6 +396,8 @@ li.tab.tab_selected a:hover{
 	margin-bottom: 10px;
 }
 
+.modal-plugin .form-actions,
+.modal-sync .form-actions,
 .modal-group2 .form-actions,
 .modal-symbol .form-actions{
 	margin-top: 0;
@@ -388,8 +408,10 @@ li.tab.tab_selected a:hover{
      ****/
 .hover-table.feeder-table tr td:last-child,
 .hover-table.manager-table tr td:last-child{
-	width: auto;
+	width: 1auto;
 }
+.modal-plugin .form-actions,
+.modal-sync .form-actions,
 .modal-manager .form-actions{
 	margin: 0;
 	padding: 10px;
@@ -398,4 +420,7 @@ li.tab.tab_selected a:hover{
 
 .loading{
 	display: none;
+}
+.modal-plugin .table{
+	margin-bottom: 5px;
 }

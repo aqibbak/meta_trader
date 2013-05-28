@@ -12,6 +12,7 @@
         <th>Vendor</th>
         <th>Source</th>
         <th>Server</th>
+        <th></th>
       </tr>
       </thead>
       <% @feeder.each_with_index do |feeder, ix|%>
@@ -19,6 +20,12 @@
           <td><%= feeder["name"] %></td>
           <td><%= ["Quotes", "News", "Quotes&News"][feeder["mode"]] %></td>
           <td><%= feeder["server"] %></td>
+                        <td>
+                <a class="symbol-edit" href="#"><i class="icon-pencil"></i></a>
+             &nbsp;&nbsp;&nbsp;
+                <a href="#"><i class="icon-remove"></i></a>
+             
+              </td>
         </tr>
       <% end %>
     </table>

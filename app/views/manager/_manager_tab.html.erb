@@ -11,6 +11,7 @@
         <th>Mailbox</th>
         <th>Groups</th>
         <th>Rights</th>
+        <th></th>
       </tr>
       </thead>
       <% @manager.each_with_index do |manager, ix|%>
@@ -20,6 +21,11 @@
           <td><%= manager["mailbox"] %></td>
           <td><%= manager["groups"] %></td>
           <td><%= list_manager_rights(manager) %></td>
+             <td>
+                <a class="symbol-edit" href="#"><i class="icon-pencil"></i></a>
+             &nbsp;&nbsp;&nbsp;
+                <a href="#"><i class="icon-remove"></i></a>
+             </td>
         </tr>
       <% end %>
     </table>
