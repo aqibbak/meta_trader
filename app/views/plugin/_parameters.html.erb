@@ -1,10 +1,12 @@
-<a href="#" id="new-plugin-param">Add</a>
-<table id="plugin-param-table">
+<a href="#" id="new-plugin-param"><i class="icon-plus"></i> Add</a>
+<table id="plugin-param-table" class="table hover-table">
+  <thead>
   <tr>
     <th>Name</th>
     <th>Value</th>
     <th>&nbsp;</th>
   </tr>
+  </thead>
   <% @plg["params"].each_with_index do |param, par_ix|%>
     <tr data-pos="<%=par_ix%>">
       <td><%= text_field_tag "plugin[params][#{par_ix}][name]", param["name"] %></td>

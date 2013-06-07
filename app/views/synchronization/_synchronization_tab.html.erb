@@ -1,25 +1,36 @@
 <% unless @synchronization.nil? %>
-  
+<div class="section section-synchronization">
+
+      <h2 class="normal blue"><i class="icon-magic"></i> Synchronization
+    <%= link_to glyph(:plus) + " New", "#modal-sync", :id => "", :class =>"btn btn-primary pull-right" %></h2>
+
   <div class="row-fluid">
-    <div class="span5">
-      <table>
+      <table class="table hover-table sync-table">
+        <thead>
         <tr>
           <th>Server</th>
           <th>Mode</th>
           <th>Symbols</th>
+          <th></th>
         </tr>
+        </thead>
         <% @synchronization.each_with_index do |synchronization, ix|%>
           <tr class="synchronization-row" data-pos="<%= ix %>">
             <td><%= synchronization["server"] %></td>
             <td><%= ["Add", "Update", "Replace"][synchronization["mode"]] %></td>
             <td><%= synchronization["securities"]=="" ? "All" : synchronization["securities"] %></td>
+              <td>
+                <a class="symbol-edit" href="#"><i class="icon-pencil"></i></a>
+             &nbsp;&nbsp;&nbsp;
+                <a href="#"><i class="icon-remove"></i></a>
+             
+              </td>
           </tr>
         <% end %>
       </table>
-    </div>
-    <div id="synchronization-form" class="span7">
+    <div id="synchronization-form">
       <%= render "synchronization/synchronization_form" %>
     </div>
   </div>
-
+</div>
 <% end %>

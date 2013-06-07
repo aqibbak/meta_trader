@@ -4,37 +4,47 @@
     <%= form_tag common_submit_path, :method => "POST", :remote => true do %>
       <div class="box-content">
 
-      <table class="table table-striped common-table">
+      <table class="table common-table">
         <tbody>
           <tr>
             <td>Server</td>
-            <td>
-              <%= @common["owner"] %></td>
+            <td class="grey-bg">
+              <%= @common["owner"]%></td>
           </tr>
           <tr>
             <td>Name</td>
-            <td><%= text_field_tag "common_tab[name]", @common["name"], :class =>"single-line" %></td>
+            <td>
+              <%= text_field_tag "common_tab[name]", @common["name"] %></td>
           </tr>
           <tr>
             <td>IP Address</td>
-            <td>
-              <div  class="input-xlarge">
-              <%= select_tag "common_tab[address]", options_for_ip_address(@common["bind_adresses"],@common["address"]), :class =>"single-line chosen-select" %>
+            <td class="">
+
+              <div  class="input-xlarge input-prepend">
+                <span class="add-on">IP</span>
+              <%= select_tag "common_tab[address]", options_for_ip_address(@common["bind_adresses"],@common["address"]), :class =>"chosen-select" %>
             </div></td>
           </tr>
           <tr>
             <td>Communication port</td>
-            <td><%= text_field_tag "common_tab[port]", @common["port"], :class =>"single-line" %></td>
+            <td>
+              <div class="input-prepend">
+              <span class="add-on"><i class="icon-sitemap"></i></span>
+              <%= text_field_tag "common_tab[port]", @common["port"] %></div></td>
           </tr>
           <tr>
             <td>Demo accounts</td>
             <td>
               <div  class="input-xlarge">
-                <%= select_tag "common_tab[typeofdemo]", options_for_demo_type(@common["typeofdemo"]), :class =>"single-line chosen-select" %></div></td>
+                <%= select_tag "common_tab[typeofdemo]", options_for_demo_type(@common["typeofdemo"]), :class =>"chosen-select" %></div></td>
           </tr>
           <tr>
             <td>Time of demo</td>
-            <td><%= text_field_tag "common_tab[timeofdemo]", @common["timeofdemo"], :class =>"spinner single-line" %> days</td>
+            <td>
+
+              <%= text_field_tag "common_tab[timeofdemo]", @common["timeofdemo"], :class =>"spinner input-mini"%>
+              <div class="input-append"> 
+              <span class="add-on">days</span></div></td>
           </tr>
 
           <tr>
@@ -46,12 +56,12 @@
           <tr>
             <td>Daylight Saving Time correction</td>
             <td>
-              <div  class="input-xlarge">
-                <%= select_tag "common_tab[daylightcorrection]", options_for_yes_no(@common["daylightcorrection"]), :class =>"single-line chosen-select" %></div></td>
+                <%= select_tag "common_tab[daylightcorrection]", options_for_yes_no(@common["daylightcorrection"]), :class =>"single-line chosen-select input-mini" %>
+              </td>
           </tr>
           <tr>
             <td>End of day time</td>
-            <td><%= text_field_tag "common_tab[endhour]", @common["endhour"], :class =>"spinner single-line" %> : <%= text_field_tag "common_tab[endminute]", @common["endminute"], :class =>"spinner single-line" %></td>
+            <td><%= text_field_tag "common_tab[endhour]", @common["endhour"], :class =>"spinner input-mini" %> : <%= text_field_tag "common_tab[endminute]", @common["endminute"], :class =>"spinner input-mini" %></td>
           </tr>
           <tr>
             <td>Rollover mode</td>
@@ -79,16 +89,20 @@
           </tr>
           <tr>
             <td>Keep internal emails</td>
-            <td><%= text_field_tag "common_tab[keepemails]", @common["keepemails"], :class =>"spinner single-line" %> days</td>
+            <td><%= text_field_tag "common_tab[keepemails]", @common["keepemails"], :class =>"spinner input-mini" %>
+            <div class="input-append"> 
+              <span class="add-on">days</span></div></td>
           </tr>
           <tr>
             <td>Keep ticks</td>
-            <td><%= text_field_tag "common_tab[keepticks]", @common["keepticks"], :class =>"spinner single-line" %> days</td>
+            <td><%= text_field_tag "common_tab[keepticks]", @common["keepticks"], :class =>"spinner input-mini" %>
+            <div class="input-append"> 
+              <span class="add-on">days</span></div></td>
           </tr>
           <tr>
             <td>Optimization time</td>
-            <td><%= text_field_tag "common_tab[optimization_t][optimization_time_h]", time_hours(@common["optimization_time"]), :class =>"spinner single-line" %> : 
-              <%= text_field_tag "common_tab[optimization_t][optimization_time_m]", time_minutes(@common["optimization_time"]), :class =>"spinner single-line" %></td>
+            <td><%= text_field_tag "common_tab[optimization_t][optimization_time_h]", time_hours(@common["optimization_time"]), :class =>"spinner input-mini" %> : 
+              <%= text_field_tag "common_tab[optimization_t][optimization_time_m]", time_minutes(@common["optimization_time"]), :class =>"spinner input-mini" %></td>
           </tr>
           <tr>
             <td>Antiflood controlls</td>
@@ -98,11 +112,13 @@
           </tr>
           <tr>
             <td>Antiflood max. connections</td>
-            <td><%= text_field_tag "common_tab[floodcontrol]", @common["floodcontrol"], :class =>"spinner single-line" %></td>
+            <td><%= text_field_tag "common_tab[floodcontrol]", @common["floodcontrol"], :class =>"spinner input-mini" %></td>
           </tr>
           <tr>
             <td>Feeder switch timeout</td>
-            <td><%= text_field_tag "common_tab[feeder_timeout]", @common["feeder_timeout"], :class =>"spinner single-line" %> seconds</td>
+            <td><%= text_field_tag "common_tab[feeder_timeout]", @common["feeder_timeout"], :class =>"spinner input-mini" %>
+            <div class="input-append"> 
+              <span class="add-on">seconds</span></div></td>
           </tr>
           <tr>
             <td>Live update mode</td>
@@ -127,15 +143,27 @@
           </tr>
           <tr>
             <td>Path to accounts/orders bases</td>
-            <td><%= text_field_tag "common_tab[path_database]", @common["path_database"], :style => "width: 300px;", :class =>"single-line" %></td>
+            <td>
+              <div class="input-prepend">
+              <span class="add-on">:\</span>
+              <%= text_field_tag "common_tab[path_database]", @common["path_database"], :style => "width: 300px;", :class =>"" %>
+            </div></td>
           </tr>
           <tr>
             <td>Path to history bases</td>
-            <td><%= text_field_tag "common_tab[path_history]", @common["path_history"], :style => "width: 300px;", :class =>"single-line" %></td>
+            <td>
+              <div class="input-prepend">
+              <span class="add-on">:\</span>
+              <%= text_field_tag "common_tab[path_history]", @common["path_history"], :style => "width: 300px;", :class =>"" %>
+            </div></td>
           </tr>
           <tr>
             <td>Path to log files</td>
-            <td><%= text_field_tag "common_tab[path_log]", @common["path_log"], :style => "width: 300px;", :class =>"single-line" %></td>
+            <td>
+              <div class="input-prepend">
+              <span class="add-on">:\</span>
+              <%= text_field_tag "common_tab[path_log]", @common["path_log"], :style => "width: 300px;", :class =>"" %>
+            </div></td>
           </tr>
           <tr>
             <td>Adapters</td>

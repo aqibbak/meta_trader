@@ -42,17 +42,52 @@
 border: 1px solid #ddd!important;
 }
 .common-table td:first-child{
-	/*background: #f6f6f6;*/
+	background: #f6f6f6;
 	color: #555;
+	border-right: 1px solid #DDD;
 }
-
+.common-table{
+	border: 2px solid #ddd;
+}
+.common-table .ui-spinner{
+	border-color: #ccc!important;
+}
+.common-table .input-append{
+	margin-bottom: 0;
+	margin-left: -3px;
+}
 .table-striped tbody>tr:nth-child(odd)>td, 
 .table-striped tbody>tr:nth-child(odd)>th {
 background-color: #f9f9f9;
 }
 .table.common-table tr th, 
 .table.common-table tr td{
-	padding: 6px 10px 4px 10px;
+	/*padding: 6px 10px 4px 10px;*/
+}
+.grey-bg{
+	background: #DDD;
+	color: #666;
+}
+.common-table .input-xlarge.input-prepend .add-on:first-child {
+border: 1px solid #ccc;
+padding: 4.5px 6px;
+}
+.common-table .chzn-container.chzn-container-single .chzn-single {
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+.common-table .chzn-container.chzn-container-single .chzn-single:hover{
+	border-bottom: 1px solid #ccc;
+}
+.common-table .chzn-container.chzn-container-single .chzn-single:active,
+.common-table .chzn-container.chzn-container-single .chzn-single:focus,
+.common-table .chzn-container.chzn-container-single .chzn-single:visited{
+	border: 1px solid #ccc;
+}
+.common-table .chzn-container.chzn-container-single .chzn-single-with-drop{
+	border: 1px solid #aaa;
 }
 
 select.single-line,
@@ -97,6 +132,9 @@ input.single-line[type="color"],
 }
 .ui-spinner{
 	border-color: transparent!important;
+}
+.ui-spinner .spinner {
+	margin-bottom: 0;
 }
 .chzn-container{
 	width: 220px!important;
@@ -196,12 +234,30 @@ color: rgb(155, 155, 155);
      ==================================================== 
      ****/
 .data-server-table td:last-child a,
+.sync-table td:last-child a,
+.manager-table td:last-child a,
+.feeder-table td:last-child a,
+.plugin-table td:last-child a,
 .group-table td:last-child a,
 .group-table2 td:last-child a,
 .symbol-table td:last-child a,
 .holiday-table td:last-child a{
 	color: #ccc;
 }
+.sync-table td:last-child a:hover,
+.sync-table td:last-child a:focus,
+.manager-table td:last-child a:hover,
+.manager-table td:last-child a:focus,
+.feeder-table td:last-child a:hover,
+.feeder-table td:last-child a:focus,
+.plugin-table td:last-child a:hover,
+.plugin-table td:last-child a:focus,
+.group-table td:last-child a:hover,
+.group-table td:last-child a:focus,
+.group-table2 td:last-child a:hover,
+.group-table2 td:last-child a:focus,
+.symbol-table td:last-child a:hover,
+.symbol-table td:last-child a:focus,
 .holiday-table td:last-child a:hover,
 .holiday-table td:last-child a:focus,
 .data-server-table td:last-child a:hover, 
@@ -378,6 +434,8 @@ li.tab.tab_selected a:hover{
 	margin-bottom: 10px;
 }
 
+.modal-plugin .form-actions,
+.modal-sync .form-actions,
 .modal-group2 .form-actions,
 .modal-symbol .form-actions{
 	margin-top: 0;
@@ -388,8 +446,10 @@ li.tab.tab_selected a:hover{
      ****/
 .hover-table.feeder-table tr td:last-child,
 .hover-table.manager-table tr td:last-child{
-	width: auto;
+	width: 1auto;
 }
+.modal-plugin .form-actions,
+.modal-sync .form-actions,
 .modal-manager .form-actions{
 	margin: 0;
 	padding: 10px;
@@ -398,4 +458,7 @@ li.tab.tab_selected a:hover{
 
 .loading{
 	display: none;
+}
+.modal-plugin .table{
+	margin-bottom: 5px;
 }

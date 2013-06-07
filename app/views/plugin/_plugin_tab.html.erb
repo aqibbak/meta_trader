@@ -1,28 +1,41 @@
 <% unless @plugin.nil? %>
+<div class="section section-plugin">
+
+
+      <h2 class="normal blue"><i class="icon-list-alt"></i> Plugin
+    <%= link_to glyph(:plus) + " New", "#modal-plugin", :id => "", :class =>"btn btn-primary pull-right" %></h2>
 
 <div class="row-fluid">
-    <table>
+    <table class="table hover-table plugin-table">
+      <thead>
       <tr>
         <th style="width:200px;">Name</th>
         <th>Version</th>
         <th style="width:260px;">Copyright</th>
         <th>File</th>
+        <th></th>
       </tr>
+      </thead>
       <% @plugin.each_with_index do |plugin, ix|%>
         <tr class="plugin-row" data-pos="<%= ix %>">
           <td><%= plugin["plugin"]["info"]["name"] %></td>
           <td><%= plugin["plugin"]["info"]["version"]/100.0 %></td>
           <td><%= plugin["plugin"]["info"]["copyright"] %></td>
           <td><%= plugin["plugin"]["file"] %></td>
+          <td>
+             <a class="symbol-edit" href="#"><i class="icon-pencil"></i></a>
+             &nbsp;&nbsp;&nbsp;
+            <a href="#"><i class="icon-remove"></i></a>
+          </td>
         </tr>
       <% end %>
     </table>
-  <div id="plugin-form" class="span6">
+  <div id="plugin-form">
     <%= render "plugin/plugin_form" %>
   </div>
 </div>
 
-
+</div><!--/section-->
 <% end %>
 
 
