@@ -4,7 +4,7 @@ class FeederController < ApplicationController
   def feeder_submit
     authorize! :update, :feeder
     data = params[:feeder]
-    key = params[:feeder_key]
+    key = params[:new_feeder] ? data["name"] : params[:feeder_key]
     api = ApiMethods.new
     @result = api.updateFeeder(key,data,session)
     render :nothing => true
