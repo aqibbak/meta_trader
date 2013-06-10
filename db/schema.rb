@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521100126) do
+ActiveRecord::Schema.define(:version => 20130610093655) do
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -30,11 +30,16 @@ ActiveRecord::Schema.define(:version => 20130521100126) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "rights"
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "servers", :force => true do |t|
+    t.string "server_address"
   end
 
   create_table "users", :force => true do |t|
@@ -51,9 +56,10 @@ ActiveRecord::Schema.define(:version => 20130521100126) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "rights"
+    t.integer  "server_id"
   end
 
-  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["login", "server_id"], :name => "index_users_on_login_and_server_id", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

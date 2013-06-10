@@ -50,8 +50,8 @@ class ApiMethods
     ip.join(".")
   end
 
-  def login(session, userid, password)
-    request.body = '{"method":"login","server":"54.246.36.182:443","userid":'+userid+',"password":"'+password+'"}'
+  def login(session, server, userid, password)
+    request.body = '{"method":"login","server":"'+server+'","userid":'+userid+',"password":"'+password+'"}'
     http.start do
       http.request(request) do |res|
         cookies  = CGI::Cookie.parse(res['Set-Cookie']);
@@ -59,12 +59,14 @@ class ApiMethods
         if response["success"] == true
           session["session_cookie"] = cookies["cppcms_session"].to_s
           session["session_expires"] = 3.minutes.from_now
+          session["api_server"] = server
           session["api_userid"] = userid
           session["api_password"] = password
           return true
         else
           session["session_cookie"] = nil
           session["session_expires"] = nil
+          session["api_server"] = nil
           session["api_userid"] = nil
           session["api_password"] = nil
           return false
@@ -75,7 +77,7 @@ class ApiMethods
 
   def getData(request_body,session)
     unless checkCookieValid(session)
-      login(session,session["api_userid"],session["api_password"])
+      login(session,session["api_server"],session["api_userid"],session["api_password"])
     end
     request.body = request_body.html_safe
     request["Accept"] = "application/json"
@@ -96,7 +98,7 @@ class ApiMethods
 
   def updateData(update_string,session)
     unless checkCookieValid(session)
-      login(session,session["api_userid"],session["api_password"])
+      login(session,session["api_server"],session["api_userid"],session["api_password"])
     end
     request.body = update_string.html_safe
     request["Cookie"] = session["session_cookie"]
@@ -708,6 +710,36 @@ class ApiMethods
     end
   end
 
+  def getAccountFromLogin(session,login)
+    return getData('{"method":"UserRecordsRequest", "logins":['+login.to_s+']}', session)
+  end
+
+  def modifyAccount(data, session, action = :new)
+    if action == :new
+      method = "UserRecordNew"
+    elsif action == :update
+      method = "UserRecordUpdate"
+    end
+
+    update_string = ""
+    data.keys.each_with_index do |key, ix|
+      if key==""
+      else
+        if key=="login"||key=="leverage"||key=="taxes"||key=="enable"||key=="enable_change_password"||key=="enable_read_only"||key=="send_reports"||key=="agent_account"
+          if data[key].to_s != ""
+            update_string += ',' unless ix==0
+            update_string += '"'+key.to_s+'":'+data[key].to_s
+          end
+        else
+          update_string += ',' unless ix==0
+          update_string += '"'+key.to_s+'":"'+data[key].to_s+'"'
+        end
+      end
+    end
+    update_string = '{"method": "'+method+'", "record": {'+update_string+'}}'
+    return updateData(update_string, session)
+  end
+
   def getOrder(session,filter=nil,open_only=0)
     if filter.nil?
       return getData('{"method":"AdmTradesRequestD","open_only":'+open_only.to_s+'}', session)
@@ -791,7 +823,7 @@ class ApiMethods
     if checkCookieValid(session)
       updateData('{"method":"Ping"}', session)
     else
-      login(session,session["api_userid"],session["api_password"])
+      login(session,session["api_server"],session["api_userid"],session["api_password"])
     end
   end
 

@@ -3,8 +3,11 @@
   <div id="account-table" class="span5">
     <%= render "account/account_table" %>
   </div>
-  <div id="account-form" class="span7">
-    <%= render "account/account_form" %>
+  <div class="span7">
+    <%= link_to "New", "#", :id => "new-account-link", :class =>"btn btn-primary pull-right" %>
+    <div id="account-form">
+      <%= render "account/account_form" %>
+    </div>
   </div>
 </div>
 <% end %>

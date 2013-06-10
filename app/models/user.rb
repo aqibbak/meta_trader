@@ -3,26 +3,21 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :authentication_keys => [:login]
+         :recoverable, :rememberable, :trackable, :authentication_keys => [:login, :server_id]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :login, :password, :password_confirmation, :remember_me, :rights, :role_ids
+  attr_accessible :login, :password, :password_confirmation, :remember_me, :rights, :role_ids, :server_id, :server
   # attr_accessible :title, :body
 
   has_and_belongs_to_many :roles
+  belongs_to :server
 
   after_create :set_base_role
 
   serialize :rights, Array
 
   def rights_enum
-    [
-      [ 'Common', :common ], [ 'Backup', :backup ], [ 'Account', :account ],
-      [ 'Feeder', :feeder ], [ 'Time', :time ], [ 'Group', :group ],
-      [ 'Manager', :manager ], [ 'Order', :order ], [ 'Plugin', :plugin ],
-      [ 'Symbol', :symbol ], [ 'Synchronization', :synchronization ], [ 'Access', :access ],
-      [ 'Data Server', :data_server ], [ 'Holiday', :holiday ]
-    ]
+    Role::RIGHTS
   end
 
   def full_rights

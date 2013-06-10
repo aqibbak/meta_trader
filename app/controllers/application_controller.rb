@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     if current_user
       api = ApiMethods.new
       unless api.checkCookieValid(session)
-        if !session["api_userid"].nil? && !session["api_password"].nil?
-          api.login(session, session["api_userid"], session["api_password"])
+        if !session["api_server"].nil? && !session["api_userid"].nil? && !session["api_password"].nil?
+          api.login(session, session["api_server"], session["api_userid"], session["api_password"])
         else
           sign_out
           redirect_to new_user_session_path

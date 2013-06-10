@@ -2,6 +2,15 @@
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:class => "form-validate") do |f| %>
   <div class="control-group">
     <div class="controls">
+      <select name='user[server_id]' class="input-block-level" data-rule-required="true">
+        <% Server.all.each do |server| %>
+          <option value="<%= server.id %>"><%= server.server_address %></option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
       <input type="text" name='user[login]' placeholder="Username" class="input-block-level" data-rule-required="true">
     </div>
   </div>

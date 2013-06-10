@@ -774,4 +774,20 @@ module ApplicationHelper
     return options.html_safe
   end
 
+  def options_for_account_status(selected=nil)
+    options = ""
+    options += "<option value=''></option>"
+    options += "<option value='NR'#{' selected=true' if selected=="NR"}>NR</option>"
+    options += "<option value='RE'#{' selected=true' if selected=="RE"}>RE</option>"
+    return options.html_safe
+  end
+
+  def options_for_account_group(groups,selected=nil)
+    options = ""
+    groups.each_with_index do |group, gi|
+      options += "<option value='#{group["group"]}'#{' selected=true' if selected==group["group"]}>#{group["group"]}</option>"
+    end
+    return options.html_safe
+  end
+
 end

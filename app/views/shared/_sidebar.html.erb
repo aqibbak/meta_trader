@@ -24,81 +24,111 @@
         All
       </a>
     </li>
+    <% if can? :manage, :common %>
     <li>
       <a href="#" data-section="section-common">
         Common
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :access %>
     <li>
       <a href="#" data-section="section-access">
         Access
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :data_server %>
     <li>
       <a href="#" data-section="section-data_server">
         Data Server
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :time %>
     <li>
       <a href="#" data-section="section-time">
         Time
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :holiday %>
     <li>
       <a href="#" data-section="section-holiday">
         Holiday
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :symbol_group %>
     <li>
       <a href="#" data-section="section-symbol-group">
         Symbol Group
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :symbols %>
     <li>
       <a href="#" data-section="section-symbols">
         Symbols
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :backup %>
     <li>
       <a href="#" data-section="section-backup">
         Backup
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :group %>
     <li>
       <a href="#" data-section="section-group">
         Group
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :manager %>
     <li>
       <a href="#" data-section="section-manager">
         Manager
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :feeder %>
     <li>
       <a href="#" data-section="section-feeder">
         Feeder
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :synchronization %>
     <li>
       <a href="#" data-section="section-synchronization">
         Synchronization
       </a>
     </li>
 
+    <% end %>
+    <% if can? :manage, :plugin %>
     <li>
       <a href="#" data-section="section-plugin">
         Plugin
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :account %>
     <li>
       <a href="#" data-section="section-account">
         Account
       </a>
     </li>
+    <% end %>
+    <% if can? :manage, :order %>
     <li>
       <a href="#" data-section="section-order">
         Order
       </a>
     </li>
+    <% end %>
   </ul>
 </div><!-- /subnav -->

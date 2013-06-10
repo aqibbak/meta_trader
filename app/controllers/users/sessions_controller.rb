@@ -6,11 +6,12 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     api = ApiMethods.new
-    result = api.login(session, params[:user][:login], params[:user][:password])
+    server = Server.find(params[:user][:server_id])
+    result = api.login(session, server.server_address, params[:user][:login], params[:user][:password])
     if result
-      user = User.find_by_login(params[:user][:login])
+      user = User.find_by_login_and_server_id(params[:user][:login],params[:user][:server_id])
       if user.nil?
-        User.create!(login: params[:user][:login], password: params[:user][:password])
+        User.create!(server_id: params[:user][:server_id], login: params[:user][:login], password: params[:user][:password])
       end
       super
     else

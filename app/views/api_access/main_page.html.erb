@@ -36,7 +36,7 @@
 <% end %>
 
 <% if can? :manage, :group %>
-<%= render "group/group_tab" %>
+<%#= render "group/group_tab" %>
 <% end %>
 
 <% if can? :manage, :manager %>
@@ -59,7 +59,7 @@
 
 <% if can? :manage, :account %>
 <div id="account-form-tab">
-<%#= render "account/account_tab" %>
+<%= render "account/account_tab" %>
 </div>
 <% end %>
 

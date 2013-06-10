@@ -11,11 +11,14 @@
             <td class="grey-bg">
               <%= @common["owner"]%></td>
           </tr>
+          <% if can? :manage, :common_name %>
           <tr>
             <td>Name</td>
             <td>
               <%= text_field_tag "common_tab[name]", @common["name"] %></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_address %>
           <tr>
             <td>IP Address</td>
             <td class="">
@@ -25,6 +28,8 @@
               <%= select_tag "common_tab[address]", options_for_ip_address(@common["bind_adresses"],@common["address"]), :class =>"chosen-select" %>
             </div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_port %>
           <tr>
             <td>Communication port</td>
             <td>
@@ -32,12 +37,16 @@
               <span class="add-on"><i class="icon-sitemap"></i></span>
               <%= text_field_tag "common_tab[port]", @common["port"] %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_typeofdemo %>
           <tr>
             <td>Demo accounts</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[typeofdemo]", options_for_demo_type(@common["typeofdemo"]), :class =>"chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_timeofdemo %>
           <tr>
             <td>Time of demo</td>
             <td>
@@ -47,91 +56,123 @@
               <span class="add-on">days</span></div></td>
           </tr>
 
+          <% end %>
+          <% if can? :manage, :common_timezone %>
           <tr>
             <td>Time zone</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[timezone]", options_for_timezone(@common["timezone"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_daylightcorrection %>
           <tr>
             <td>Daylight Saving Time correction</td>
             <td>
                 <%= select_tag "common_tab[daylightcorrection]", options_for_yes_no(@common["daylightcorrection"]), :class =>"single-line chosen-select input-mini" %>
               </td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_endhour %>
           <tr>
             <td>End of day time</td>
             <td><%= text_field_tag "common_tab[endhour]", @common["endhour"], :class =>"spinner input-mini" %> : <%= text_field_tag "common_tab[endminute]", @common["endminute"], :class =>"spinner input-mini" %></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_rollovers_mode %>
           <tr>
             <td>Rollover mode</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[rollovers_mode]", options_for_rollover(@common["rollovers_mode"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_statement_mode %>
           <tr>
             <td>Statements mode</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[statement_mode]", options_for_statements(@common["statement_mode"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_monthly_state_mode %>
           <tr>
             <td>Monthly statements mode</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[monthly_state_mode]", options_for_monthly_statements(@common["monthly_state_mode"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_statement_weekend %>
           <tr>
             <td>Generate statements at weekends</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[statement_weekend]", options_for_yes_no(@common["statement_weekend"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_keepemails %>
           <tr>
             <td>Keep internal emails</td>
             <td><%= text_field_tag "common_tab[keepemails]", @common["keepemails"], :class =>"spinner input-mini" %>
             <div class="input-append"> 
               <span class="add-on">days</span></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_keepticks %>
           <tr>
             <td>Keep ticks</td>
             <td><%= text_field_tag "common_tab[keepticks]", @common["keepticks"], :class =>"spinner input-mini" %>
             <div class="input-append"> 
               <span class="add-on">days</span></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_optimization_time %>
           <tr>
             <td>Optimization time</td>
             <td><%= text_field_tag "common_tab[optimization_t][optimization_time_h]", time_hours(@common["optimization_time"]), :class =>"spinner input-mini" %> : 
               <%= text_field_tag "common_tab[optimization_t][optimization_time_m]", time_minutes(@common["optimization_time"]), :class =>"spinner input-mini" %></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_antiflood %>
           <tr>
             <td>Antiflood controlls</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[antiflood]", options_for_yes_no(@common["antiflood"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_floodcontrol %>
           <tr>
             <td>Antiflood max. connections</td>
             <td><%= text_field_tag "common_tab[floodcontrol]", @common["floodcontrol"], :class =>"spinner input-mini" %></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_feeder_timeout %>
           <tr>
             <td>Feeder switch timeout</td>
             <td><%= text_field_tag "common_tab[feeder_timeout]", @common["feeder_timeout"], :class =>"spinner input-mini" %>
             <div class="input-append"> 
               <span class="add-on">seconds</span></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_liveupdate_mode %>
           <tr>
             <td>Live update mode</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[liveupdate_mode]", options_for_live_update(@common["liveupdate_mode"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_timesync %>
           <tr>
             <td>Time synchronization with</td>
             <td>
               <div  class="input-xlarge">
                 <%= select_tag "common_tab[timesync]", options_for_timesync(@common["timesync"]), :class =>"single-line chosen-select" %></div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_web_adresses %>
           <tr>
             <td>IP Access list of web services</td>
             <td>
@@ -141,6 +182,8 @@
               <% end %>
             </td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_path_database %>
           <tr>
             <td>Path to accounts/orders bases</td>
             <td>
@@ -149,6 +192,8 @@
               <%= text_field_tag "common_tab[path_database]", @common["path_database"], :style => "width: 300px;", :class =>"" %>
             </div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_path_history %>
           <tr>
             <td>Path to history bases</td>
             <td>
@@ -157,6 +202,8 @@
               <%= text_field_tag "common_tab[path_history]", @common["path_history"], :style => "width: 300px;", :class =>"" %>
             </div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_path_log %>
           <tr>
             <td>Path to log files</td>
             <td>
@@ -165,6 +212,8 @@
               <%= text_field_tag "common_tab[path_log]", @common["path_log"], :style => "width: 300px;", :class =>"" %>
             </div></td>
           </tr>
+          <% end %>
+          <% if can? :manage, :common_adapter %>
           <tr>
             <td>Adapters</td>
             <td>
@@ -173,6 +222,7 @@
               <%= hidden_field_tag "common_tab[adapter][full_adapter_list]", @common["adapters"], :class =>"" %>
             </div></td>
           </tr>
+          <% end %>
           <tr>
             <td></td>
             <td> <%= submit_tag "Submit", :class => "btn btn-primary" %> </td>

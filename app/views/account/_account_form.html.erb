@@ -6,12 +6,12 @@
       <%= render "account/personal_tab" %>
     <% end %>
     <% unless @act.empty? %>
-      <% tp.add_tab("Trade") do %>
-        <%= render "account/trades_tab" %>
-      <% end %>
-      <% tp.add_tab("Security") do %>
-        <%= render "account/security_tab" %>
-      <% end %>
+      <%# tp.add_tab("Trade") do %>
+        <%#= render "account/trades_tab" %>
+      <%# end %>
+      <%# tp.add_tab("Security") do %>
+        <%#= render "account/security_tab" %>
+      <%# end %>
     <% end %>
     <%= submit_tag %>
   <% end %>

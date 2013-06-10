@@ -38,6 +38,7 @@ MetaTrader::Application.routes.draw do
   post "filter_account", :to => "account#filter_account", :as => "filter_account"
   get "fetch_account", :to => "account#fetch_account", :as => "fetch_account"
   post "tabs/account/submit", :to => "account#account_submit", :as => "account_submit"
+  get "new_account", :to => "account#new_account", :as => "new_account"
 
   get "fetch_order", :to => "order#fetch_order", :as => "fetch_order"
   post "tabs/order/submit", :to => "order#order_submit", :as => "order_submit"
