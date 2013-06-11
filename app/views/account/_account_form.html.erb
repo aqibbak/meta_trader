@@ -1,3 +1,12 @@
+<!-- Modal -->
+<div id="modal-account" class="modal in modal-form modal-account tab-forms" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel" class="normal"><i class="icon-user"></i> Account</h3>
+    </div>
+    <div class="modal-body ">
+
+
 <%= form_tag account_submit_path, :method => "POST", :remote => true do  %>
   <%= hidden_field_tag "new_account", @act.empty? %>
   <%= hidden_field_tag "account_key", @act["login"] %>
@@ -13,6 +22,12 @@
         <%#= render "account/security_tab" %>
       <%# end %>
     <% end %>
-    <%= submit_tag %>
   <% end %>
+        <div class="form-actions">
+      <%= submit_tag"Submit", :class => "btn btn-primary" %>
+    </div> 
 <% end %>
+
+    </div><!--/modal-body-->
+    
+  </div><!--/modal-1-->

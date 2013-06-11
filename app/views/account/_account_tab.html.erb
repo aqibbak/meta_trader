@@ -1,13 +1,14 @@
 <% unless @account.nil? %>
 <div class="row-fluid">
-  <div id="account-table" class="span5">
+	<div class="section section-account">
+		<h2 class="normal blue"><i class="icon-user"></i> Account
+		<%= link_to "New", "#", :id => "new-account-link", :class =>"btn btn-primary pull-right" %></h2>
+  <div id="account-table">
     <%= render "account/account_table" %>
-  </div>
-  <div class="span7">
-    <%= link_to "New", "#", :id => "new-account-link", :class =>"btn btn-primary pull-right" %>
+  </div>    
     <div id="account-form">
       <%= render "account/account_form" %>
     </div>
-  </div>
 </div>
+</div><!-- section-->
 <% end %>

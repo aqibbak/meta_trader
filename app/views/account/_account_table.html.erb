@@ -1,4 +1,5 @@
-<table>
+<table class="table hover-table account-table">
+  <thead>
   <tr>
     <th>Login</th>
     <th>Name</th>
@@ -7,7 +8,9 @@
     <th>Email</th>
     <th>Balance</th>
     <th>Status</th>
+    <th></th>
   </tr>
+  </thead>
   <% @account.each_with_index do |account, ix|%>
     <tr class="account-row" data-login="<%= account["login"] %>">
       <td><%= account["login"] %></td>
@@ -17,6 +20,9 @@
       <td><%= account["email"] %></td>
       <td><%= account["balance"] %></td>
       <td><%= "" %></td>
+      <td> <a class="data-server-edit" href="#"><i class="icon-pencil"></i></a>
+   &nbsp;&nbsp;&nbsp;
+   <a class="" href="#"><i class="icon-remove"></i></a></td>
     </tr>
   <% end %>
 </table>

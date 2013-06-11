@@ -233,6 +233,7 @@ color: rgb(155, 155, 155);
 /*** Data server
      ==================================================== 
      ****/
+.account-table td:last-child a,
 .data-server-table td:last-child a,
 .sync-table td:last-child a,
 .manager-table td:last-child a,
@@ -244,6 +245,8 @@ color: rgb(155, 155, 155);
 .holiday-table td:last-child a{
 	color: #ccc;
 }
+.account-table td:last-child a:hover,
+.account-table td:last-child a:focus,
 .sync-table td:last-child a:hover,
 .sync-table td:last-child a:focus,
 .manager-table td:last-child a:hover,
@@ -272,6 +275,7 @@ color: rgb(155, 155, 155);
 .border{
 	border:1px solid #ddd;
 }
+.modal-account .modal-body,
 .modal-holiday .modal-body,
 .modal-data-feeds .modal-body,
 .modal-group2 .modal-body,
@@ -370,6 +374,7 @@ li.tab.tab_selected a:hover{
 	border-left: none!important;
 	border-right: none!important;
 }
+.modal.modal-account,
 .modal.modal-group2,
 .modal.modal-data-feeds,
 .modal.modal-symbol{
@@ -380,6 +385,7 @@ li.tab.tab_selected a:hover{
 .modal-symbol .modal-body{
 	max-height: 550px;
 }
+.modal-account .modal-body,
 .modal-data-feeds .modal-body{
 	max-height: 600px;
 }
@@ -433,7 +439,7 @@ li.tab.tab_selected a:hover{
 .tab-forms .tabbed_panel .panes .pane .chzn-container{
 	margin-bottom: 10px;
 }
-
+.modal-account .form-actions,
 .modal-plugin .form-actions,
 .modal-sync .form-actions,
 .modal-group2 .form-actions,
@@ -448,6 +454,7 @@ li.tab.tab_selected a:hover{
 .hover-table.manager-table tr td:last-child{
 	width: 1auto;
 }
+.modal-account .form-actions,
 .modal-plugin .form-actions,
 .modal-sync .form-actions,
 .modal-manager .form-actions{

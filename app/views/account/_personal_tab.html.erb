@@ -1,12 +1,13 @@
 <% if @act.empty? %>
 <%# Form for new account %>
+  <div class="padd-10">
   <div class="row-fluid">
     <div class="span4">
       <%= hidden_field_tag "account[enable]", '0' %>
-      <%= check_box_tag "account[enable]", '1', @act["enable"].to_i==1 %> Enable
+      <%= check_box_tag "account[enable]", '1', @act["enable"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Enable
     </div>
     <div class="span4">
-      Password: <%= text_field_tag "account[password]", "", style: "width:100px;" %>
+      Password:<br> <%= text_field_tag "account[password]", "", style: "width:100px;" %>
     </div>
     <div class="span4">
       Investor password: <%= text_field_tag "account[password_investor]", "", style: "width:83px;" %>
@@ -17,7 +18,7 @@
       Login: <%= text_field_tag "account[login]", "", style: "width:140px;" %>
     </div>
     <div class="span8">
-      Name: <%= text_field_tag "account[name]" %>
+      Name: <br><%= text_field_tag "account[name]", "", style: "width:350px;" %>
     </div>
   </div>
   <div class="row-fluid">
@@ -32,16 +33,16 @@
     </div>
   </div>
   <div class="row-fluid">
-    <div class="span4">
-      Address: <%= text_field_tag "account[address]", "", style: "width:140px;" %>
-    </div>
     <div class="span8">
-      Zip-code: <%= text_field_tag "account[zipcode]" %>
+      Address: <br>  <%= text_field_tag "account[address]", "", style: "width:350px;" %>
+    </div>
+    <div class="span4">
+      Zip-code: <br> <%= text_field_tag "account[zipcode]", nil, :class =>"input-small" %>
     </div>
   </div>
   <div class="row-fluid">
     <div class="span8">
-      Phone: <%= text_field_tag "account[phone]" %>
+      Phone: <br> <%= text_field_tag "account[phone]", "", style: "width:350px;" %>
     </div>
     <div class="span4">
       Email: <%= text_field_tag "account[email]", "", style: "width:140px;" %>
@@ -51,24 +52,26 @@
     <div class="span4">
       ID number: <%= text_field_tag "account[id]", "", style: "width:120px;" %>
     </div>
-    <div class="span4">
-      Status: <%= select_tag "account[status]", options_for_account_status, style: "width:150px;" %>
+    <div class="span4 input-small">
+      Status:<br> <%= select_tag "account[status]", options_for_account_status, :class =>"chosen-select" %>
     </div>
     <div class="span4">
       Phone password: <%= text_field_tag "account[password_phone]", "", style: "width:93px;" %>
     </div>
   </div>
   <div class="row-fluid">
-    <div class="span4">
-      Group: <%= select_tag "account[group]", options_for_account_group(@group), style: "width:140px;" %>
+    <div class="span4 input-small">
+      Group: <br>
+      <%= select_tag "account[group]", options_for_account_group(@group), :class =>"chosen-select" %>
     </div>
     <div class="span8">
-      Comment: <%= text_field_tag "account[comment]" %>
+      Comment: <br> <%= text_field_tag "account[comment]" %>
     </div>
   </div>
   <div class="row-fluid">
-    <div class="span5">
-      Leverage: <%= select_tag "account[leverage]", options_for_group_default_leverage, style: "width:90px;" %> (forex only)
+    <div class="span5 input-small">
+      Leverage: <br>
+      <%= select_tag "account[leverage]", options_for_group_default_leverage, :class =>"chosen-select" %> (forex only)
     </div>
     <div class="span3">
       Tax rate: <%= text_field_tag "account[taxes]", "", style: "width:70px;" %> %
@@ -80,15 +83,15 @@
   <div class="row-fluid">
     <div class="span4">
       <%= hidden_field_tag "account[enable_change_password]", '0' %>
-      <%= check_box_tag "account[enable_change_password]", '1', @act["enable_change_password"].to_i==1 %> Allow to change password
+      <%= check_box_tag "account[enable_change_password]", '1', @act["enable_change_password"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Allow to change password
     </div>
     <div class="span4">
       <%= hidden_field_tag "account[enable_read_only]", '0' %>
-      <%= check_box_tag "account[enable_read_only]", '1', @act["enable_read_only"].to_i==1 %> Read only(without trading)
+      <%= check_box_tag "account[enable_read_only]", '1', @act["enable_read_only"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Read only(without trading)
     </div>
     <div class="span4">
       <%= hidden_field_tag "account[send_reports]", '0' %>
-      <%= check_box_tag "account[send_reports]", '1', @act["send_reports"].to_i==1 %> Send reports
+      <%= check_box_tag "account[send_reports]", '1', @act["send_reports"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Send reports
     </div>
   </div>
 
@@ -97,7 +100,7 @@
   <div class="row-fluid">
     <div class="span6">
       <%= hidden_field_tag "account[enable]", '0' %>
-      <%= check_box_tag "account[enable]", '1', @act["enable"].to_i==1 %> Enable
+      <%= check_box_tag "account[enable]", '1', @act["enable"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Enable
     </div>
     <div class="span6">
       Registration date: <%= text_field_tag "reg_date", Time.zone.at(@act["regdate"].to_i), style: "width:200px;", disabled: true %>
@@ -108,7 +111,8 @@
       Name: <%= text_field_tag "account[name]", @act["name"] %>
     </div>
     <div class="span4">
-      Phone password: <%= password_field_tag "account[password_phone]", @act["password_phone"], style: "width:93px;" %>
+      Phone password: 
+      <%= password_field_tag "account[password_phone]", @act["password_phone"], style: "width:93px;" %>
     </div>
   </div>
   <div class="row-fluid">
@@ -132,7 +136,7 @@
   </div>
   <div class="row-fluid">
     <div class="span4">
-      Phone: <%= text_field_tag "account[phone]", @act["phone"], style: "width:140px;" %>
+      Phone:<br> <%= text_field_tag "account[phone]", @act["phone"], style: "width:140px;" %>
     </div>
     <div class="span8">
       Email: <%= text_field_tag "account[email]", @act["email"] %>
@@ -170,15 +174,16 @@
   <div class="row-fluid">
     <div class="span4">
       <%= hidden_field_tag "account[enable_change_password]", '0' %>
-      <%= check_box_tag "account[enable_change_password]", '1', @act["enable_change_password"].to_i==1 %> Allow to change password
+      <%= check_box_tag "account[enable_change_password]", '1', @act["enable_change_password"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Allow to change password
     </div>
     <div class="span4">
       <%= hidden_field_tag "account[enable_read_only]", '0' %>
-      <%= check_box_tag "account[enable_read_only]", '1', @act["enable_read_only"].to_i==1 %> Read only(without trading)
+      <%= check_box_tag "account[enable_read_only]", '1', @act["enable_read_only"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Read only(without trading)
     </div>
     <div class="span4">
       <%= hidden_field_tag "account[send_reports]", '0' %>
-      <%= check_box_tag "account[send_reports]", '1', @act["send_reports"].to_i==1 %> Send reports
+      <%= check_box_tag "account[send_reports]", '1', @act["send_reports"].to_i==1, :class =>"icheck-me pull-left",  :data => { :skin => 'minimal', :color =>'blue'} %> Send reports
     </div>
   </div>
+  </div><!--padd-10-->
 <% end %>
