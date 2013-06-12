@@ -25,7 +25,7 @@ function initSymbolEvents(){
   });
   $("#form-symbol-modal").bind("ajax:complete",function(){
     $("#modal-symbol").modal("hide");
-  })
+  });
 }
 
 $(document).ready(function(){

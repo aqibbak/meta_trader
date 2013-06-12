@@ -1,2 +1,3 @@
 $("#account-form").html("<%= escape_javascript(render 'account/account_form') %>")
 $('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});     
+$("#modal-account").modal("show");
