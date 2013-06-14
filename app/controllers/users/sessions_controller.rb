@@ -8,6 +8,7 @@ class Users::SessionsController < Devise::SessionsController
     api = ApiMethods.new
     server = Server.find(params[:user][:server_id])
     result = api.login(session, server.server_address, params[:user][:login], params[:user][:password])
+    puts result
     if result
       user = User.find_by_login_and_server_id(params[:user][:login],params[:user][:server_id])
       if user.nil?

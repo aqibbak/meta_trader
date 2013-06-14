@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     roles.each do |role|
       all_rights = all_rights | role.rights
     end
-    all_rights = all_rights | rights.map {|v| v.to_sym if v != ""}.compact
+    all_rights = (all_rights.map {|v| v.to_sym if v != ""} | rights.map {|v| v.to_sym if v != ""}).compact
     return all_rights
   end
 

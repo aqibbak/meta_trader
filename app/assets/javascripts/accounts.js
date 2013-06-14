@@ -18,9 +18,12 @@ function initAccountEvents(){
     });
     return false;
   });
-  $(".account-row").click(function(){
-    var login = $(this).data().login;
+  $(".data-server-edit").click(function(){
+    var login = $(this).parent().parent().data().login;
     fetchAccount(login);
+  });
+  $("#form-account-modal").bind("ajax:complete",function(){
+    $("#modal-account").modal("hide");
   });
 }
 

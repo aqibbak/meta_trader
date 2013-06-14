@@ -17,12 +17,21 @@ class AccountController < ApplicationController
       method = :new
     else
       method = :update
-      data[:login] = key
+      data["login"] = key
     end
     api = ApiMethods.new
 
     @result = api.modifyAccount(data,session,method)
-    render :nothing => true
+    if @result[:success] == true && new_acc=="true"
+      server = Server.where("server_address = ?", session["api_server"]).last
+      puts @result.to_s
+      User.create!(login: @result[:login], password: data["password"], server_id: server.id)
+    end
+
+    @group = api.getGroup(session)
+    @account = api.getAccount(session)
+    @act = {}
+
   end
 
   def fetch_account
@@ -42,6 +51,17 @@ class AccountController < ApplicationController
     @act = {}
     @group = api.getGroup(session)
     render "fetch_account"
+  end
+
+  def delete_account
+    authorize! :delete, :account
+    @login = params[:login]
+    api = ApiMethods.new
+    @result = api.deleteAccount(session,@login)
+    if @result[:success]==true
+      user = User.find_by_login(@login).last
+      user.destroy!
+    end
   end
 
 end
