@@ -22,8 +22,8 @@ function initAccountEvents(){
     var login = $(this).parent().parent().data().login;
     fetchAccount(login);
   });
-  $("#form-symbol-modal").bind("ajax:complete",function(){
-    $("#modal-symbol").modal("hide");
+  $("#form-account-modal").bind("ajax:complete",function(){
+    $("#modal-account").modal("hide");
   });
 }
 
