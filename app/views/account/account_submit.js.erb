@@ -1,0 +1,4 @@
+$("#account-form-tab").html("<%= escape_javascript(render 'account/account_tab') %>");
+$('.tabbed_panel .tab a').click(function(event){ event.preventDefault(); handle_tab_click($(this))});     
+initAccountEvents();
+$(".modal-backdrop").remove();

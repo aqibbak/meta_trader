@@ -56,6 +56,7 @@ class ApiMethods
       http.request(request) do |res|
         cookies  = CGI::Cookie.parse(res['Set-Cookie']);
         response = JSON.parse(res.body)
+        puts response.to_s
         if response["success"] == true
           session["session_cookie"] = cookies["cppcms_session"].to_s
           session["session_expires"] = 3.minutes.from_now
@@ -107,7 +108,9 @@ class ApiMethods
         response = JSON.parse(res.body)
         if response["success"] == true
           session["session_expires"] = 3.minutes.from_now
-          return {:success => true, :msg => "All good"}
+          result = {:success => true, :msg => "All good"}
+          result.merge!({:login => response["login"]}) unless response["login"].nil?
+          return result
         else
           return {:success => false, :msg => response["msg"]}
         end
@@ -738,6 +741,10 @@ class ApiMethods
     end
     update_string = '{"method": "'+method+'", "record": {'+update_string+'}}'
     return updateData(update_string, session)
+  end
+
+  def deleteAccount(session,login)
+    return updateData('{"method":"UsersGroupOp", "command": 0, "logins":['+login.to_s+']}', session)
   end
 
   def getOrder(session,filter=nil,open_only=0)
