@@ -4,7 +4,7 @@ class ApiAccessController < ApplicationController
 
   def main_page
     api = ApiMethods.new
-    @common = api.getCommon(session)
+    #@common = api.getCommon(session)
     #@access = api.getAccess(session)
     #@data_server = api.getDataServer(session)
     #@time = api.getTime(session)
@@ -14,7 +14,7 @@ class ApiAccessController < ApplicationController
     #@symbol = api.getSymbol(session)
     #@sym = api.symbolWithEmptySessions
     #@backup = api.getBackup(session)
-    #@group = api.getGroup(session)
+    @group = api.getGroup(session)
     #@grp = {}
     #@manager = api.getManager(session)
     #@mgr = { "secgroups"=> {} }
@@ -24,8 +24,8 @@ class ApiAccessController < ApplicationController
     #@sync = {}
     #@plugin = api.getPlugin(session)
     #@plg = {"plugin" => {}, "params" => []}
-    #@account = api.getAccount(session)
-    #@act = {}
+    @account = api.getAccount(session)
+    @act = {}
     #@order = api.getOrder(session)
     #@ord = { "conv_rates" => [] }
   end
