@@ -25,7 +25,12 @@
           </thead>
           <% @symbol.each_with_index do |symbol, ix|%>
             <tr class="symbol-row" data-pos="<%= ix %>">
-              <td><%= symbol["symbol"] %></td>
+              <td>
+                <% begin %>
+                <%= symbol["symbol"] %>
+                <% rescue %>
+                <% end %>
+              </td>
               <td><%= @symbol_group[symbol["type"]]["name"] %></td>
               <td>
                 <%= case symbol["exemode"] ; when 0 ; "Request" ; when 1 ; "Instant" ; when 2 ; "Market" ; end %>

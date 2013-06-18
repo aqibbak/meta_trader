@@ -12,8 +12,11 @@
   <%= hidden_field_tag "symbol_key", @sym["symbol"] %>
   <%= tabbed_panel do |tp| %>
     
-    <% tp.add_tab("Symbol") do %>
-      <%= render "symbol/symbol_tab" %>
+    <% begin %>
+      <% tp.add_tab("Symbol") do %>
+        <%= render "symbol/symbol_tab" %>
+      <% end %>
+    <% rescue %>
     <% end %>
     <% tp.add_tab("Filtration") do %>
       <%= render "symbol/filtration_tab" %>

@@ -1,3 +1,4 @@
+<% begin %>
 <%= form_tag order_submit_path, :method => "POST", :remote => true do %>
 
 {"activation"=>0, "close_price"=>0, "close_time"=>1364444674, "cmd"=>6, "comment"=>"Dummy transaction", "commission"=>0, "commission_agent"=>0, "conv_rates"=>[0, 0], "conv_reserv"=>0, "digits"=>0, "expiration"=>0, "internal_id"=>0, "login"=>1, "magic"=>0, "margin_rate"=>0, "open_price"=>0, "open_time"=>1364444674, "order"=>1289778, "profit"=>0, "sl"=>0, "spread"=>0, "state"=>0, "storage"=>0, "symbol"=>"", "taxes"=>0, "timestamp"=>1369150262, "tp"=>0, "value_date"=>0, "volume"=>0}
@@ -99,4 +100,6 @@
     </div>
   </div>
   <%= submit_tag %>
+<% end %>
+<% rescue %>
 <% end %>

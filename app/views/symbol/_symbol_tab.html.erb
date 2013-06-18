@@ -7,7 +7,7 @@
     Symbol: <%= text_field_tag "symbol[symbol]", @sym["symbol"], :class =>"single-line input-small"  %>
   </div>
   <div class="span4 controls input-small">
-    Source: <%= select_tag "symbol[source]", options_for_source_select(@symbol, @sym["source"]), :class =>"chosen-select"  %>
+    Source: <%= select_tag "symbol[source]", options_for_source_select(@symbol, @sym["source"]), :class =>"chosen-select" %>
   </div>
   <div class="span4 input-small">
     Digits: <%= select_tag "symbol[digits]", options_for_symbol_digits(@sym["digits"]), :class =>"single-line chosen-select"  %>

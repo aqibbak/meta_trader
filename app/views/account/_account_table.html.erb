@@ -14,7 +14,12 @@
   <% @account.each_with_index do |account, ix|%>
     <tr class="account-row" data-login="<%= account["login"] %>">
       <td><%= account["login"] %></td>
-      <td><%= account["name"] %></td>
+      <td>
+        <% begin %>
+        <%= account["name"] %>
+        <% rescue %>
+        <% end %>
+      </td>
       <td><%= account["group"] %></td>
       <td><%= account["city"] %></td>
       <td><%= account["email"] %></td>
