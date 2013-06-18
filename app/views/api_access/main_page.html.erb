@@ -36,7 +36,7 @@
 <% end %>
 
 <% if can? :manage, :group %>
-<%#= render "group/group_tab" %>
+<%= render "group/group_tab" %>
 <% end %>
 
 <% if can? :manage, :manager %>
@@ -65,7 +65,7 @@
 
 <% if can? :manage, :order %>
 <div id="order-form-tab">
-<%#= render "order/order_tab" %>
+<%= render "order/order_tab" %>
 </div>
 <% end %>
 

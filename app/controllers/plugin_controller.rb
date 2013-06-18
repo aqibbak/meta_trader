@@ -8,6 +8,7 @@ class PluginController < ApplicationController
     api = ApiMethods.new
     @result = api.updatePlugin(key,data,session)
     @plg = {}
+    @plugin = api.getPlugin(session)
   end
 
   def new_plugin

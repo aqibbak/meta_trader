@@ -10,8 +10,8 @@ function fetchFeeder(pos){
 }
 
 $(document).ready(function(){
-  $(".feeder-row").click(function(){
-    var pos = $(this).data().pos;
+  $(".feeder-edit").click(function(){
+    var pos = $(this).parent().parent().data().pos;
     fetchFeeder(pos);
   });
 });

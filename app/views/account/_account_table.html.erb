@@ -21,7 +21,7 @@
       <td><%= account["balance"] %></td>
       <td><%= "" %></td>
       <td>
-        <a class="data-server-edit" href="#"><i class="icon-pencil"></i></a>
+        <a class="account-edit" href="#"><i class="icon-pencil"></i></a>
         &nbsp;&nbsp;&nbsp;
         <%= link_to delete_account_path(account["login"]), :remote => true, :method => :delete do %>
           <i class="icon-remove"></i>

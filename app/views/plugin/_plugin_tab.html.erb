@@ -3,8 +3,7 @@
 
 
       <h2 class="normal blue"><i class="icon-list-alt"></i> Plugin
-    <%= link_to glyph(:plus) + " New", "#modal-plugin", :id => "", :class =>"btn btn-primary pull-right" %></h2>
-
+    <%= link_to glyph(:plus) + " New", "#modal-plugin", :id => "new-plugin-link", :class =>"btn btn-primary pull-right" %></h2>
 <div class="row-fluid">
     <table class="table hover-table plugin-table">
       <thead>
@@ -23,7 +22,7 @@
           <td><%= plugin["plugin"]["info"]["copyright"] %></td>
           <td><%= plugin["plugin"]["file"] %></td>
           <td>
-             <a class="symbol-edit" href="#"><i class="icon-pencil"></i></a>
+             <a class="plugin-edit" href="#"><i class="icon-pencil"></i></a>
              &nbsp;&nbsp;&nbsp;
             <a href="#"><i class="icon-remove"></i></a>
           </td>

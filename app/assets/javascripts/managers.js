@@ -10,8 +10,8 @@ function fetchManager(pos){
 }
 
 $(document).ready(function(){
-  $(".manager-row").click(function(){
-    var pos = $(this).data().pos;
+  $(".manager-edit").click(function(){
+    var pos = $(this).parent().parent().data().pos;
     fetchManager(pos);
   });
 });

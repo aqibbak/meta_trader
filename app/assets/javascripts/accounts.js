@@ -18,7 +18,7 @@ function initAccountEvents(){
     });
     return false;
   });
-  $(".data-server-edit").click(function(){
+  $(".account-edit").click(function(){
     var login = $(this).parent().parent().data().login;
     fetchAccount(login);
   });

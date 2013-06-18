@@ -20,4 +20,11 @@ class SynchronizationController < ApplicationController
 
   end
 
+  def new_synchronization
+    authorize! :create, :plugin
+    api = ApiMethods.new
+    @sync = {}
+    render "fetch_synchronization"
+  end
+
 end

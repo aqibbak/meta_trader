@@ -18,8 +18,8 @@ function secgroupEvents(){
 }
 
 function initGroupEvents(){
-  $(".group-row").click(function(){
-    var pos = $(this).data().pos;
+  $(".group-edit").click(function(){
+    var pos = $(this).parent().parent().data().pos;
     fetchGroup(pos);
   });
   secgroupEvents();

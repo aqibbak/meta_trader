@@ -9,9 +9,13 @@ function fetchSynchronization(pos){
   });
 }
 
-$(document).ready(function(){
-  $(".synchronization-row").click(function(){
+function initSyncEvents(){
+  $(".synchronization-edit").click(function(){
     var pos = $(this).data().pos;
     fetchSynchronization(pos);
   });
+}
+
+$(document).ready(function(){
+  initSyncEvents();
 });
