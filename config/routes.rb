@@ -4,6 +4,8 @@ MetaTrader::Application.routes.draw do
 
   devise_for :users, :controllers => { :sessions => "users/sessions" }
 
+  get "dashboard", :to => "api_access#dashboard", :as => "dashboard"
+  post "server_select", :to => "api_access#server_select", :as => "server_select"
   get "main_page", :to => "api_access#main_page", :as => "main_page"
 
   post "ping_session", :to => "api_access#ping_session", :as => "ping_session"
@@ -53,7 +55,7 @@ MetaTrader::Application.routes.draw do
   post "tabs/data_server/submit", :to => "variable_update#data_server_submit", :as => "data_server_submit"
   delete "tabs/data_server/:position", :to => "variable_update#data_server_delete", :as => "delete_data_server_row"
 
-  root :to => "api_access#main_page"
+  root :to => "api_access#dashboard"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

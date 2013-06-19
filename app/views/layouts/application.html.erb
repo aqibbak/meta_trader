@@ -27,7 +27,7 @@
 
   <div class="container-fluid" id="content">
     <div id="left">
-      <%= render "shared/sidebar" %>
+      <%= render "shared/sidebar" unless @hide_sidebar %>
     </div><!-- /left -->
 
     <div id="main">

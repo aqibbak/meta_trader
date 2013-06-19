@@ -1,0 +1,22 @@
+<% if current_user.servers.empty? %>
+  You have not been assigned any servers to connect to.
+<% else %>
+  <h2 style="margin:50px;">Select server to login to</h2>
+
+  <%= form_tag server_select_path, :class => "form-validate", :style => "margin:100px;" do |f| %>
+    <div class="control-group">
+      <div class="controls" style="width:150px;">
+        <select name='server_id' class="input-block-level" data-rule-required="true">
+          <% current_user.servers.each do |server| %>
+            <option value="<%= server.id %>"><%= server.server_address %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
+    <div class="submit">
+      <input type="submit" value="Login to server" class="btn btn-primary">
+    </div>
+  <% end %>
+
+  <div>&nbsp;</div>
+<% end %>

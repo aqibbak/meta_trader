@@ -108,18 +108,8 @@ RailsAdmin.config do |config|
     configure :roles, :has_and_belongs_to_many_association
     
     list do
-      filters [:server, :login] 
-      field :server do
-        read_only true
-        pretty_value do
-          if bindings[:object].server.nil?
-            ""
-          else
-            bindings[:object].server.server_address
-          end
-        end
-      end
-      field :login do
+      filters [:username]
+      field :username do
         read_only true
       end
       field :roles do
@@ -141,39 +131,27 @@ RailsAdmin.config do |config|
       end
     end
     edit do
-      field :server do
-        read_only true
-        pretty_value do
-          if bindings[:object].server.nil?
-            ""
-          else
-            bindings[:object].server.server_address
-          end
-        end
+      field :username do
+        help "Required"
       end
-      field :login do
-        read_only true
-      end
+      field :password
+      field :password_confirmation
       field :roles do
+        nested_form false
+      end
+      field :servers do
         nested_form false
       end
       include_fields :rights
     end
     show do
-      field :server do
-        read_only true
-        pretty_value do
-          if bindings[:object].server.nil?
-            ""
-          else
-            bindings[:object].server.server_address
-          end
-        end
-      end
-      field :login do
+      field :username do
         read_only true
       end
       field :roles do
+        nested_form false
+      end
+      field :servers do
         nested_form false
       end
       field :rights do
@@ -238,4 +216,23 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Server' do
+    object_label_method do
+      :custom_label_method
+    end
+
+    list do
+      field :server_address
+    end
+    edit do
+      include_fields :server_address
+    end
+    show do
+      field :server_address
+    end
+  end
+
+  def custom_label_method
+    "Server[#{self.server_address}]"
+  end
 end

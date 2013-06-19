@@ -1,12 +1,15 @@
 <div id="navigation">
 	<div class="container-fluid">
-	  <a href="#" id="brand">
+	  <a href="/" id="brand">
 	    MetaTrader
 	  </a>
 	  <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation">
 	    <i class="icon-reorder"></i>
 	  </a>
-	  <ul class='main-nav'>
+	  <ul class='main-nav pull-right'>
+			<% if current_user.admin? %>
+				<li><%= link_to "Admin dashboard", rails_admin_path %></li>
+			<% end %>
 	    <!-- Main navigation -->
 	  </ul>
 	  <div class="user">

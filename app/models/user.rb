@@ -3,14 +3,15 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :authentication_keys => [:login, :server_id]
+         :recoverable, :rememberable, :trackable, :authentication_keys => [:username]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :login, :password, :password_confirmation, :remember_me, :rights, :role_ids, :server_id, :server
+  attr_accessible :password, :password_confirmation, :remember_me, :rights, :role_ids, :username, :server_ids, :servers
   # attr_accessible :title, :body
 
   has_and_belongs_to_many :roles
-  belongs_to :server
+
+  has_and_belongs_to_many :servers
 
   after_create :set_base_role
 

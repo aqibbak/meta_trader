@@ -2,7 +2,7 @@ require 'api_methods'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!, :check_api_connection
+  before_filter :authenticate_user!#, :check_api_connection
 
   private
 

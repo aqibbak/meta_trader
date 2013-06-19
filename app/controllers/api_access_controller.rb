@@ -2,6 +2,25 @@ class ApiAccessController < ApplicationController
   include ApplicationHelper
   layout :resolve_layout
 
+  def dashboard
+    @hide_sidebar = true
+  end
+
+  def server_select
+    api = ApiMethods.new
+    server = Server.find(params[:server_id])
+    login = ENV["MT_API_LOGIN"]
+    password = ENV["MT_API_PASS"]
+    result = api.login(session, server.server_address, login, password)
+    puts result
+    if result
+      redirect_to main_page_path
+    else
+      flash[:error] = "Unable to log in."
+      render "dashboard"
+    end
+  end
+
   def main_page
     api = ApiMethods.new
     @common = api.getCommon(session)
